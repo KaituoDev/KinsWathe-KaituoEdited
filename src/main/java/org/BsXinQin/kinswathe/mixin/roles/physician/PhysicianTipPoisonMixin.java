@@ -25,7 +25,7 @@ public abstract class PhysicianTipPoisonMixin {
 
     @Inject(method = "setPoisonTicks", at = @At("HEAD"))
     private void tipPhysicianPoison(int ticks, @NotNull UUID poisoner, CallbackInfo ci) {
-        if (ticks <= 0 || poisoner == null || GameFunctions.isPlayerSpectatingOrCreative(this.player)) return;
+        if (ticks <= 0 || GameFunctions.isPlayerSpectatingOrCreative(this.player)) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
         if (gameWorld.isRole(this.player, KinsWatheRoles.ROBOT) || !(this.player instanceof ServerPlayerEntity)) return;
         for (ServerPlayerEntity serverPlayer : this.player.getServer().getPlayerManager().getPlayerList()) {

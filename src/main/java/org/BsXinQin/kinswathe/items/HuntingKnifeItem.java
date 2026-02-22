@@ -27,6 +27,7 @@ public class HuntingKnifeItem extends Item {
         ItemStack stack = player.getStackInHand(hand);
         if (player.getItemCooldownManager().isCoolingDown(this)) return TypedActionResult.fail(stack);
         HunterComponent playerHunter = HunterComponent.KEY.get(player);
+        playerHunter.isSprinting = player.isSprinting();
         playerHunter.useHuntingKnife();
         player.setCurrentHand(hand);
         player.playSound(WatheSounds.ITEM_KNIFE_PREPARE, 1.0f, 1.0f);
@@ -38,9 +39,10 @@ public class HuntingKnifeItem extends Item {
         if (!(livingEntity instanceof PlayerEntity player) || player.isSpectator() || remainingUseTicks >= this.getMaxUseTime(stack, player) - 10) return;
         HitResult hitResult = ProjectileUtil.getCollision(player, entity -> entity instanceof @NotNull PlayerEntity target && GameFunctions.isPlayerAliveAndSurvival(target), 3.0f);
         PlayerEntity targetPlayer = (hitResult instanceof @NotNull EntityHitResult entityHitResult) ? (PlayerEntity) entityHitResult.getEntity() : null;
+        HunterComponent playerHunter = HunterComponent.KEY.get(player);
         setTemporaryCooldown(world, player);
         if (!world.isClient && targetPlayer != null && remainingUseTicks > 5) {
-            GameConstants.ITEM_COOLDOWNS.put(this, GameConstants.getInTicks(0,45));
+            playerHunter.reset();
             KinsWatheItems.setItemAfterUsing(player, this, null);
             GameFunctions.killPlayer(targetPlayer, true, player, GameConstants.DeathReasons.KNIFE);
             targetPlayer.playSound(WatheSounds.ITEM_KNIFE_STAB, 1.0f, 1.0f);
@@ -62,16 +64,15 @@ public class HuntingKnifeItem extends Item {
 
     @Override
     public int getMaxUseTime(ItemStack stack, LivingEntity livingEntity) {
-        return 100;
+        return 200;
     }
 
-    private void setTemporaryCooldown(@NotNull World world, @NotNull PlayerEntity player) {
+    public void setTemporaryCooldown(@NotNull World world, @NotNull PlayerEntity player) {
         if (world.isClient) return;
         HunterComponent playerHunter = HunterComponent.KEY.get(player);
-        GameConstants.ITEM_COOLDOWNS.put(this, GameConstants.getInTicks(0, playerHunter.knifeTicks * 4 / 20));
-        playerHunter.reset();
-        if (GameFunctions.isPlayerAliveAndSurvival(player)) {
-            player.getItemCooldownManager().set(this, GameConstants.ITEM_COOLDOWNS.get(this));
+        playerHunter.stopHuntingKnife();
+        if (GameFunctions.isPlayerAliveAndSurvival(player) && playerHunter.isSprinting) {
+            player.getItemCooldownManager().set(this, GameConstants.getInTicks(0, playerHunter.knifeTicks / 10));
         }
     }
 }

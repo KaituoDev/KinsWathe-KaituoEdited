@@ -18,6 +18,7 @@ public class GameSafeComponent implements AutoSyncedComponent, ServerTickingComp
     public static final ComponentKey<GameSafeComponent> KEY = ComponentRegistry.getOrCreate(Identifier.of(KinsWathe.MOD_ID, "safe"), GameSafeComponent.class);
 
     @NotNull private final PlayerEntity player;
+    public static int GLOBAL_SAFE_TICKS = 0;
     public boolean isGameSafe = false;
     public int safeTicks = 0;
 
@@ -27,10 +28,10 @@ public class GameSafeComponent implements AutoSyncedComponent, ServerTickingComp
     public void serverTick() {
         if (this.isGameSafe && this.safeTicks <= KinsWatheConfig.HANDLER.instance().StartingCooldown * 20) {
             this.notInGameReset();
-            if (this.safeTicks == KinsWatheConfig.HANDLER.instance().StartingCooldown * 20) {
-                this.isGameSafe = false;
+            this.updateSafeTime();
+            if (this.safeTicks > KinsWatheConfig.HANDLER.instance().StartingCooldown * 20) {
+                this.reset();
             }
-            ++ this.safeTicks;
             this.sync();
         }
     }
@@ -44,6 +45,28 @@ public class GameSafeComponent implements AutoSyncedComponent, ServerTickingComp
     public void startGameSafe() {
         this.isGameSafe = true;
         this.sync();
+    }
+
+    public void updateSafeTime() {
+        ++ this.safeTicks;
+        if (!this.player.getWorld().isClient) {
+            if (GLOBAL_SAFE_TICKS > KinsWatheConfig.HANDLER.instance().StartingCooldown * 20) {
+                this.reset();
+            }
+            if (this.isGameSafe) {
+                if (this.safeTicks > GLOBAL_SAFE_TICKS) {
+                    GLOBAL_SAFE_TICKS = this.safeTicks;
+                }
+            }
+            if (this.isGameSafe && this.safeTicks < GLOBAL_SAFE_TICKS) {
+                this.safeTicks = GLOBAL_SAFE_TICKS;
+                this.sync();
+            }
+        }
+    }
+
+    public static void resetGlobalSafeTicks() {
+        GLOBAL_SAFE_TICKS = 0;
     }
 
     public void reset() {

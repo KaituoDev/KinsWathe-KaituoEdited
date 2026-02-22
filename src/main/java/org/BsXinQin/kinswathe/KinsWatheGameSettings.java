@@ -45,6 +45,8 @@ public class KinsWatheGameSettings {
             if (GAME_STOP) {
                 //指令
                 setCommands(server);
+                //游戏安全时间
+                GameSafeComponent.resetGlobalSafeTicks();
                 GAME_STOP = false;
             }
         });
@@ -62,21 +64,32 @@ public class KinsWatheGameSettings {
 
     /// 设置游戏安全时间
     public static void setGameSafeTime(@NotNull MinecraftServer server) {
-        if (!KinsWatheConfig.HANDLER.instance().EnableGameSafeTime) return;
+        if (!KinsWatheConfig.HANDLER.instance().EnableStartSafeTime) return;
+        GameSafeComponent.resetGlobalSafeTicks();
         for (ServerPlayerEntity serverPlayer : server.getPlayerManager().getPlayerList()) {
             if (serverPlayer == null) return;
+            //KinsWathe物品安全时间
+            serverPlayer.getItemCooldownManager().set(KinsWatheItems.BLOWGUN, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
+            serverPlayer.getItemCooldownManager().set(KinsWatheItems.HUNTING_KNIFE, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
+            serverPlayer.getItemCooldownManager().set(KinsWatheItems.KNOCKOUT_DRUG, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
+            serverPlayer.getItemCooldownManager().set(KinsWatheItems.POISON_INJECTOR, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
+            //Wathe物品安全时间
             serverPlayer.getItemCooldownManager().set(WatheItems.KNIFE, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
-            serverPlayer.getItemCooldownManager().set(WatheItems.REVOLVER, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
             serverPlayer.getItemCooldownManager().set(WatheItems.GRENADE, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
-            if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
-                serverPlayer.getItemCooldownManager().set(Registries.ITEM.get(Identifier.of("noellesroles", "bandit_revolver")), GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
-            }
-            if (FabricLoader.getInstance().isModLoaded("stupid_express")) {
-                serverPlayer.getItemCooldownManager().set(Registries.ITEM.get(Identifier.of("stupid_express", "jerry_can")), GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
-                serverPlayer.getItemCooldownManager().set(Registries.ITEM.get(Identifier.of("stupid_express", "lighter")), GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
-            }
+            serverPlayer.getItemCooldownManager().set(WatheItems.REVOLVER, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
+            serverPlayer.getItemCooldownManager().set(WatheItems.PSYCHO_MODE, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
+            //HarpySimpleRoles物品安全时间
             if (FabricLoader.getInstance().isModLoaded("harpysimpleroles")) {
+                serverPlayer.getItemCooldownManager().set(Registries.ITEM.get(Identifier.of("harpysimpleroles", "toxin")), GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
                 serverPlayer.getItemCooldownManager().set(Registries.ITEM.get(Identifier.of("harpysimpleroles", "bandit_revolver")), GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
+            }
+            //StarryExpress物品安全时间
+            if (FabricLoader.getInstance().isModLoaded("starexpress")) {
+                serverPlayer.getItemCooldownManager().set(Registries.ITEM.get(Identifier.of("starexpress", "tape")), GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
+            }
+            //StupidExpress物品安全时间
+            if (FabricLoader.getInstance().isModLoaded("stupid_express")) {
+                serverPlayer.getItemCooldownManager().set(Registries.ITEM.get(Identifier.of("stupid_express", "lighter")), GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
             }
             GameSafeComponent playerSafe = GameSafeComponent.KEY.get(serverPlayer);
             playerSafe.startGameSafe();
@@ -98,9 +111,7 @@ public class KinsWatheGameSettings {
         //死亡事件
         AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
             if (identifier == GameConstants.DeathReasons.FELL_OUT_OF_TRAIN) return true;
-            GameSafeComponent playerSafe = GameSafeComponent.KEY.get(player);
-            if (playerSafe.isGameSafe) return false;
-            return true;
+            return !GameSafeComponent.KEY.get(player).isGameSafe;
         }));
     }
 

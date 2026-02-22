@@ -23,6 +23,15 @@
   - Coroner can see bodies when mood is higher than mid (disabled by default)
 
 
+## Modifications to Wathe
+
+- Can set whether killers drop Revolver after killing civilians
+
+- Can set starting coins for civilians, neutrals and killers
+
+- Can set coins obtained for killer after a kill
+
+
 ## Wathe Plus Function
 
 - Add visual stamina bar display
@@ -46,9 +55,10 @@
 
 - Cook
   - Has passive income
+  - See players who eat through walls temporarily
   - Can purchase Pan and food in shop
   - Pan can use like Knife and stun target
-  - See people who eat through walls temporarily
+  - Pan can destroy it to protects player one extra shooting of life
 
 - Detective
   - Use ability to check whether target is innocent
@@ -63,24 +73,24 @@
   - Initially equip with Medical Kit
   - Medical Kit can use on a player to remove poison and get coins
   - Can purchase Pill in shop
-  - Pill can protects player one extra hit of life
+  - Pill can protect player one extra hit of life
 
 - Robot
   - Has no mood
   - Immune poison
   - Infinite stamina
-  - Use ability to see the darkness clearly and attack others
+  - Use ability to see the darkness clearly
 
 
 ## New Killers
 
 - Cleaner
-  - Limit on the number of people that can be generated
   - Initially equip with Sulfuric Acid Barrel
   - Sulfuric Acid Barrel can dissolve a body
   - Use ability to clear field drops
 
 - Drugmaker
+  - Limit on the number of players that can be generated
   - Can see really poisoned players through walls
   - Get coins if someone was poisoned
   - Can not purchase Grenade and Psycho Mode in shop
@@ -92,13 +102,15 @@
 - Hunter
   - If holding knife when sprinting, hunter will speed up
   - Hunting Knife replaces Knife in shop
-  - Hunting Knife will immediately cooldown when stoping holding
+  - Hunting Knife will immediately cooldown when stoping holding if sprinted
   - Use ability to refresh Hunting Knife cooldown
 
 - Kidnapper
   - Can buy Knockout Drug in shop
+  - Initially equip with a Knockout Drug
   - Knockout Drug can daze target and let it foolow you
-  - Players that be dazed can not see or voice chat
+  - Players that be dazed can not see, attack, use or voice chat
+  - If distance between Kidnapper and dazed player exceeds 5 blocks, the player will be lifted
 
 
 ## New Neutrals
@@ -108,12 +120,12 @@
   - Killer side neutral role
   - Initially equip with Dream Imprint
   - Dream Imprint can imprint target and protects it one extra hit of life
-  - When imprinted target is damaged, it will teleport to user
-  - Turn into a killer based on the civilians who taking Delusion Vial
-  - The number of civilians taking Delusion Vial is one-fourth of the total number of players
+  - When imprinted target is damaged, it will teleport to user and give Dreamer a count to turn into killer
+  - Turn into killer based on the non-killer players who taking Delusion Vial
+  - The number of non-killer players taking Delusion Vial is one-fourth of the total number of players
 
 - Licensed Villain
-  - Limit on the number of people that can be generated
+  - Limit on the number of players that can be generated
   - Requires killing all players to win
   - Game does not end when all civilians or killers are dead
   - Has 15 seconds of sprint time
@@ -128,7 +140,7 @@
   - Double passive income
 
 - Taskmaster
-  - Only generates on roles with income
+  - Only generates on roles with task income
   - Killer roles receive 50 coins after completing tasks
   - Non-killer roles receive an additional 25 income after completing tasks
 

@@ -9,6 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import org.BsXinQin.kinswathe.component.GameSafeComponent;
+import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -20,10 +22,7 @@ public class ItemTipComponent {
     private static final Map<Item, Integer> presetCooldowns = new HashMap<>();
     public static int getItemCooldownTicks(@NotNull Item item) {return presetCooldowns.getOrDefault(item, 0);}
 
-    public static void initItemCooldown() {
-        if (GameConstants.ITEM_COOLDOWNS == null) return;
-        presetCooldowns.putAll(GameConstants.ITEM_COOLDOWNS);
-    }
+    public static void initItemCooldown() {presetCooldowns.putAll(GameConstants.ITEM_COOLDOWNS);}
 
     public static void addItemtip(@NotNull Item item, @NotNull ItemStack itemStack, @NotNull List<Text> list) {
         if (itemStack.isOf(item)) {
@@ -43,16 +42,22 @@ public class ItemTipComponent {
         if (itemStack.isOf(item)) {
             initItemCooldown();
             ItemCooldownManager itemCooldown = MinecraftClient.getInstance().player.getItemCooldownManager();
+            GameSafeComponent playerSafe = GameSafeComponent.KEY.get(MinecraftClient.getInstance().player);
+            HunterComponent playerHunter = HunterComponent.KEY.get(MinecraftClient.getInstance().player);
             if (itemCooldown != null && itemCooldown.isCoolingDown(item)) {
-                float progress = itemCooldown.getCooldownProgress(item, 0);
-                int totalTicks = ItemTipComponent.getItemCooldownTicks(item);
-                if (totalTicks > 0) {
-                    int remainingTicks = (int) (totalTicks * progress);
-                    int totalSeconds = (remainingTicks + 19) / 20;
-                    int minutes = totalSeconds / 60;
-                    int seconds = totalSeconds % 60;
-                    String countdown = (minutes > 0 ? minutes + "m" : "") + (seconds > 0 ? seconds + "s" : "");
-                    list.add(Text.translatable("tip.cooldown", countdown).withColor(WatheItemTooltips.COOLDOWN_COLOR));
+                if (playerSafe.isGameSafe || playerHunter.knifeTicks > 0) {
+                    list.add(Text.translatable("tip.cooldown_temporary").withColor(WatheItemTooltips.COOLDOWN_COLOR));
+                } else {
+                    float progress = itemCooldown.getCooldownProgress(item, 0);
+                    int totalTicks = ItemTipComponent.getItemCooldownTicks(item);
+                    if (totalTicks > 0) {
+                        int remainingTicks = (int) (totalTicks * progress);
+                        int totalSeconds = (remainingTicks + 19) / 20;
+                        int minutes = totalSeconds / 60;
+                        int seconds = totalSeconds % 60;
+                        String countdown = (minutes > 0 ? minutes + "m" : "") + (seconds > 0 ? seconds + "s" : "");
+                        list.add(Text.translatable("tip.cooldown", countdown).withColor(WatheItemTooltips.COOLDOWN_COLOR));
+                    }
                 }
             }
         }

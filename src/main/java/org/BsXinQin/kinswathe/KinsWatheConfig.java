@@ -21,7 +21,19 @@ public class KinsWatheConfig {
     public boolean EnableJumpNotInGame = true;
 
     @SerialEntry(comment = "Whether to enable safe time when game starts.")
-    public boolean EnableGameSafeTime = true;
+    public boolean EnableStartSafeTime = false;
+
+    /// 关于Wathe修改
+    @SerialEntry(comment = "\n\n[Wathe] Modify:\nWhether Revolver drop after killer kills civilian.")
+    public boolean PreventKillerDropRevolver = false;
+    @SerialEntry(comment = "Initial civilians income.")
+    public int InitialCivilianIncome = 0;
+    @SerialEntry(comment = "Initial neutrals income.")
+    public int InitialNeutralIncome = 0;
+    @SerialEntry(comment = "Initial killers income.")
+    public int InitialKillerIncome = 100;
+    @SerialEntry(comment = "Increase money when kill player.")
+    public int IncreaseMoneyWhenKill = 100;
 
     /// 关于KinsWathe修改
     @SerialEntry(comment = "\n\n[Kin's Wathe] Modify:\nBellringer: modify price and cooldown of ability.")
@@ -29,9 +41,7 @@ public class KinsWatheConfig {
     @SerialEntry
     public int BellringerAbilityCooldown = GameConstants.getInTicks(2,0) / 20;
 
-    @SerialEntry(comment = "Cleaner: modify generation player limit, price and cooldown of ability.")
-    public int CleanerPlayerLimit = 12;
-    @SerialEntry
+    @SerialEntry(comment = "Cleaner: modify price and cooldown of ability.")
     public int CleanerAbilityPrice = 200;
     @SerialEntry
     public int CleanerAbilityCooldown = GameConstants.getInTicks(2,30) / 20;
@@ -44,7 +54,9 @@ public class KinsWatheConfig {
     @SerialEntry
     public int DetectiveAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
 
-    @SerialEntry(comment = "Drugmaker: modify get coins when someone was poisoned, price of Poison Injector and Blowgun.")
+    @SerialEntry(comment = "Drugmaker: modify generation player limit, get coins when someone was poisoned, price of Poison Injector and Blowgun.")
+    public int DrugmakerPlayerLimit = 10;
+    @SerialEntry
     public int DrugmakerGetCoins = 50;
     @SerialEntry
     public int DrugmakerPoisonInjectorPrice = 125;
@@ -52,7 +64,7 @@ public class KinsWatheConfig {
     public int DrugmakerBlowgunPrice = 175;
 
     @SerialEntry(comment = "Hunter: modify price and cooldown of ability.")
-    public int HunterAbilityPrice = 150;
+    public int HunterAbilityPrice = 125;
     @SerialEntry
     public int HunterAbilityCooldown = GameConstants.getInTicks(0,5) / 20;
 
@@ -83,10 +95,7 @@ public class KinsWatheConfig {
     public boolean ViolatorEnabled = false;
 
     /// 关于NoellesRoles修改
-    @SerialEntry(comment = "\n\n[Noelle's Roles] Modify:\nWhether to enable Noelle's Roles modify.")
-    public boolean EnableNoellesRolesModify = true;
-
-    @SerialEntry(comment = "Conductor: whether to enable instinct of seeing dropped items.")
+    @SerialEntry(comment = "\n\n[Noelle's Roles] Modify:\nConductor: whether to enable instinct of seeing dropped items.")
     public boolean ConductorInstinctModify = false;
 
     @SerialEntry(comment = "Coroner: whether to enable instinct of seeing player bodies.")

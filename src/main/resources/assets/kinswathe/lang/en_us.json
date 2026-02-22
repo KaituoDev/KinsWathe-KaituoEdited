@@ -26,7 +26,7 @@
   "announcement.goals.kinswathe.dreamer": "Make your world incredible!",
   "tip.kinswathe.dreamer.imprint": "%s has left a mark on you",
   "tip.kinswathe.dreamer.disconnect": "Marked player seems to disconnect...",
-  "tip.kinswathe.dreamer.counts": "%s/%s civilians has been deluded",
+  "tip.kinswathe.dreamer.counts": "%s/%s players has been deluded",
   "tip.kinswathe.dreamer.fake_poisoned": "Someone was deluded",
 
   "announcement.role.kinswathe.drugmaker": "Drugmaker",
@@ -71,19 +71,19 @@
   "item.kinswathe.blowgun.tooltip": "Point, right-click and shoot\nTarget that be shooted will be poisoned\n1 minute cooldown",
 
   "item.kinswathe.dream_imprint": "Dream Imprint",
-  "item.kinswathe.dream_imprint.tooltip": "Use on a player to protect one extra hit of life\nTarget will teleport to user if it dies\nSingle use",
+  "item.kinswathe.dream_imprint.tooltip": "Use on a player to protect one extra hit of life\nTarget will teleport to user if it dies and give a delusion count\nSingle use",
 
   "item.kinswathe.hunting_knife": "Hunting Knife",
-  "item.kinswathe.hunting_knife.tooltip": "Right-click, hold for a second and get close to your victim\nIf stop holding, four times holding-time cooldown\nAfter a kill, cannot be used for 45 seconds\nAttack to knock back / push a player (no cooldown)",
+  "item.kinswathe.hunting_knife.tooltip": "Right-click, hold for a second and get close to your victim\nCompared to Knife, it has a longer holding-time\nIf stop holding after sprinting, two times holding-time cooldown\nAfter a kill, cannot be used for 45 seconds\nAttack to knock back / push a player (no cooldown)",
 
   "item.kinswathe.knockout_drug": "Knockout Drug",
-  "item.kinswathe.knockout_drug.tooltip": "Use on a player to daze it for 20 seconds\nThe affected player will follow you\nUse sneaking key to release it\nSingle use, 1 minute cooldown",
+  "item.kinswathe.knockout_drug.tooltip": "Use on a player to daze it for 20 seconds\nThe affected player will follow you\nUse sneaking key to release it\nSingle use, 45 seconds cooldown",
 
   "item.kinswathe.medical_kit": "Medical Kit",
   "item.kinswathe.medical_kit.tooltip": "Use on a player to remove poison\n1 minute cooldown",
 
   "item.kinswathe.pan": "Pan",
-  "item.kinswathe.pan.tooltip": "Right-click, hold for a second and stun target for 5 seconds\n45 seconds cooldown",
+  "item.kinswathe.pan.tooltip": "Right-click, hold for a second and stun target for 5 seconds\nIf shot during holding, destroy pan to protects player one extra hit of life\n45 seconds cooldown",
 
   "item.kinswathe.pill": "Pill",
   "item.kinswathe.pill.tooltip": "Right-click to eat\nProtects player one extra hit of life\nSingle use, 2 minute cooldown",
@@ -94,5 +94,69 @@
   "item.kinswathe.sulfuric_acid_barrel": "Sulfuric Acid Barrel",
   "item.kinswathe.sulfuric_acid_barrel.tooltip": "Use on a dead body to dissolve it\n1 minute cooldown",
 
-  "shop.purchase_failed": "Purchase Failed"
+  "shop.purchase_failed": "Purchase Failed",
+  "tip.cooldown_temporary": "On cooldown...",
+
+
+  "guidebook.namespace.kinswathe": "Kin's Wathe",
+
+  "guidebook.role.kinswathe:bellringer": "Bellringer",
+  "guidebook.role.title.kinswathe:bellringer": "Time Keeper",
+  "guidebook.role.description.kinswathe:bellringer": "Bellringer holds the secrets of time aboard the train, able to hear the sound of time flowing.\n\nBellringer is always aware of the remaining round time. They gain 50 coins for each task completed.\n\nEvery so often, Bellringer can ring the time bell, reducing the remaining time by 1 minute.\n\nSome say Bellringer just wants to reach the destination early, while others speculate they have other motives...",
+
+  "guidebook.role.kinswathe:cleaner": "Cleaner",
+  "guidebook.role.title.kinswathe:cleaner": "Leave No Trace",
+  "guidebook.role.description.kinswathe:cleaner": "Cleaner is a cleanup specialist sent by the killer organization.\n\nThey start with a Sulfuric Acid Barrel, which can be used on a dead body to dissolve it, leaving no trace.\n\nEvery so often, Cleaner can clear all dropped items on the ground.\n\nFor Killers, Cleaner is the most reliable partner—after all, no body means no evidence.",
+
+  "guidebook.role.kinswathe:cook": "Cook",
+  "guidebook.role.title.kinswathe:cook": "Flipping Master",
+  "guidebook.role.description.kinswathe:cook": "The most popular person on the train—after all, who doesn't want a hot meal during their journey?\n\nCook gains 50 coins for each task completed, and also automatically receives 5 coins in tips every minute.\n\nA Pan can be used not only for cooking but also as a weapon and shield in critical moments.\n\nWhen a passenger consumes food, Cook can briefly see their location through walls.\n\nRemember, Cook is just an ordinary person. Don't chase Killers with a Pan...",
+
+  "guidebook.role.kinswathe:detective": "Detective",
+  "guidebook.role.title.kinswathe:detective": "Truth Seeker",
+  "guidebook.role.description.kinswathe:detective": "Detective didn't board this train by chance—they received an anonymous letter hinting that a murder would occur on this journey.\n\nDetective gains 50 coins for each task completed. Every so often, they can use their ability to determine whether a target is innocent.\n\nBut Detective cannot directly identify Killers—their ability only tells them who is innocent. The rest requires their own deduction...",
+
+  "guidebook.role.kinswathe:dreamer": "Dreamer",
+  "guidebook.role.title.kinswathe:dreamer": "Illusion Weaver",
+  "guidebook.role.description.kinswathe:dreamer": "Dreamer walks between reality and illusion.\n\nThey start with a Dream Imprint, which can be used on a target. The marked target will take one extra hit of life.\n\nWhen a marked target takes damage, they teleport back to Dreamer and grant Dreamer one delusion count.\n\nWhen enough non-Killer players have been deluded, Dreamer becomes a Killer.\n\nFor Dreamer, reality is just a dream that can be rewritten.",
+
+  "guidebook.role.kinswathe:drugmaker": "Drugmaker",
+  "guidebook.role.title.kinswathe:drugmaker": "Lethal Formula",
+  "guidebook.role.description.kinswathe:drugmaker": "Drugmaker is the Killer most skilled in using poison, savoring every second of their prey's struggle.\n\nDrugmaker can see poisoned players through walls—after all, they are their masterpieces.\n\nAt the shop, they can purchase Poison Injectors and Blowguns.\n\nFor Drugmaker, death is just a prescription away.",
+
+  "guidebook.role.kinswathe:hunter": "Hunter",
+  "guidebook.role.title.kinswathe:hunter": "Relentless Tracker",
+  "guidebook.role.description.kinswathe:hunter": "Hunter is born to chase, relishing the thrill of prey fleeing yet finding no escape.\n\nWhen sprinting while holding a Hunting Knife, Hunter's movement speed greatly increases.\n\nEvery so often, Hunter can use their ability to instantly refresh the Hunting Knife's cooldown.\n\nFor Hunter, escaping only fuels their hunting desire.",
+
+  "guidebook.role.kinswathe:judge": "Judge",
+  "guidebook.role.title.kinswathe:judge": "Embodiment of Justice",
+  "guidebook.role.description.kinswathe:judge": "Judge boarded this train purely for vacation, but their innate sense of justice won't let them turn a blind eye to evil.\n\nJudge gains 50 coins for each task completed, and also receives 5 coins every minute.\n\nEvery so often, Judge can use their ability to make a target glow.\n\nSome say those marked by Judge will eventually face justice, but others worry whether Judge's verdicts are truly fair...",
+
+  "guidebook.role.kinswathe:kidnapper": "Kidnapper",
+  "guidebook.role.title.kinswathe:kidnapper": "Dark Dealer",
+  "guidebook.role.description.kinswathe:kidnapper": "Kidnapper doesn't kill openly—they prefer to turn prey into obedient puppets.\n\nAt the shop, they can purchase Knockout Drug. They also start with one.\n\nAffected players will black out, unable to attack or use items, and will follow Kidnapper until the effect ends.\n\nNo one knows where Kidnapper takes these passengers, and no one wants to know.",
+
+  "guidebook.role.kinswathe:licensed_villain": "Licensed Villain",
+  "guidebook.role.title.kinswathe:licensed_villain": "Certified Evil",
+  "guidebook.role.description.kinswathe:licensed_villain": "Licensed Villain holds an officially certified villain license.\n\nLicensed Villain's win condition is unique—they must kill all players to win.\n\nLicensed Villain has 15 seconds of sprint time and gains 50 coins for each task completed.\n\nFor them, everyone is just a target waiting to be eliminated.",
+
+  "guidebook.role.kinswathe:physician": "Physician",
+  "guidebook.role.title.kinswathe:physician": "Angel in White",
+  "guidebook.role.description.kinswathe:physician": "Physician is the most trustworthy person on the train, having sworn to heal the sick and injured.\n\nPhysician has a keen sense of smell, able to see poisoned passengers through walls.\n\nThey start with a Medical Kit. Using it to detoxify a player or completing a task earns 50 coins.\n\nAt the shop, they can purchase Pills, which allow them to withstand one extra attack.",
+
+  "guidebook.role.kinswathe:robot": "Robot",
+  "guidebook.role.title.kinswathe:robot": "Mechanical Being",
+  "guidebook.role.description.kinswathe:robot": "Robot has infiltrated this train—no one knows its purpose.\n\nAs a mechanical construct, it has no sanity, is immune to poison and knockout drugs, and has unlimited stamina.\n\nEvery so often, Robot can see clearly even in darkness.\n\nSome say it's just malfunctioning, while others believe it carries some kind of mission...",
+
+  "guidebook.role.kinswathe:magnate": "Magnate",
+  "guidebook.role.title.kinswathe:magnate": "Favorite of Fortune",
+  "guidebook.role.description.kinswathe:magnate": "Magnate is the person with the most money on the train, their pockets always full of endless coins.\n\nMagnate's passive income is twice that of other roles.",
+
+  "guidebook.role.kinswathe:taskmaster": "Taskmaster",
+  "guidebook.role.title.kinswathe:taskmaster": "More Work, More Pay",
+  "guidebook.role.description.kinswathe:taskmaster": "Taskmaster believes that hard work pays off—their income is tied to tasks.\n\nIf Taskmaster is a Killer, they gain 50 coins per task completed.\n\nIf they are a non-Killer, they gain an additional 25 coins per task completed.",
+
+  "guidebook.role.kinswathe:violator": "Violator",
+  "guidebook.role.title.kinswathe:violator": "Rule Breaker",
+  "guidebook.role.description.kinswathe:violator": "Violator breaks the most basic rule of the train—they can jump during the game.\n\nNo one knows why they can jump, or what other rules they might break..."
 }

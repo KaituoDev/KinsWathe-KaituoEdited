@@ -67,7 +67,15 @@ public class DreamerComponent implements AutoSyncedComponent, ServerTickingCompo
     public void teleportToDreamer() {
         if (this.dreamerUUID == null || this.player.getWorld().isClient) return;
         PlayerEntity dreamer = this.player.getWorld().getPlayerByUuid(this.dreamerUUID);
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
         if (GameFunctions.isPlayerAliveAndSurvival(dreamer) && GameFunctions.isPlayerAliveAndSurvival(this.player)) {
+            if (gameWorld.isRole(dreamer, KinsWatheRoles.DREAMER)) {
+                DreamerKillerComponent playerDreamer = DreamerKillerComponent.KEY.get(dreamer);
+                if (!playerDreamer.hasBecomeKiller) {
+                    playerDreamer.dreamerCounts += 1;
+                    playerDreamer.sync();
+                }
+            }
             ((ServerWorld) this.player.getWorld()).spawnParticles(ParticleTypes.PORTAL, this.player.getX(), this.player.getY(), this.player.getZ(), 75, 0.5, 1.5, 0.5, 0.1);
             this.player.getWorld().playSound(null, this.player.getBlockPos(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
             this.player.teleport((ServerWorld) this.player.getWorld(), dreamer.getX(), dreamer.getY(), dreamer.getZ(), Set.of(), dreamer.getYaw(), dreamer.getPitch());

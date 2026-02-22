@@ -63,6 +63,11 @@ public class KidnapperComponent implements AutoSyncedComponent, ServerTickingCom
             this.reset();
             return;
         }
+        if (this.player.distanceTo(controller) > 5.0f) {
+            this.releaseControlTip();
+            this.reset();
+            return;
+        }
         if (GameFunctions.isPlayerSpectatingOrCreative(controller) || GameFunctions.isPlayerSpectatingOrCreative(this.player) || controller.isSneaking()) {
             this.releaseControlTip();
             this.reset();

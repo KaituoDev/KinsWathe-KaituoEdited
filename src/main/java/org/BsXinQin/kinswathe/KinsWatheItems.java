@@ -79,7 +79,7 @@ public class KinsWatheItems {
         GameConstants.ITEM_COOLDOWNS.put(BLOWGUN, GameConstants.getInTicks(1,0));
         GameConstants.ITEM_COOLDOWNS.put(DREAM_IMPRINT, GameConstants.getInTicks(0,0));
         GameConstants.ITEM_COOLDOWNS.put(HUNTING_KNIFE, GameConstants.getInTicks(0,45));
-        GameConstants.ITEM_COOLDOWNS.put(KNOCKOUT_DRUG, GameConstants.getInTicks(1,0));
+        GameConstants.ITEM_COOLDOWNS.put(KNOCKOUT_DRUG, GameConstants.getInTicks(0,45));
         GameConstants.ITEM_COOLDOWNS.put(MEDICAL_KIT, GameConstants.getInTicks(1,0));
         GameConstants.ITEM_COOLDOWNS.put(PAN, GameConstants.getInTicks(0,45));
         GameConstants.ITEM_COOLDOWNS.put(PILL, GameConstants.getInTicks(2,0));

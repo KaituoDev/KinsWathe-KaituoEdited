@@ -23,7 +23,7 @@ public abstract class GameSafeHudMixin {
     @Inject(method = "render", at = @At("HEAD"))
     private void getGameSafeHudMixin(@NotNull DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         if (MinecraftClient.getInstance().player == null) return;
-        if (!ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).EnableGameSafeTime) return;
+        if (!ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).EnableStartSafeTime) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
         GameSafeComponent playerSafe = GameSafeComponent.KEY.get(MinecraftClient.getInstance().player);
         if (gameWorld.isRunning() && WatheClient.isPlayerAliveAndInSurvival() && playerSafe.isGameSafe) {

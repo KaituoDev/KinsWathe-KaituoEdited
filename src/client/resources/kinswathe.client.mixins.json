@@ -24,6 +24,7 @@
     "roles.hunter.HunterShopMixin",
     "roles.judge.JudgeHudMixin",
     "roles.kidnapper.KidnapperControlledMixin",
+    "roles.kidnapper.KidnapperKeyControlledMixin",
     "roles.kidnapper.KidnapperShopMixin",
     "roles.licensed_villain.LicensedVillainShopMixin",
     "roles.physician.PhysicianShopMixin",

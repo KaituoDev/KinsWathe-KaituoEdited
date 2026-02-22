@@ -4,13 +4,18 @@ import dev.doctor4t.wathe.api.Role;
 import dev.doctor4t.wathe.api.WatheRoles;
 import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
 import dev.doctor4t.wathe.api.event.AllowPlayerPunching;
+import dev.doctor4t.wathe.cca.GameWorldComponent;
+import dev.doctor4t.wathe.cca.PlayerShopComponent;
 import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.index.WatheItems;
 import lombok.SneakyThrows;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.UseAction;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.BsXinQin.kinswathe.packet.AbilityC2SPacket;
 import org.BsXinQin.kinswathe.roles.bellringer.BellringerAbility;
@@ -181,7 +186,7 @@ public class KinsWatheRoles {
             Identifier.of(KinsWathe.MOD_ID, "taskmaster"),
             0xFF3399,
             null,
-            new ArrayList<>(rolesHaveIncome()),
+            new ArrayList<>(rolesHaveTaskIncome()),
             false,
             false
     ));
@@ -216,7 +221,8 @@ public class KinsWatheRoles {
         return modifier;
     }
 
-    /// 引入NoellesRoles角色
+    /// 引入其他模组角色
+    //引入NoellesRoles角色
     @SneakyThrows
     public static Role noellesrolesRoles(String role) {
         Class<?> roleClass = Class.forName("org.agmas.noellesroles.Noellesroles");
@@ -225,22 +231,19 @@ public class KinsWatheRoles {
     }
 
     /// 添加有收入的身份
-    public static List<Role> rolesHaveIncome() {
+    public static List<Role> rolesHaveTaskIncome() {
         List<Role> roles = new ArrayList<>();
         roles.add(WatheRoles.KILLER);
         roles.add(BELLRINGER);
         roles.add(CLEANER);
         roles.add(COOK);
         roles.add(DETECTIVE);
-        roles.add(DREAMER);
         roles.add(DRUGMAKER);
         roles.add(JUDGE);
         roles.add(KIDNAPPER);
         roles.add(LICENSED_VILLAIN);
         roles.add(PHYSICIAN);
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
-            roles.add(noellesrolesRoles("MIMIC"));
-            roles.add(noellesrolesRoles("JESTER"));
             roles.add(noellesrolesRoles("PHANTOM"));
             roles.add(noellesrolesRoles("SWAPPER"));
             roles.add(noellesrolesRoles("TRAPPER"));
@@ -248,7 +251,6 @@ public class KinsWatheRoles {
             roles.add(noellesrolesRoles("BARTENDER"));
             roles.add(noellesrolesRoles("MORPHLING"));
             roles.add(noellesrolesRoles("NOISEMAKER"));
-            roles.add(noellesrolesRoles("EXECUTIONER"));
             roles.add(noellesrolesRoles("THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES"));
         }
         return List.copyOf(roles);
@@ -258,8 +260,8 @@ public class KinsWatheRoles {
     public static List<Role> rolesHavePassiveIncome() {
         List<Role> roles = new ArrayList<>();
         roles.add(WatheRoles.KILLER);
-        roles.add(COOK);
         roles.add(CLEANER);
+        roles.add(COOK);
         roles.add(DREAMER);
         roles.add(DRUGMAKER);
         roles.add(JUDGE);
@@ -301,10 +303,10 @@ public class KinsWatheRoles {
     /// 限制身份生成人数
     public static void limitRolesGeneratePlayers() {
         ServerTickEvents.END_SERVER_TICK.register(((server) -> {
-            //限制清道夫生成人数
-            if (server.getPlayerManager().getCurrentPlayerCount() >= KinsWatheConfig.HANDLER.instance().CleanerPlayerLimit) {
-                Harpymodloader.setRoleMaximum(CLEANER,1);} else {
-                Harpymodloader.setRoleMaximum(CLEANER,0);
+            //限制制毒师生成人数
+            if (server.getPlayerManager().getCurrentPlayerCount() >= KinsWatheConfig.HANDLER.instance().DrugmakerPlayerLimit) {
+                Harpymodloader.setRoleMaximum(DRUGMAKER,1);} else {
+                Harpymodloader.setRoleMaximum(DRUGMAKER,0);
             }
             //限制执照恶棍生成人数
             if (server.getPlayerManager().getCurrentPlayerCount() >= KinsWatheConfig.HANDLER.instance().LicensedVillainPlayerLimit) {
@@ -319,6 +321,12 @@ public class KinsWatheRoles {
         ModdedRoleAssigned.EVENT.register((player, role)->{
             AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(player);
             ability.cooldown = KinsWatheConfig.HANDLER.instance().StartingCooldown * 20;
+            GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
+            PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
+            //阵营初始收入
+            if (gameWorld.isInnocent(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialCivilianIncome);
+            if (!gameWorld.isInnocent(player) && !gameWorld.canUseKillerFeatures(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialNeutralIncome);
+            if (gameWorld.canUseKillerFeatures(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialKillerIncome - 100);
             //清道夫初始物品
             if (role.equals(CLEANER)) {
                 player.giveItemStack(KinsWatheItems.SULFURIC_ACID_BARREL.getDefaultStack());
@@ -327,7 +335,11 @@ public class KinsWatheRoles {
             if (role.equals(DREAMER)) {
                 player.giveItemStack(KinsWatheItems.DREAM_IMPRINT.getDefaultStack());
             }
-            //黑警初始物品
+            //绑匪初始物品
+            if (role.equals(KIDNAPPER)) {
+                player.giveItemStack(KinsWatheItems.KNOCKOUT_DRUG.getDefaultStack());
+            }
+            //执照恶棍初始物品
             if (role.equals(LICENSED_VILLAIN)) {
                 player.giveItemStack(WatheItems.LOCKPICK.getDefaultStack());
             }
@@ -368,6 +380,14 @@ public class KinsWatheRoles {
         AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
             DreamerComponent playerDream = DreamerComponent.KEY.get(player);
             PhysicianComponent playerPhysician = PhysicianComponent.KEY.get(player);
+            //厨师死亡事件
+            if (player.getMainHandStack().isOf(KinsWatheItems.PAN) && player.isUsingItem() && player.getActiveItem().getItem().getUseAction(player.getActiveItem()) == UseAction.SPEAR) {
+                if (identifier == GameConstants.DeathReasons.GUN) {
+                    KinsWatheItems.setItemAfterUsing(player, KinsWatheItems.PAN, Hand.MAIN_HAND);
+                    player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0f, 1.0f);
+                    return false;
+                }
+            }
             //梦者死亡事件
             if (playerDream.dreamArmor > 0) {
                 playerDream.teleportToDreamer();
