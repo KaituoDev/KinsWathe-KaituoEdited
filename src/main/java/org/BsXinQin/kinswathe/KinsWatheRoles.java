@@ -38,6 +38,7 @@ import org.agmas.harpymodloader.modifiers.HMLModifiers;
 import org.agmas.harpymodloader.modifiers.Modifier;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -170,6 +171,17 @@ public class KinsWatheRoles {
             -1,
             false
     ));
+    //造尸怪
+    public static Role BODYMAKER = registerRole(new Role(
+            Identifier.of(KinsWathe.MOD_ID,"bodymaker"),
+            0x2148d1,
+            false,
+            true,
+            Role.MoodType.FAKE,
+            -1,
+            false));
+    //新增伪造死亡原因
+    public static Identifier FAKE_DEATH_REASON = Identifier.of(KinsWathe.MOD_ID, "fake");
 
     /// 新增词条
     //富豪
@@ -323,6 +335,13 @@ public class KinsWatheRoles {
             ability.cooldown = KinsWatheConfig.HANDLER.instance().StartingCooldown * 20;
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
             PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
+
+            if (role.equals(BODYMAKER)) {
+                ability.cooldown = 0;
+                ability.sync();
+                //造尸怪特殊关照：开局不需要冷却，方便开局马上制造尸体混淆别人
+
+            }
             //阵营初始收入
             if (gameWorld.isInnocent(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialCivilianIncome);
             if (!gameWorld.isInnocent(player) && !gameWorld.canUseKillerFeatures(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialNeutralIncome);
@@ -359,6 +378,7 @@ public class KinsWatheRoles {
             HunterAbility.register(context.player());
             JudgeAbility.register(context.player());
             RobotAbility.register(context.player());
+
         });
     }
 

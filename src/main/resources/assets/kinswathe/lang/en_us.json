@@ -10,6 +10,12 @@
   "announcement.role.kinswathe.bellringer": "Bellringer",
   "announcement.goals.kinswathe.bellringer": "Check time, and modify time.",
 
+  "announcement.goals.kinswathe.bodymaker": "Fake corpses to confuse others.",
+  "announcement.role.kinswathe.bodymaker": "Bodymaker",
+  "death_reason.kinswatheRoles.fake": "fake.",
+  "tip.bodymaker.success": "Created a fake corpse of %s",
+  "tip.bodymaker.cooldown": "Ability usable in %ss",
+
   "announcement.role.kinswathe.cleaner": "Cleaner",
   "announcement.goals.kinswathe.cleaner": "Remove all obstacles!",
 

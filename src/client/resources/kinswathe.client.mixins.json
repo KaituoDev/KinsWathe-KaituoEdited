@@ -28,7 +28,8 @@
     "roles.kidnapper.KidnapperShopMixin",
     "roles.licensed_villain.LicensedVillainShopMixin",
     "roles.physician.PhysicianShopMixin",
-    "roles.robot.RobotHudMixin"
+    "roles.robot.RobotHudMixin",
+    "roles.bodymaker.BodymakerScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

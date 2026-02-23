@@ -10,6 +10,12 @@
   "announcement.role.kinswathe.bellringer": "敲钟人",
   "announcement.goals.kinswathe.bellringer": "查看时间，并修改时间。",
 
+  "announcement.goals.kinswathe.bodymaker": "伪造尸体，混淆视听",
+  "announcement.role.kinswathe.bodymaker": "造尸怪",
+  "death_reason.kinswathe.fake": "伪造的",
+  "tip.bodymaker.success": "伪造了 %s 的尸体",
+  "tip.bodymaker.cooldown": "能力在 %s 秒后可用",
+
   "announcement.role.kinswathe.cleaner": "清道夫",
   "announcement.goals.kinswathe.cleaner": "扫除一切障碍！",
 
