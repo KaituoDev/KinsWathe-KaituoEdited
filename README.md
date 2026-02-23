@@ -112,6 +112,10 @@
   - Players that be dazed can not see, attack, use or voice chat
   - If distance between Kidnapper and dazed player exceeds 5 blocks, the player will be lifted
 
+- Bodymaker
+  - Can create a Corpse to confuse others
+  - No cooldown at the start
+  - When Create a corpse, it will in cooldown in 45s
 
 ## New Neutrals
 
