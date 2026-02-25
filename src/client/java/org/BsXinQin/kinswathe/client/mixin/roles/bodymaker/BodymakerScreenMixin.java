@@ -6,7 +6,6 @@ import dev.doctor4t.wathe.client.gui.screen.ingame.LimitedInventoryScreen;
 import dev.doctor4t.wathe.index.WatheItems;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
@@ -52,11 +51,10 @@ public abstract class BodymakerScreenMixin extends LimitedHandledScreen<PlayerSc
             int shouldBeY = (this.height - 32) / 2;
             int y = shouldBeY + 80;
             if (selectedLevel == 0) {
-                List<AbstractClientPlayerEntity> players = MinecraftClient.getInstance().world.getPlayers();
+                List<UUID> players = new ArrayList<>(MinecraftClient.getInstance().player.networkHandler.getPlayerUuids());
                 int x = this.width / 2 - (players.size()) * apart / 2 + 9;
                 for (int i = 0; i < players.size(); ++i) {
-                    AbstractClientPlayerEntity targetPlayer = players.get(i);
-                    BodymakerPlayerWidget widget = new BodymakerPlayerWidget(((LimitedInventoryScreen) (Object) this), x + apart * i, y, targetPlayer, i, this);
+                    BodymakerPlayerWidget widget = new BodymakerPlayerWidget(((LimitedInventoryScreen) (Object) this), x + apart * i, y, players.get(i), MinecraftClient.getInstance().player.networkHandler.getPlayerListEntry(players.get(i)), this);
                     addDrawableChild(widget);
                 }
             }

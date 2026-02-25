@@ -35,9 +35,9 @@ public class JudgeAbility {
                 lightning.refreshPositionAfterTeleport(target.getPos());
                 lightning.setCosmetic(true);
                 target.getWorld().spawnEntity(lightning);
-                player.playSoundToPlayer(SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 1.0f, 1.0f);
-                ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().JudgeAbilityCooldown);
             }
+            player.playSoundToPlayer(SoundEvents.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().JudgeAbilityCooldown);
         }
     }
 }

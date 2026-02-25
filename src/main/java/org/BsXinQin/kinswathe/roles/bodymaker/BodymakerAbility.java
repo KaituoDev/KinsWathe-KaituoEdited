@@ -31,7 +31,7 @@ public class BodymakerAbility {
         AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(player);
         if (gameWorld.isRole(player, KinsWatheRoles.BODYMAKER) && GameFunctions.isPlayerAliveAndSurvival(player) && ability.cooldown <= 0) {
             ServerPlayerEntity target = player.getServer().getPlayerManager().getPlayer(payload.target());
-            if (GameFunctions.isPlayerAliveAndSurvival(target)) {
+            if (target != null) {
                 PlayerBodyEntity playerBody = WatheEntities.PLAYER_BODY.create(target.getWorld());
                 if (playerBody != null) {
                     playerBody.setPlayerUuid(target.getUuid());
@@ -69,10 +69,10 @@ public class BodymakerAbility {
                         }
                         syncMethod.invoke(deathReasonInstance);
                     }
-                    player.playSoundToPlayer(SoundEvents.ENTITY_SKELETON_CONVERTED_TO_STRAY, SoundCategory.PLAYERS, 1.0f, 1.0f);
-                    ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().BodymakerAbilityCooldown);
                 }
             }
+            player.playSoundToPlayer(SoundEvents.ENTITY_SKELETON_CONVERTED_TO_STRAY, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().BodymakerAbilityCooldown);
         }
     }
 }

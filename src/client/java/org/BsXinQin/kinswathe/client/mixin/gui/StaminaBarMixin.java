@@ -11,7 +11,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.KinsWathe;
 import org.BsXinQin.kinswathe.KinsWatheConfig;
-import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
