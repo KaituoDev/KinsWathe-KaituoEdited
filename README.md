@@ -156,7 +156,7 @@
 
 ## Config Settings
 
-- Plus functions are configurable
+- Modifications to other mods are disabled by default
 
 - All roles ability are configurable
 
