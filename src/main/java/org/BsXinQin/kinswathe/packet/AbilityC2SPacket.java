@@ -18,5 +18,5 @@ public record AbilityC2SPacket() implements CustomPayload {
     public static AbilityC2SPacket read(PacketByteBuf buf) {
         return new AbilityC2SPacket();
     }
-    public @NotNull Id<? extends CustomPayload> getId() {return ID;}
+    public @NotNull Id<? extends @NotNull CustomPayload> getId() {return ID;}
 }

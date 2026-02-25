@@ -21,7 +21,7 @@ public class KinsWatheItems {
     );
     //梦之印记
     public static final Item DREAM_IMPRINT = registerItem(
-            new DreamImprintItem(new Item.Settings().maxCount(1)),
+            new DreamImprintItem(new Item.Settings().maxCount(4)),
             "dream_imprint"
     );
     //吹矢
@@ -77,7 +77,6 @@ public class KinsWatheItems {
     /// 添加物品冷却
     public static void addItemCooldowns() {
         GameConstants.ITEM_COOLDOWNS.put(BLOWGUN, GameConstants.getInTicks(1,0));
-        GameConstants.ITEM_COOLDOWNS.put(DREAM_IMPRINT, GameConstants.getInTicks(0,0));
         GameConstants.ITEM_COOLDOWNS.put(HUNTING_KNIFE, GameConstants.getInTicks(0,45));
         GameConstants.ITEM_COOLDOWNS.put(KNOCKOUT_DRUG, GameConstants.getInTicks(0,45));
         GameConstants.ITEM_COOLDOWNS.put(MEDICAL_KIT, GameConstants.getInTicks(1,0));

@@ -28,8 +28,8 @@ public abstract class DreamerShopMixin {
         if (!FabricLoader.getInstance().isModLoaded("noellesroles")) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
         if (gameWorld.isRole(this.player, KinsWatheRoles.DREAMER)) {
-            if (index < 0 || index >= KinsWatheShops.getKillerNeutralRolesShop(this.player.getWorld()).size()) return;
-            ShopEntry entries = KinsWatheShops.getKillerNeutralRolesShop(this.player.getWorld()).get(index);
+            if (index < 0 || index >= KinsWatheShops.getKillerNeutralRolesShop().size()) return;
+            ShopEntry entries = KinsWatheShops.getKillerNeutralRolesShop().get(index);
             if (PlayerPurchaseComponent.handlePurchase(this.player, this.balance, entries.stack().getItem(), entries.price())) {
                 this.balance -= entries.price();
                 this.sync();

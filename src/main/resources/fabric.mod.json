@@ -29,6 +29,7 @@
   "custom": {
     "cardinal-components": [
       "kinswathe:safe",
+      "kinswathe:body",
       "kinswathe:ability",
       "kinswathe:config",
       "kinswathe:winner",

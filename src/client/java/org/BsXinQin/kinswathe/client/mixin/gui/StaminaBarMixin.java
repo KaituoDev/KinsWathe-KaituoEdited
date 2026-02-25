@@ -10,6 +10,7 @@ import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.KinsWatheConfig;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,7 +30,7 @@ public abstract class StaminaBarMixin {
         if (WatheClient.isPlayerAliveAndInSurvival()) {
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
             Role role = gameWorld.getRole(MinecraftClient.getInstance().player);
-            if (ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).EnableStaminaBar && !MinecraftClient.getInstance().options.hudHidden && role != null) {
+            if (KinsWatheConfig.HANDLER.instance().EnableStaminaBar && !MinecraftClient.getInstance().options.hudHidden && role != null) {
                 int maxSprintTime = role.getMaxSprintTime();
                 if (maxSprintTime == -1) {
                     getStaminaBarInfinite(context, 1.0f, 0xFF00FF00);

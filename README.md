@@ -69,6 +69,7 @@
 
 - Physician
   - Can see poisoned players through walls
+  - Can analyze the death reason of the bodies
   - Has 15 seconds of sprint time
   - Initially equip with Medical Kit
   - Medical Kit can use on a player to remove poison and get coins
@@ -77,12 +78,16 @@
 
 - Robot
   - Has no mood
-  - Immune poison
-  - Infinite stamina
+  - Infinite sprint time
+  - Immune poison and dazing
   - Use ability to see the darkness clearly
 
 
 ## New Killers
+
+- Bodymaker
+  - Can create a body of someone to confuse others
+  - Both death reason and role of the body can be edited
 
 - Cleaner
   - Initially equip with Sulfuric Acid Barrel
@@ -103,7 +108,7 @@
   - If holding knife when sprinting, hunter will speed up
   - Hunting Knife replaces Knife in shop
   - Hunting Knife will immediately cooldown when stoping holding if sprinted
-  - Use ability to refresh Hunting Knife cooldown
+  - Use ability to refresh knifes' cooldown
 
 - Kidnapper
   - Can buy Knockout Drug in shop
@@ -168,3 +173,5 @@
 ## Special Thanks
 
 - AqumpusAXY for Wathe Plus Function
+
+- Annina for Bodymaker

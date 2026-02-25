@@ -18,28 +18,40 @@ public class KinsWatheConfig {
     public boolean EnableStaminaBar = true;
 
     @SerialEntry(comment = "Whether to enable jump when not in game.")
-    public boolean EnableJumpNotInGame = true;
+    public boolean EnableJumpNotInGame = false;
 
     @SerialEntry(comment = "Whether to enable safe time when game starts.")
     public boolean EnableStartSafeTime = false;
 
     /// 关于Wathe修改
-    @SerialEntry(comment = "\n\n[Wathe] Modify:\nWhether Revolver drop after killer kills civilian.")
-    public boolean PreventKillerDropRevolver = false;
+    @SerialEntry(comment = "\n\n[Wathe] Modify (default settings are original settings of Wathe):")
+    public boolean EnableWatheModify = false;
+
     @SerialEntry(comment = "Initial civilians income.")
     public int InitialCivilianIncome = 0;
+
     @SerialEntry(comment = "Initial neutrals income.")
     public int InitialNeutralIncome = 0;
+
     @SerialEntry(comment = "Initial killers income.")
     public int InitialKillerIncome = 100;
+
     @SerialEntry(comment = "Increase money when kill player.")
     public int IncreaseMoneyWhenKill = 100;
+
+    @SerialEntry(comment = "Whether Revolver drop after killer kills civilian.")
+    public boolean PreventKillerDropRevolver = false;
 
     /// 关于KinsWathe修改
     @SerialEntry(comment = "\n\n[Kin's Wathe] Modify:\nBellringer: modify price and cooldown of ability.")
     public int BellringerAbilityPrice = 200;
     @SerialEntry
     public int BellringerAbilityCooldown = GameConstants.getInTicks(2,0) / 20;
+
+    @SerialEntry(comment = "Bodymaker: modify cooldown of ability and whether to fake role of body.")
+    public int BodymakerAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
+    @SerialEntry
+    public boolean BodymakerAbilityFakeRole = true;
 
     @SerialEntry(comment = "Cleaner: modify price and cooldown of ability.")
     public int CleanerAbilityPrice = 200;
@@ -53,6 +65,9 @@ public class KinsWatheConfig {
     public int DetectiveAbilityPrice = 200;
     @SerialEntry
     public int DetectiveAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
+
+    @SerialEntry(comment = "Dreamer: modify initial quantity of Dream Imprint.")
+    public int DreamerInitialItemQuantity = 1;
 
     @SerialEntry(comment = "Drugmaker: modify generation player limit, get coins when someone was poisoned, price of Poison Injector and Blowgun.")
     public int DrugmakerPlayerLimit = 10;
@@ -95,7 +110,10 @@ public class KinsWatheConfig {
     public boolean ViolatorEnabled = false;
 
     /// 关于NoellesRoles修改
-    @SerialEntry(comment = "\n\n[Noelle's Roles] Modify:\nConductor: whether to enable instinct of seeing dropped items.")
+    @SerialEntry(comment = "\n\n[Noelle's Roles] Modify (default settings are original settings of Noelle's Roles):")
+    public boolean EnableNoellesRolesModify = false;
+
+    @SerialEntry(comment = "Conductor: whether to enable instinct of seeing dropped items.")
     public boolean ConductorInstinctModify = false;
 
     @SerialEntry(comment = "Coroner: whether to enable instinct of seeing player bodies.")

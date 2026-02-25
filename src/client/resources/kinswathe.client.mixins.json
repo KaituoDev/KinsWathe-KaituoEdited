@@ -13,6 +13,9 @@
     "host.KeyBindingMixin",
     "modifiers.violator.ViolatorKeyBindingMixin",
     "roles.bellringer.BellringerHudMixin",
+    "roles.bodymaker.BodymakerDoNotCloseMixin",
+    "roles.bodymaker.BodymakerScreenMixin",
+    "roles.bodymaker.BodymakerSuggestorMixin",
     "roles.cleaner.CleanerHudMixin",
     "roles.cook.CookShopMixin",
     "roles.detective.DetectiveHudMixin",
@@ -22,14 +25,13 @@
     "roles.hunter.HunterHudMixin",
     "roles.hunter.HunterLockSlotMixin",
     "roles.hunter.HunterShopMixin",
-    "roles.judge.JudgeHudMixin",
+    "roles.judge.JudgeScreenMixin",
     "roles.kidnapper.KidnapperControlledMixin",
     "roles.kidnapper.KidnapperKeyControlledMixin",
     "roles.kidnapper.KidnapperShopMixin",
     "roles.licensed_villain.LicensedVillainShopMixin",
     "roles.physician.PhysicianShopMixin",
-    "roles.robot.RobotHudMixin",
-    "roles.bodymaker.BodymakerScreenMixin"
+    "roles.robot.RobotHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -48,9 +50,9 @@
     "roles.dreamer.DreamerInstinctMixin",
     "roles.dreamer.DreamerMoodMixin",
     "roles.drugmaker.DrugmakerInstinctMixin",
-    "roles.judge.JudgeTargetHudMixin",
     "roles.licensed_villain.LicensedVillainInstinctMixin",
     "roles.licensed_villain.LicensedVillainMoodMixin",
+    "roles.physician.PhysicianDeathReasonMixin",
     "roles.physician.PhysicianInstinctMixin",
     "roles.robot.RobotMoodMixin"
   ]

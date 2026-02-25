@@ -12,13 +12,17 @@ import lombok.SneakyThrows;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.BsXinQin.kinswathe.packet.AbilityC2SPacket;
+import org.BsXinQin.kinswathe.packet.BodymakerC2SPacket;
+import org.BsXinQin.kinswathe.packet.JudgeC2SPacket;
 import org.BsXinQin.kinswathe.roles.bellringer.BellringerAbility;
+import org.BsXinQin.kinswathe.roles.bodymaker.BodymakerAbility;
 import org.BsXinQin.kinswathe.roles.cleaner.CleanerAbility;
 import org.BsXinQin.kinswathe.roles.cook.CookComponent;
 import org.BsXinQin.kinswathe.roles.detective.DetectiveAbility;
@@ -38,7 +42,6 @@ import org.agmas.harpymodloader.modifiers.HMLModifiers;
 import org.agmas.harpymodloader.modifiers.Modifier;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +62,16 @@ public class KinsWatheRoles {
             false,
             Role.MoodType.REAL,
             WatheRoles.CIVILIAN.getMaxSprintTime(),
+            true
+    ));
+    //造尸怪
+    public static Role BODYMAKER = registerRole(new Role(
+            Identifier.of(KinsWathe.MOD_ID,"bodymaker"),
+            0x2148d1,
+            false,
+            true,
+            Role.MoodType.FAKE,
+            -1,
             true
     ));
     //清道夫
@@ -171,17 +184,6 @@ public class KinsWatheRoles {
             -1,
             false
     ));
-    //造尸怪
-    public static Role BODYMAKER = registerRole(new Role(
-            Identifier.of(KinsWathe.MOD_ID,"bodymaker"),
-            0x2148d1,
-            false,
-            true,
-            Role.MoodType.FAKE,
-            -1,
-            false));
-    //新增伪造死亡原因
-    public static Identifier FAKE_DEATH_REASON = Identifier.of(KinsWathe.MOD_ID, "fake");
 
     /// 新增词条
     //富豪
@@ -242,11 +244,12 @@ public class KinsWatheRoles {
         return (Role) roleField.get(null);
     }
 
-    /// 添加有收入的身份
+    /// 添加有任务收入的身份
     public static List<Role> rolesHaveTaskIncome() {
         List<Role> roles = new ArrayList<>();
         roles.add(WatheRoles.KILLER);
         roles.add(BELLRINGER);
+        roles.add(BODYMAKER);
         roles.add(CLEANER);
         roles.add(COOK);
         roles.add(DETECTIVE);
@@ -272,6 +275,7 @@ public class KinsWatheRoles {
     public static List<Role> rolesHavePassiveIncome() {
         List<Role> roles = new ArrayList<>();
         roles.add(WatheRoles.KILLER);
+        roles.add(BODYMAKER);
         roles.add(CLEANER);
         roles.add(COOK);
         roles.add(DREAMER);
@@ -335,24 +339,19 @@ public class KinsWatheRoles {
             ability.cooldown = KinsWatheConfig.HANDLER.instance().StartingCooldown * 20;
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
             PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
-
-            if (role.equals(BODYMAKER)) {
-                ability.cooldown = 0;
-                ability.sync();
-                //造尸怪特殊关照：开局不需要冷却，方便开局马上制造尸体混淆别人
-
-            }
             //阵营初始收入
-            if (gameWorld.isInnocent(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialCivilianIncome);
-            if (!gameWorld.isInnocent(player) && !gameWorld.canUseKillerFeatures(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialNeutralIncome);
-            if (gameWorld.canUseKillerFeatures(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialKillerIncome - 100);
+            if (KinsWatheConfig.HANDLER.instance().EnableWatheModify) {
+                if (gameWorld.isInnocent(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialCivilianIncome);
+                if (!gameWorld.isInnocent(player) && !gameWorld.canUseKillerFeatures(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialNeutralIncome);
+                if (gameWorld.canUseKillerFeatures(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialKillerIncome - 100);
+            }
             //清道夫初始物品
             if (role.equals(CLEANER)) {
                 player.giveItemStack(KinsWatheItems.SULFURIC_ACID_BARREL.getDefaultStack());
             }
             //梦者初始物品
             if (role.equals(DREAMER)) {
-                player.giveItemStack(KinsWatheItems.DREAM_IMPRINT.getDefaultStack());
+                player.giveItemStack(new ItemStack(KinsWatheItems.DREAM_IMPRINT, KinsWatheConfig.HANDLER.instance().DreamerInitialItemQuantity));
             }
             //绑匪初始物品
             if (role.equals(KIDNAPPER)) {
@@ -376,9 +375,13 @@ public class KinsWatheRoles {
             CleanerAbility.register(context.player());
             DetectiveAbility.register(context.player());
             HunterAbility.register(context.player());
-            JudgeAbility.register(context.player());
             RobotAbility.register(context.player());
-
+        });
+        ServerPlayNetworking.registerGlobalReceiver(BodymakerC2SPacket.ID, (payload, context) -> {
+            BodymakerAbility.register(payload, context.player());
+        });
+        ServerPlayNetworking.registerGlobalReceiver(JudgeC2SPacket.ID, (payload, context) -> {
+            JudgeAbility.register(payload, context.player());
         });
     }
 

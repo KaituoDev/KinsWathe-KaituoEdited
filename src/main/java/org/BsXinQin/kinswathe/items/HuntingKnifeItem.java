@@ -36,7 +36,7 @@ public class HuntingKnifeItem extends Item {
 
     @Override
     public void onStoppedUsing(@NotNull ItemStack stack, @NotNull World world, @NotNull LivingEntity livingEntity, int remainingUseTicks) {
-        if (!(livingEntity instanceof PlayerEntity player) || player.isSpectator() || remainingUseTicks >= this.getMaxUseTime(stack, player) - 10) return;
+        if (!(livingEntity instanceof @NotNull PlayerEntity player) || player.isSpectator() || remainingUseTicks >= this.getMaxUseTime(stack, player) - 10) return;
         HitResult hitResult = ProjectileUtil.getCollision(player, entity -> entity instanceof @NotNull PlayerEntity target && GameFunctions.isPlayerAliveAndSurvival(target), 3.0f);
         PlayerEntity targetPlayer = (hitResult instanceof @NotNull EntityHitResult entityHitResult) ? (PlayerEntity) entityHitResult.getEntity() : null;
         HunterComponent playerHunter = HunterComponent.KEY.get(player);
@@ -70,9 +70,9 @@ public class HuntingKnifeItem extends Item {
     public void setTemporaryCooldown(@NotNull World world, @NotNull PlayerEntity player) {
         if (world.isClient) return;
         HunterComponent playerHunter = HunterComponent.KEY.get(player);
-        playerHunter.stopHuntingKnife();
         if (GameFunctions.isPlayerAliveAndSurvival(player) && playerHunter.isSprinting) {
             player.getItemCooldownManager().set(this, GameConstants.getInTicks(0, playerHunter.knifeTicks / 10));
         }
+        playerHunter.stopHuntingKnife();
     }
 }

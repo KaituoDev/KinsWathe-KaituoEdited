@@ -17,7 +17,7 @@ public class KillerNoBackfireMixin {
 
     @Inject(method = "lambda$receive$2", at = @At("HEAD"), remap = false, cancellable = true)
     private static void noKillerBackfire(ServerPlayNetworking.Context context, @NotNull ServerPlayerEntity player, Item revolver, @NotNull CallbackInfo ci) {
-        if (!KinsWatheConfig.HANDLER.instance().PreventKillerDropRevolver) return;
+        if (!KinsWatheConfig.HANDLER.instance().EnableWatheModify || !KinsWatheConfig.HANDLER.instance().PreventKillerDropRevolver) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
         if (gameWorld.canUseKillerFeatures(player) && GameFunctions.isPlayerAliveAndSurvival(player)) {
             ci.cancel();

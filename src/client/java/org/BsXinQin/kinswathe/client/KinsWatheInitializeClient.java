@@ -51,7 +51,6 @@ public class KinsWatheInitializeClient {
                             KinsWatheRoles.BELLRINGER,
                             KinsWatheRoles.DETECTIVE,
                             KinsWatheRoles.HUNTER,
-                            KinsWatheRoles.JUDGE,
                             KinsWatheRoles.ROBOT,
                             KinsWatheRoles.CLEANER
                     };

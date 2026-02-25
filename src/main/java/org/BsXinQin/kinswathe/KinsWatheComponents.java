@@ -1,10 +1,8 @@
 package org.BsXinQin.kinswathe;
 
+import dev.doctor4t.wathe.entity.PlayerBodyEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
-import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
-import org.BsXinQin.kinswathe.component.CustomWinnerComponent;
-import org.BsXinQin.kinswathe.component.GameSafeComponent;
+import org.BsXinQin.kinswathe.component.*;
 import org.BsXinQin.kinswathe.roles.cook.CookComponent;
 import org.BsXinQin.kinswathe.roles.dreamer.DreamerComponent;
 import org.BsXinQin.kinswathe.roles.dreamer.DreamerKillerComponent;
@@ -24,6 +22,7 @@ public class KinsWatheComponents implements EntityComponentInitializer, WorldCom
     public void registerEntityComponentFactories(@NotNull EntityComponentFactoryRegistry registry) {
         registry.beginRegistration(PlayerEntity.class, GameSafeComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(GameSafeComponent::new);
         registry.beginRegistration(PlayerEntity.class, AbilityPlayerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(AbilityPlayerComponent::new);
+        registry.beginRegistration(PlayerBodyEntity.class, BodyDeathReasonComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(BodyDeathReasonComponent::new);
         registry.beginRegistration(PlayerEntity.class, CookComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(CookComponent::new);
         registry.beginRegistration(PlayerEntity.class, DreamerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(DreamerComponent::new);
         registry.beginRegistration(PlayerEntity.class, DreamerKillerComponent.KEY).respawnStrategy(RespawnCopyStrategy.NEVER_COPY).end(DreamerKillerComponent::new);

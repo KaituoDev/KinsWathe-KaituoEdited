@@ -37,6 +37,7 @@ public class HunterComponent implements AutoSyncedComponent, ServerTickingCompon
     }
 
     public void stopHuntingKnife() {
+        this.isSprinting = false;
         this.isUseKnife = false;
         this.sync();
     }

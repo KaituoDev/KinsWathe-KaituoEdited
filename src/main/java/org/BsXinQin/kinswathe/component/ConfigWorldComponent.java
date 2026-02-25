@@ -25,11 +25,11 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     /// 具体配置内容
     //全局配置
     public int StartingCooldown = GameConstants.getInTicks(0,30) / 20;
-    public boolean EnableStaminaBar = true;
-    public boolean EnableJumpNotInGame = true;
+    public boolean EnableJumpNotInGame = false;
     public boolean EnableStartSafeTime = false;
     //关于KinsWathe修改
     public int BellringerAbilityPrice = 200;
+    public boolean BodymakerAbilityFakeRole = true;
     public int CleanerAbilityPrice = 200;
     public int CookPanPrice = 250;
     public int DetectiveAbilityPrice = 200;
@@ -42,6 +42,7 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public int LicensedVillainRevolverPrice = 300;
     public int PhysicianPillPrice = 300;
     //关于NoellesRoles修改
+    public boolean EnableNoellesRolesModify = false;
     public boolean ConductorInstinctModify = false;
     public boolean CoronerInstinctModify = false;
 
@@ -50,11 +51,11 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public void writeToNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
         //全局配置
         StartingCooldown = KinsWatheConfig.HANDLER.instance().StartingCooldown; tag.putInt("StartingCooldown", this.StartingCooldown);
-        EnableStaminaBar = KinsWatheConfig.HANDLER.instance().EnableStaminaBar; tag.putBoolean("EnableStaminaBar", this.EnableStaminaBar);
         EnableJumpNotInGame = KinsWatheConfig.HANDLER.instance().EnableJumpNotInGame; tag.putBoolean("EnableJumpNotInGame", this.EnableJumpNotInGame);
         EnableStartSafeTime = KinsWatheConfig.HANDLER.instance().EnableStartSafeTime; tag.putBoolean("EnableStartSafeTime", this.EnableStartSafeTime);
         //关于KinsWathe修改
         BellringerAbilityPrice = KinsWatheConfig.HANDLER.instance().BellringerAbilityPrice; tag.putInt("BellringerAbilityPrice", this.BellringerAbilityPrice);
+        BodymakerAbilityFakeRole = KinsWatheConfig.HANDLER.instance().BodymakerAbilityFakeRole; tag.putBoolean("BodymakerAbilityFakeRole", this.BodymakerAbilityFakeRole);
         CleanerAbilityPrice = KinsWatheConfig.HANDLER.instance().CleanerAbilityPrice; tag.putInt("CleanerAbilityPrice", this.CleanerAbilityPrice);
         CookPanPrice = KinsWatheConfig.HANDLER.instance().CookPanPrice; tag.putInt("CookPanPrice", this.CookPanPrice);
         DetectiveAbilityPrice = KinsWatheConfig.HANDLER.instance().DetectiveAbilityPrice; tag.putInt("DetectiveAbilityPrice", this.DetectiveAbilityPrice);
@@ -67,6 +68,7 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         LicensedVillainRevolverPrice = KinsWatheConfig.HANDLER.instance().LicensedVillainRevolverPrice; tag.putInt("LicensedVillainRevolverPrice", this.LicensedVillainRevolverPrice);
         PhysicianPillPrice = KinsWatheConfig.HANDLER.instance().PhysicianPillPrice; tag.putInt("PhysicianPillPrice", this.PhysicianPillPrice);
         //关于NoellesRoles修改
+        EnableNoellesRolesModify = KinsWatheConfig.HANDLER.instance().EnableNoellesRolesModify; tag.putBoolean("EnableNoellesRolesModify", this.EnableNoellesRolesModify);
         ConductorInstinctModify = KinsWatheConfig.HANDLER.instance().ConductorInstinctModify; tag.putBoolean("ConductorInstinctModify", this.ConductorInstinctModify);
         CoronerInstinctModify = KinsWatheConfig.HANDLER.instance().CoronerInstinctModify; tag.putBoolean("CoronerInstinctModify", this.CoronerInstinctModify);
     }
@@ -75,11 +77,11 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public void readFromNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
         //全局配置
         if (tag.contains("StartingCooldown"))   this.StartingCooldown = tag.getInt("StartingCooldown");
-        if (tag.contains("EnableStaminaBar"))   this.EnableStaminaBar = tag.getBoolean("EnableStaminaBar");
         if (tag.contains("EnableJumpNotInGame"))   this.EnableJumpNotInGame = tag.getBoolean("EnableJumpNotInGame");
         if (tag.contains("EnableStartSafeTime"))   this.EnableStartSafeTime = tag.getBoolean("EnableStartSafeTime");
         //关于KinsWathe修改
         if (tag.contains("BellringerAbilityPrice"))   this.BellringerAbilityPrice = tag.getInt("BellringerAbilityPrice");
+        if (tag.contains("BodymakerAbilityFakeRole"))   this.BodymakerAbilityFakeRole = tag.getBoolean("BodymakerAbilityFakeRole");
         if (tag.contains("CleanerAbilityPrice"))   this.CleanerAbilityPrice = tag.getInt("CleanerAbilityPrice");
         if (tag.contains("CookPanPrice"))   this.CookPanPrice = tag.getInt("CookPanPrice");
         if (tag.contains("DetectiveAbilityPrice"))   this.DetectiveAbilityPrice = tag.getInt("DetectiveAbilityPrice");
@@ -92,6 +94,7 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         if (tag.contains("LicensedVillainRevolverPrice"))   this.LicensedVillainRevolverPrice = tag.getInt("LicensedVillainRevolverPrice");
         if (tag.contains("PhysicianPillPrice"))   this.PhysicianPillPrice = tag.getInt("PhysicianPillPrice");
         //关于NoellesRoles修改
+        if (tag.contains("EnableNoellesRolesModify"))   this.EnableNoellesRolesModify = tag.getBoolean("EnableNoellesRolesModify");
         if (tag.contains("ConductorInstinctModify"))   this.ConductorInstinctModify = tag.getBoolean("ConductorInstinctModify");
         if (tag.contains("CoronerInstinctModify"))   this.CoronerInstinctModify = tag.getBoolean("CoronerInstinctModify");
     }

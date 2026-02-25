@@ -4,6 +4,7 @@
   "package": "org.BsXinQin.kinswathe.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "host.AddDeathReasonMixin",
     "host.CustomWinnerCheckMixin",
     "host.GameFnctionsResetMixin",
     "host.GiveCoinsForMoodMixin",

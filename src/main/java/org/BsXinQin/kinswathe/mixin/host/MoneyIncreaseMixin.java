@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MoneyIncreaseMixin {
     @Inject(method = "killPlayer(Lnet/minecraft/entity/player/PlayerEntity;ZLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Identifier;)V", at = @At("HEAD"))
     private static void increaseMoney(@NotNull PlayerEntity victim, boolean spawnBody, @NotNull PlayerEntity killer, Identifier identifier, CallbackInfo ci) {
+        if (!KinsWatheConfig.HANDLER.instance().EnableWatheModify) return;
         if (killer != null) {
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(victim.getWorld());
             if (!gameWorld.isInnocent(killer)) {

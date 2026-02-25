@@ -32,7 +32,7 @@ public abstract class DreamerShopMixin extends LimitedHandledScreen<PlayerScreen
         if (!FabricLoader.getInstance().isModLoaded("noellesroles")) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
         if (gameWorld.isRole(this.player, KinsWatheRoles.DREAMER)) {
-            List<ShopEntry> entries = KinsWatheShops.getKillerNeutralRolesShop(this.player.getWorld());
+            List<ShopEntry> entries = KinsWatheShops.getKillerNeutralRolesShop();
             int apart = 36;
             int x = this.width / 2 - (entries.size()) * apart / 2 + 9;
             int shouldBeY = (this.height - 32) / 2;
