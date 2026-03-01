@@ -1,4 +1,4 @@
-package org.BsXinQin.kinswathe.client.component;
+package org.BsXinQin.kinswathe.client.items;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.KinsWathe;
 import org.jetbrains.annotations.NotNull;
 
-public class ExtraModelComponent {
+public class ItemExtraModel {
 
     public static Identifier getCooldownId() {
         return Identifier.of(KinsWathe.MOD_ID, "item_cooldown");

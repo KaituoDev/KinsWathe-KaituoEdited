@@ -7,6 +7,8 @@
   "tip.kinswathe.game_safe_time": "Remaining safe time: %ss",
   "tip.kinswathe.game_no_safe_time": "Safe time has been exhausted!",
 
+  "announcement.title.neutral": "Neutrals",
+
   "announcement.role.kinswathe.bellringer": "Bellringer",
   "announcement.goals.kinswathe.bellringer": "Check time, and modify time.",
 
@@ -43,6 +45,7 @@
   "announcement.role.kinswathe.judge": "Judge",
   "announcement.goals.kinswathe.judge": "Fair and just!",
   "tip.kinswathe.judge.notification": "You are undergoing justice",
+  "tip.kinswathe.judge.ability_failed": "Target seems not to be present...",
   "hud.kinswathe.judge.ready": "Ready to judge",
 
   "announcement.role.kinswathe.kidnapper": "Kidnapper",
@@ -122,7 +125,7 @@
 
   "guidebook.role.kinswathe:cleaner": "Cleaner",
   "guidebook.role.title.kinswathe:cleaner": "Leaves No Trace",
-  "guidebook.role.description.kinswathe:cleaner": "The Cleaner is an cleanup expert sent by the killer organization.\n\nStarts with Sulfuric Acid Barrel, which can be used to dissolve bodies, leaving no trace behind.\n\nThe Cleaner can use their ability to clear all dropped items on the ground.\n\nFor killers, the Cleaner is the most reliable partner — after all, no body means no evidence.",
+  "guidebook.role.description.kinswathe:cleaner": "The Cleaner is an cleanup expert sent by the killer organization.\n\nStarts with Sulfuric Acid Barrel, which can be used to dissolve bodies, and can get coins when dissolve a body.\n\nThe Cleaner can use their ability to clear all dropped items on the ground.\n\nFor killers, the Cleaner is the most reliable partner — after all, no body means no evidence.",
 
   "guidebook.role.kinswathe:cook": "Cook",
   "guidebook.role.title.kinswathe:cook": "Frying Pan Master",
@@ -142,7 +145,7 @@
 
   "guidebook.role.kinswathe:hunter": "Hunter",
   "guidebook.role.title.kinswathe:hunter": "Hunting Time",
-  "guidebook.role.description.kinswathe:hunter": "A born chaser, the Hunter thoroughly enjoys the feeling of prey being pursued!\n\nWhen sprinting while charging a knife, the Hunter's movement speed is greatly increased. Ordinary daggers in the shop are replaced with Hunting Knife — it has a longer charge time, but instantly cooldown when charging stops.\n\nThe Hunter can use his ability to instantly refresh the cooldown of all knives in his inventory, granting him terrifying chain-kill potential.\n\nRunning away only fuels his hunting desire!",
+  "guidebook.role.description.kinswathe:hunter": "A born chaser, the Hunter thoroughly enjoys the feeling of prey being pursued!\n\nWhen sprinting while holding a knife, the Hunter's movement speed is greatly increased. Hunting Knife will be added to the store — it has a longer holding time, but instantly cooldown when holding stops.\n\nThe Hunter can use his ability to instantly refresh the cooldown of all knives in his inventory, granting him terrifying chain-kill potential.\n\nRunning away only fuels his hunting desire!",
 
   "guidebook.role.kinswathe:judge": "Judge",
   "guidebook.role.title.kinswathe:judge": "Embodiment of Justice",
@@ -150,7 +153,7 @@
 
   "guidebook.role.kinswathe:kidnapper": "Kidnapper",
   "guidebook.role.title.kinswathe:kidnapper": "Dark Dealings",
-  "guidebook.role.description.kinswathe:kidnapper": "The Kidnapper doesn't kill openly; he prefers to turn his prey into obedient puppets.\n\nKnockout Drug can be purchased at the shop. Using it renders a target unconscious, causing them to follow the Kidnapper. The Kidnapper also boards the train with Knockout Drug, just in case.\n\nA target affected by Knockout Drug will have a black screen, unable to attack, use items, or use voice chat — they can only follow blindly until the effect wears off. However, if you can get far enough away during this time, the Kidnapper won't be able to catch you.\n\nNo one knows where the Kidnapper takes these passengers, and no one wants to know.",
+  "guidebook.role.description.kinswathe:kidnapper": "The Kidnapper doesn't kill openly; he prefers to turn his prey into obedient puppets.\n\nKnockout Drug can be purchased at the shop. Using it renders a target unconscious, causing them to follow the Kidnapper. The Kidnapper also boards the train with Knockout Drug, just in case.\n\nIf the Kidnapper personally kill the dazed target, he will receive an additional reward.\n\nA target affected by Knockout Drug will have a black screen, unable to attack, use items, or use voice chat — they can only follow blindly until the effect wears off. However, if you can get far enough away during this time, the Kidnapper won't be able to catch you.\n\nNo one knows where the Kidnapper takes these passengers, and no one wants to know.",
 
   "guidebook.role.kinswathe:licensed_villain": "Licensed Villain",
   "guidebook.role.title.kinswathe:licensed_villain": "Officially Certified",
@@ -162,7 +165,7 @@
 
   "guidebook.role.kinswathe:robot": "Robot",
   "guidebook.role.title.kinswathe:robot": "Mechanical Being",
-  "guidebook.role.description.kinswathe:robot": "The Robot has infiltrated this train; no one knows its purpose.\n\nAs a mechanical construct, it has no sanity, is immune to poison, cannot be knocked out by Knockout Drug, and has unlimited stamina.\n\nEvery so often, the Robot can activate Night Vision mode, allowing it to see clearly in the dark.\n\nSome say it's just malfunctioning, while others believe it carries some kind of mission...",
+  "guidebook.role.description.kinswathe:robot": "The Robot has infiltrated this train; no one knows its purpose.\n\nAs a mechanical construct, it has no mood, is immune to poison, cannot be knocked out by Knockout Drug, and has unlimited stamina.\n\nEvery so often, the Robot can activate Night Vision mode, allowing it to see clearly in the dark.\n\nSome say it's just malfunctioning, while others believe it carries some kind of mission...",
 
   "guidebook.role.kinswathe:magnate": "Magnate",
   "guidebook.role.title.kinswathe:magnate": "Fortune's Favorite",

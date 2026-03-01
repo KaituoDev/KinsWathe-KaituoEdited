@@ -1,4 +1,4 @@
-package org.BsXinQin.kinswathe.client.component;
+package org.BsXinQin.kinswathe.client.items;
 
 import dev.doctor4t.ratatouille.util.TextUtils;
 import dev.doctor4t.wathe.client.util.WatheItemTooltips;
@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import org.BsXinQin.kinswathe.KinsWatheItems;
 import org.BsXinQin.kinswathe.component.GameSafeComponent;
 import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.jetbrains.annotations.NotNull;
@@ -17,9 +18,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ItemTipComponent {
+public class ItemToolTip {
 
     private static final Map<Item, Integer> presetCooldowns = new HashMap<>();
+
     public static int getItemCooldownTicks(@NotNull Item item) {return presetCooldowns.getOrDefault(item, 0);}
 
     public static void initItemCooldown() {presetCooldowns.putAll(GameConstants.ITEM_COOLDOWNS);}
@@ -45,14 +47,14 @@ public class ItemTipComponent {
             GameSafeComponent playerSafe = GameSafeComponent.KEY.get(MinecraftClient.getInstance().player);
             HunterComponent playerHunter = HunterComponent.KEY.get(MinecraftClient.getInstance().player);
             if (itemCooldown != null && itemCooldown.isCoolingDown(item)) {
-                if (playerSafe.isGameSafe || playerHunter.knifeTicks > 0) {
+                if (playerSafe.isGameSafe || (itemStack.isOf(KinsWatheItems.HUNTING_KNIFE) && playerHunter.knifeTicks > 0)) {
                     list.add(Text.translatable("tip.cooldown_temporary").withColor(WatheItemTooltips.COOLDOWN_COLOR));
                 } else {
                     float progress = itemCooldown.getCooldownProgress(item, 0);
-                    int totalTicks = ItemTipComponent.getItemCooldownTicks(item);
+                    int totalTicks = getItemCooldownTicks(item);
                     if (totalTicks > 0) {
-                        int remainingTicks = (int) (totalTicks * progress);
-                        int totalSeconds = (remainingTicks + 19) / 20;
+                        int remainingTicks = (int) (totalTicks * progress) + 19;
+                        int totalSeconds = remainingTicks / 20;
                         int minutes = totalSeconds / 60;
                         int seconds = totalSeconds % 60;
                         String countdown = (minutes > 0 ? minutes + "m" : "") + (seconds > 0 ? seconds + "s" : "");

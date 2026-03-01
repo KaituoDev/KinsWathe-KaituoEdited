@@ -7,6 +7,8 @@
   "tip.kinswathe.game_safe_time": "剩余安全时间：%s 秒",
   "tip.kinswathe.game_no_safe_time": "安全时间结束！",
 
+  "announcement.title.neutral": "中立",
+
   "announcement.role.kinswathe.bellringer": "敲钟人",
   "announcement.goals.kinswathe.bellringer": "查看时间，并修改时间。",
 
@@ -43,6 +45,7 @@
   "announcement.role.kinswathe.judge": "大法官",
   "announcement.goals.kinswathe.judge": "公平公正!",
   "tip.kinswathe.judge.notification": "你正在接受审判",
+  "tip.kinswathe.judge.ability_failed": "对方似乎不在场...",
   "hud.kinswathe.judge.ready": "审判准备就绪",
 
   "announcement.role.kinswathe.kidnapper": "绑匪",
@@ -122,7 +125,7 @@
 
   "guidebook.role.kinswathe:cleaner": "清道夫",
   "guidebook.role.title.kinswathe:cleaner": "不留痕迹",
-  "guidebook.role.description.kinswathe:cleaner": "清道夫是杀手组织派来的清理专家。\n\n初始携带一个硫酸桶，可以用来溶解尸体，让一切不留痕迹。\n\n清道夫可以使用技能清理地面上的所有掉落物。\n\n对于杀手们来说，清道夫是最可靠的合作伙伴——毕竟，没有尸体就没有证据。",
+  "guidebook.role.description.kinswathe:cleaner": "清道夫是杀手组织派来的清理专家。\n\n初始携带一个硫酸桶，可以用来溶解尸体，并获得金币报酬。\n\n清道夫可以使用技能清理地面上的所有掉落物。\n\n对于杀手们来说，清道夫是最可靠的合作伙伴——毕竟，没有尸体就没有证据。",
 
   "guidebook.role.kinswathe:cook": "厨师",
   "guidebook.role.title.kinswathe:cook": "颠勺大师",
@@ -142,7 +145,7 @@
 
   "guidebook.role.kinswathe:hunter": "追猎者",
   "guidebook.role.title.kinswathe:hunter": "猎杀时刻",
-  "guidebook.role.description.kinswathe:hunter": "天生的追逐者，追猎者十分享受猎物被追的感觉！\n\n追猎者在冲刺时如果持刀蓄力，移动速度会大幅提升。商店中的普通匕首被替换为猎刀——拥有更持久的蓄力时间，但是停止蓄力时会立即冷却。\n\n追猎者可以使用能力瞬间刷新背包内所有刀的冷却时间，这令他有了恐怖的连杀能力。\n\n逃跑只会激起他更强烈的狩猎欲望！",
+  "guidebook.role.description.kinswathe:hunter": "天生的追逐者，追猎者十分享受猎物被追的感觉！\n\n追猎者在冲刺时如果持刀蓄力，移动速度会大幅提升。商店中可以购买猎刀——拥有更持久的蓄力时间，但是停止蓄力时会立即冷却。\n\n追猎者可以使用能力瞬间刷新背包内所有刀的冷却时间，这令他有了恐怖的连杀能力。\n\n逃跑只会激起他更强烈的狩猎欲望！",
 
   "guidebook.role.kinswathe:judge": "大法官",
   "guidebook.role.title.kinswathe:judge": "正义的化身",
@@ -150,7 +153,7 @@
 
   "guidebook.role.kinswathe:kidnapper": "绑匪",
   "guidebook.role.title.kinswathe:kidnapper": "黑暗交易",
-  "guidebook.role.description.kinswathe:kidnapper": "绑匪从不光明正大杀人，他更喜欢将猎物变成听话的傀儡。\n\n在商店中可以购买迷药，使用后可使目标陷入昏迷状态，并跟随绑匪移动。绑匪也会在登上列车前自带一个迷药，以备不时之需。\n\n被迷药作用的目标将会黑屏，无法攻击或使用物品，也无法使用语音聊天——他们只能盲目地跟随，直到解除药效。不过，要是你有办法在这期间脱离足够远的距离，绑匪就拿你没办法了\n\n没人知道绑匪把这些乘客带去了哪里，也没人想知道。",
+  "guidebook.role.description.kinswathe:kidnapper": "绑匪从不光明正大杀人，他更喜欢将猎物变成听话的傀儡。\n\n在商店中可以购买迷药，使用后可使目标陷入昏迷状态，并跟随绑匪移动。绑匪也会在登上列车前自带一个迷药，以备不时之需。\n\n如果绑匪亲自击杀昏迷中的目标将获得一笔额外的报酬。\n\n被迷药作用的目标将会黑屏，无法攻击或使用物品，也无法使用语音聊天——他们只能盲目地跟随，直到解除药效。不过，要是你有办法在这期间脱离足够远的距离，绑匪就拿你没办法了。\n\n没人知道绑匪把这些乘客带去了哪里，也没人想知道。",
 
   "guidebook.role.kinswathe:licensed_villain": "执照恶棍",
   "guidebook.role.title.kinswathe:licensed_villain": "持证上岗",
@@ -162,7 +165,7 @@
 
   "guidebook.role.kinswathe:robot": "机器人",
   "guidebook.role.title.kinswathe:robot": "机械造物",
-  "guidebook.role.description.kinswathe:robot": "机器人混入了这趟列车，没人知道它的目的是什么。\n\n作为机械构造体，它没有理智，免疫毒药，不会被迷药迷晕，并且拥有无限的体力。\n\n每隔一段时间，机器人可以启动夜视模式，在黑暗中也能清晰视物。\n\n有人说它只是出了故障，也有人坚信它带着某种使命...",
+  "guidebook.role.description.kinswathe:robot": "机器人混入了这趟列车，没人知道它的目的是什么。\n\n作为机械构造体，它没有情绪，免疫毒药，不会被迷药迷晕，并且拥有无限的体力。\n\n每隔一段时间，机器人可以启动夜视模式，在黑暗中也能清晰视物。\n\n有人说它只是出了故障，也有人坚信它带着某种使命...",
 
   "guidebook.role.kinswathe:magnate": "富豪",
   "guidebook.role.title.kinswathe:magnate": "财富的宠儿",

@@ -38,6 +38,12 @@
 
 - Jump can be allowed when not in game
 
+- Auto join voice chat group for spectators
+
+- Better modifications to Blackout and Psycho Mode
+
+- Neutral roles can announce separately when game ends.
+
 - Unlock 32 render distance limit when ultraPerfMode is disabled 
 
 - Switch player inventory to the last slot when game starts
@@ -91,7 +97,7 @@
 
 - Cleaner
   - Initially equip with Sulfuric Acid Barrel
-  - Sulfuric Acid Barrel can dissolve a body
+  - Sulfuric Acid Barrel can dissolve a body and get coins
   - Use ability to clear field drops
 
 - Drugmaker
@@ -106,15 +112,16 @@
 
 - Hunter
   - If holding knife when sprinting, hunter will speed up
-  - Hunting Knife replaces Knife in shop
+  - Can purchase Hunting Knife in shop
   - Hunting Knife will immediately cooldown when stoping holding if sprinted
   - Use ability to refresh knifes' cooldown
 
 - Kidnapper
-  - Can buy Knockout Drug in shop
+  - Can purchase Knockout Drug in shop
   - Initially equip with a Knockout Drug
   - Knockout Drug can daze target and let it foolow you
   - Players that be dazed can not see, attack, use or voice chat
+  - Can get additional coins for personally killing the dazed target
   - If distance between Kidnapper and dazed player exceeds 5 blocks, the player will be lifted
 
 

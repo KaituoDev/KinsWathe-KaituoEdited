@@ -36,7 +36,6 @@ import java.util.UUID;
 public abstract class BodymakerScreenMixin extends LimitedHandledScreen<PlayerScreenHandler> implements BodymakerScreenCallback {
 
     @Shadow @Final public ClientPlayerEntity player;
-
     @Unique private int selectedLevel = 0;
     @Unique private UUID selectedPlayerUuid = null;
     @Unique private String selectedDeathReason = null;

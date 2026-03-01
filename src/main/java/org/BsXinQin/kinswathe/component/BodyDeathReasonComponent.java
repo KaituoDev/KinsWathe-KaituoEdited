@@ -13,18 +13,21 @@ import org.ladysnake.cca.api.v3.component.sync.AutoSyncedComponent;
 import org.ladysnake.cca.api.v3.component.tick.ServerTickingComponent;
 
 public class BodyDeathReasonComponent implements AutoSyncedComponent, ServerTickingComponent {
+
     public static final ComponentKey<BodyDeathReasonComponent> KEY = ComponentRegistry.getOrCreate(Identifier.of(KinsWathe.MOD_ID, "body"), BodyDeathReasonComponent.class);
+
     public Identifier deathReason = GameConstants.DeathReasons.GENERIC;
     public PlayerBodyEntity playerBodyEntity;
 
     public BodyDeathReasonComponent(@NotNull PlayerBodyEntity playerBodyEntity) {this.playerBodyEntity = playerBodyEntity;}
 
-    public void sync() {
-        KEY.sync(this.playerBodyEntity);
+    @Override
+    public void serverTick() {
+        this.sync();
     }
 
-    public void reset() {
-        this.sync();
+    public void sync() {
+        KEY.sync(this.playerBodyEntity);
     }
 
     public void writeToNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
@@ -33,10 +36,5 @@ public class BodyDeathReasonComponent implements AutoSyncedComponent, ServerTick
 
     public void readFromNbt(@NotNull NbtCompound tag, RegistryWrapper.@NotNull WrapperLookup registryLookup) {
         this.deathReason = Identifier.of(tag.getString("deathReason"));
-    }
-
-    @Override
-    public void serverTick() {
-        this.sync();
     }
 }

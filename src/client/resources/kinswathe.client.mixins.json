@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "gui.StaminaBarMixin",
+    "host.BetterBlackOutMixin",
+    "host.BetterBlackOutMixin$SoundSystemMixin",
     "host.CustomWinnerAnnouncementMixin",
     "host.CustomWinnerTextMixin",
     "host.GameSafeHudMixin",
@@ -41,6 +43,7 @@
   },
   "mixins": [
     "gui.IncomeIconMixin",
+    "host.EndTextRendererMixin",
     "host.KillerSidedTextMixin",
     "host.UnlockDistanceMixin",
     "noellesroles.roles.conductor.ConductorInstinctMixin",

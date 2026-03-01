@@ -6,6 +6,7 @@ import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
 import dev.doctor4t.wathe.api.event.AllowPlayerPunching;
 import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
+import dev.doctor4t.wathe.client.gui.RoleAnnouncementTexts;
 import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.index.WatheItems;
 import lombok.SneakyThrows;
@@ -332,6 +333,13 @@ public class KinsWatheRoles {
         }));
     }
 
+    /// 注册中立结算界面
+    public static RoleAnnouncementTexts.RoleAnnouncementText NEUTRAL_TEXT = new KinsWatheAnnouncementText();
+    public static void registerNeutralAnnouncement() {
+        if (!KinsWatheConfig.HANDLER.instance().EnableNeutralAnnouncement) return;
+        RoleAnnouncementTexts.registerRoleAnnouncementText(NEUTRAL_TEXT);
+    }
+
     /// 设置初始事件
     public static void setDefaultEvents() {
         ModdedRoleAssigned.EVENT.register((player, role)->{
@@ -450,6 +458,8 @@ public class KinsWatheRoles {
         addNewRoleCamps();
         //限制身份生成人数
         limitRolesGeneratePlayers();
+        //注册中立结算界面
+        registerNeutralAnnouncement();
         //设置初始事件
         setDefaultEvents();
         //注册身份技能

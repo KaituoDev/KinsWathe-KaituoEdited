@@ -2,6 +2,8 @@ package org.BsXinQin.kinswathe;
 
 import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.game.GameFunctions;
+import dev.doctor4t.wathe.index.WatheItems;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -24,7 +26,7 @@ public class KinsWatheItems {
             new DreamImprintItem(new Item.Settings().maxCount(4)),
             "dream_imprint"
     );
-    //吹矢
+    //猎刀
     public static final Item HUNTING_KNIFE = registerItem(
             new HuntingKnifeItem(new Item.Settings().maxCount(1)),
             "hunting_knife"
@@ -44,7 +46,7 @@ public class KinsWatheItems {
             new PanItem(new Item.Settings().maxCount(1)),
             "pan"
     );
-    //毒液注射器
+    //药丸
     public static final Item PILL = registerItem(
             new PillItem(new Item.Settings().maxCount(1)),
             "pill"
@@ -86,9 +88,26 @@ public class KinsWatheItems {
         GameConstants.ITEM_COOLDOWNS.put(SULFURIC_ACID_BARREL, GameConstants.getInTicks(1,0));
     }
 
+    /// 添加物品组别
+    public static void addItemGroup() {
+        ItemGroupEvents.modifyEntriesEvent(WatheItems.EQUIPMENT_GROUP).register(entries -> {
+            entries.add(BLOWGUN);
+            entries.add(DREAM_IMPRINT);
+            entries.add(HUNTING_KNIFE);
+            entries.add(KNOCKOUT_DRUG);
+            entries.add(MEDICAL_KIT);
+            entries.add(PAN);
+            entries.add(PILL);
+            entries.add(POISON_INJECTOR);
+            entries.add(SULFURIC_ACID_BARREL);
+        });
+    }
+
     /// 初始化方法
     public static void init() {
         //添加物品冷却
         addItemCooldowns();
+        //添加物品组别
+        addItemGroup();
     }
 }

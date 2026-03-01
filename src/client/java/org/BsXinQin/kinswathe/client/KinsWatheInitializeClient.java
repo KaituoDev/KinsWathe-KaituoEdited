@@ -15,8 +15,8 @@ import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.KinsWathe;
 import org.BsXinQin.kinswathe.KinsWatheItems;
 import org.BsXinQin.kinswathe.KinsWatheRoles;
-import org.BsXinQin.kinswathe.client.component.ExtraModelComponent;
-import org.BsXinQin.kinswathe.client.component.ItemTipComponent;
+import org.BsXinQin.kinswathe.client.items.ItemExtraModel;
+import org.BsXinQin.kinswathe.client.items.ItemToolTip;
 import org.BsXinQin.kinswathe.packet.AbilityC2SPacket;
 import org.agmas.noellesroles.client.NoellesrolesClient;
 import org.lwjgl.glfw.GLFW;
@@ -24,9 +24,10 @@ import org.lwjgl.glfw.GLFW;
 public class KinsWatheInitializeClient {
 
     public static KeyBinding abilityBind;
+    public static long BLACKOUT_TIME = 0;
 
     /// 设置技能按键
-    public static void registerKeyBinding() {
+    public static void registerAbilityKey() {
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
             if (abilityBind == null) ClientTickEvents.START_CLIENT_TICK.register(client -> {
                 abilityBind = NoellesrolesClient.abilityBind;
@@ -63,31 +64,32 @@ public class KinsWatheInitializeClient {
             }
         });
     }
+
     /// 添加物品描述和模型
     public static void addItemTipAndModel() {
         ItemTooltipCallback.EVENT.register(((itemStack, tooltipContext, tooltipType, list) -> {
             //添加KinsWathe物品描述
-            ItemTipComponent.addItemtip(KinsWatheItems.BLOWGUN, itemStack, list);
-            ItemTipComponent.addItemtip(KinsWatheItems.DREAM_IMPRINT, itemStack, list);
-            ItemTipComponent.addItemtip(KinsWatheItems.HUNTING_KNIFE, itemStack, list);
-            ItemTipComponent.addItemtip(KinsWatheItems.KNOCKOUT_DRUG, itemStack, list);
-            ItemTipComponent.addItemtip(KinsWatheItems.MEDICAL_KIT, itemStack, list);
-            ItemTipComponent.addItemtip(KinsWatheItems.PAN, itemStack, list);
-            ItemTipComponent.addItemtip(KinsWatheItems.PILL, itemStack, list);
-            ItemTipComponent.addItemtip(KinsWatheItems.POISON_INJECTOR, itemStack, list);
-            ItemTipComponent.addItemtip(KinsWatheItems.SULFURIC_ACID_BARREL, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.BLOWGUN, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.DREAM_IMPRINT, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.HUNTING_KNIFE, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.KNOCKOUT_DRUG, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.MEDICAL_KIT, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.PAN, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.PILL, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.POISON_INJECTOR, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.SULFURIC_ACID_BARREL, itemStack, list);
             //添加NoellreRoles物品冷却描述
             if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
-                ItemTipComponent.addCooldowntip(Registries.ITEM.get(Identifier.of("noellesroles", "fake_revolver")), itemStack, list);
+                ItemToolTip.addCooldowntip(Registries.ITEM.get(Identifier.of("noellesroles", "fake_revolver")), itemStack, list);
             }
         }));
         //注册物品额外材质
-        ExtraModelComponent.registerCooldownModel(KinsWatheItems.POISON_INJECTOR);
+        ItemExtraModel.registerCooldownModel(KinsWatheItems.POISON_INJECTOR);
     }
 
     public static void init() {
         //设置技能按键
-        registerKeyBinding();
+        registerAbilityKey();
         //添加有技能的角色
         setRoleAbilityPackets();
         //添加物品描述和模型

@@ -23,6 +23,18 @@ public class KinsWatheConfig {
     @SerialEntry(comment = "Whether to enable safe time when game starts.")
     public boolean EnableStartSafeTime = false;
 
+    @SerialEntry(comment = "Whether to enable auto join voice chat group for spectators.")
+    public boolean EnableAutoJoinVoiceChat = true;
+
+    @SerialEntry(comment = "Whether to enable better Blackout visual effect.")
+    public boolean EnableBetterBlackout = true;
+
+    @SerialEntry(comment = "Whether to enable instinct when in Psycho Mode.")
+    public boolean EnableAutoPsychoInstinct = true;
+
+    @SerialEntry(comment = "Whether to enable neutral roles announcement when game ends.")
+    public boolean EnableNeutralAnnouncement = true;
+
     /// 关于Wathe修改
     @SerialEntry(comment = "\n\n[Wathe] Modify (default settings are original settings of Wathe):")
     public boolean EnableWatheModify = false;
@@ -53,7 +65,9 @@ public class KinsWatheConfig {
     @SerialEntry
     public boolean BodymakerAbilityFakeRole = true;
 
-    @SerialEntry(comment = "Cleaner: modify price and cooldown of ability.")
+    @SerialEntry(comment = "Cleaner: modify get coins when dissolve a body, price and cooldown of ability.")
+    public int CleanerGetCoins = 50;
+
     public int CleanerAbilityPrice = 200;
     @SerialEntry
     public int CleanerAbilityCooldown = GameConstants.getInTicks(2,30) / 20;
@@ -90,8 +104,10 @@ public class KinsWatheConfig {
     @SerialEntry
     public int JudgeAbilityCooldown = GameConstants.getInTicks(3,0) / 20;
 
-    @SerialEntry(comment = "Kidnapper: modify price of Knockout Drug.")
+    @SerialEntry(comment = "Kidnapper: modify price of Knockout Drug and get additional coins when kill dazed player.")
     public int KidnapperKnockoutDrugPrice = 75;
+    @SerialEntry
+    public int KidnapperGetAdditionalCoins = 100;
 
     @SerialEntry(comment = "Licensed Villain: modify generation player limit and price of Revolver.")
     public int LicensedVillainPlayerLimit = 10;

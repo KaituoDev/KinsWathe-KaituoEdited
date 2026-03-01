@@ -3,7 +3,6 @@ package org.BsXinQin.kinswathe.client.mixin.roles.bodymaker;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import dev.doctor4t.wathe.api.WatheRoles;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ChatInputSuggestor;
@@ -44,7 +43,7 @@ public abstract class BodymakerSuggestorMixin {
             WatheRoles.ROLES.forEach((role) -> {
                 if (HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().toString())) return;
                 if (Harpymodloader.SPECIAL_ROLES.contains(role)) return;
-                if (FabricLoader.getInstance().isModLoaded("harpysimpleroles") && role == WatheRoles.KILLER) return;
+                if (role != WatheRoles.KILLER && role.identifier().getPath().equals("killer")) return;
                 if (role.identifier().getPath().startsWith(textField.getText()) || textField.getText().isEmpty()) {
                     MutableText s = Text.literal(role.identifier().getPath());
                     if (!MinecraftClient.getInstance().getLanguageManager().getLanguage().startsWith("en_")) {

@@ -46,7 +46,7 @@ public class BodymakerRoleWidget extends TextFieldWidget {
         if (keyCode == 258) {
             if (!getText().isEmpty()) {
                 String roleName = getText();
-                var matchingRoles = WatheRoles.ROLES.stream().filter(role -> !HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().toString())).filter(role -> !Harpymodloader.SPECIAL_ROLES.contains(role)).filter(role -> role.identifier().getPath().startsWith(roleName)).map(role -> role.identifier().getPath()).toList();
+                var matchingRoles = WatheRoles.ROLES.stream().filter(role -> !HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().toString())).filter(role -> !Harpymodloader.SPECIAL_ROLES.contains(role)).filter(role -> !(role != WatheRoles.KILLER && role.identifier().getPath().equals("killer"))).filter(role -> role.identifier().getPath().startsWith(roleName)).map(role -> role.identifier().getPath()).toList();
                 if (!matchingRoles.isEmpty()) {
                     setText(matchingRoles.getFirst());
                     this.setCursorToEnd(false);
@@ -59,7 +59,7 @@ public class BodymakerRoleWidget extends TextFieldWidget {
         if (keyCode == 257 || keyCode == 335) {
             if (!getText().isEmpty()) {
                 String roleName = getText();
-                var matchedRole = WatheRoles.ROLES.stream().filter(role -> !HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().toString())).filter(role -> !Harpymodloader.SPECIAL_ROLES.contains(role)).filter(role -> role.identifier().getPath().equalsIgnoreCase(roleName)).findFirst();
+                var matchedRole = WatheRoles.ROLES.stream().filter(role -> !HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().toString())).filter(role -> !Harpymodloader.SPECIAL_ROLES.contains(role)).filter(role -> !(role != WatheRoles.KILLER && role.identifier().getPath().equals("killer"))).filter(role -> role.identifier().getPath().equalsIgnoreCase(roleName)).findFirst();
                 if (matchedRole.isPresent()) {
                     ClientPlayNetworking.send(new BodymakerC2SPacket(targetPlayerUuid, deathReason, matchedRole.get().identifier().toString()));
                 } else {
@@ -84,6 +84,7 @@ public class BodymakerRoleWidget extends TextFieldWidget {
         WatheRoles.ROLES.forEach((role) -> {
             if (HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().toString())) return;
             if (Harpymodloader.SPECIAL_ROLES.contains(role)) return;
+            if (role != WatheRoles.KILLER && role.identifier().getPath().equals("killer")) return;
             String rolePath = role.identifier().getPath();
             if (rolePath.startsWith(getText()) || getText().isEmpty()) {
                 suggestions.add(rolePath);

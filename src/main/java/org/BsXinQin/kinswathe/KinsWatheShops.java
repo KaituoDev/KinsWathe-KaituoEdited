@@ -81,6 +81,7 @@ public class KinsWatheShops {
     public static List<ShopEntry> getHunterShop(@NotNull World world) {
         return Util.make(new ArrayList<>(), (entries) -> {
             entries.add(new ShopEntry(KinsWatheItems.HUNTING_KNIFE.getDefaultStack(), getItemPrice("KNIFE", 100), ShopEntry.Type.WEAPON));
+            entries.add(new ShopEntry(WatheItems.KNIFE.getDefaultStack(), getItemPrice("KNIFE", 100) * 7 / 4, ShopEntry.Type.WEAPON));
             entries.add(new ShopEntry(WatheItems.REVOLVER.getDefaultStack(), getItemPrice("REVOLVER", 300), ShopEntry.Type.WEAPON));
             entries.add(new ShopEntry(WatheItems.GRENADE.getDefaultStack(), getItemPrice("GRENADE", 350), ShopEntry.Type.WEAPON));
             entries.add(new ShopEntry(WatheItems.PSYCHO_MODE.getDefaultStack(), getItemPrice("PSYCHO_MODE", 300), ShopEntry.Type.WEAPON));

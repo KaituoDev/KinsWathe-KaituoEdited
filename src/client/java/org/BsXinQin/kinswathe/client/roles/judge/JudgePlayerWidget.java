@@ -8,7 +8,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.PlayerSkinDrawer;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
+import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
@@ -18,24 +18,27 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.Arrays;
+import java.util.UUID;
 
 public class JudgePlayerWidget extends ButtonWidget {
 
     public final LimitedInventoryScreen screen;
-    public final AbstractClientPlayerEntity targetPlayer;
+    public final UUID targetUUID;
+    public final PlayerListEntry targetPlayerEntry;
 
-    public JudgePlayerWidget(@NotNull LimitedInventoryScreen screen, int x, int y, @NotNull AbstractClientPlayerEntity targetPlayer, int index) {
+    public JudgePlayerWidget(@NotNull LimitedInventoryScreen screen, int x, int y, @NotNull UUID targetUUID, @NotNull PlayerListEntry targetPlayerEntry) {
         super(x, y, 16, 16, Text.literal(""), (button) -> {
             if (MinecraftClient.getInstance().player == null) return;
             AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(MinecraftClient.getInstance().player);
             PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(MinecraftClient.getInstance().player);
             if (ability.cooldown <= 0 && playerShop.balance >= ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).JudgeAbilityPrice) {
-                ClientPlayNetworking.send(new JudgeC2SPacket(targetPlayer.getUuid()));
+                ClientPlayNetworking.send(new JudgeC2SPacket(targetUUID));
                 screen.close();
             }
         }, DEFAULT_NARRATION_SUPPLIER);
         this.screen = screen;
-        this.targetPlayer = targetPlayer;
+        this.targetUUID = targetUUID;
+        this.targetPlayerEntry = targetPlayerEntry;
     }
 
     protected void renderWidget(@NotNull DrawContext context, int mouseX, int mouseY, float delta) {
@@ -45,21 +48,21 @@ public class JudgePlayerWidget extends ButtonWidget {
         PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(MinecraftClient.getInstance().player);
         if (ability.cooldown <= 0 && playerShop.balance >= ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).JudgeAbilityPrice) {
             context.drawGuiTexture(ShopEntry.Type.POISON.getTexture(), this.getX() - 7, this.getY() - 7, 30, 30);
-            PlayerSkinDrawer.draw(context, targetPlayer.getSkinTextures().texture(), this.getX(), this.getY(), 16);
+            PlayerSkinDrawer.draw(context, targetPlayerEntry.getSkinTextures().texture(), this.getX(), this.getY(), 16);
             if (this.isHovered()) {
                 this.drawShopSlotHighlight(context, this.getX(), this.getY());
-                context.drawTooltip(MinecraftClient.getInstance().textRenderer, Arrays.asList(targetPlayer.getName(), Text.translatable("hud.kinswathe.judge.ready").copy().withColor(Color.GREEN.getRGB())), this.getX() - 4 - MinecraftClient.getInstance().textRenderer.getWidth(targetPlayer.getName()) / 2, this.getY() - 19);
+                context.drawTooltip(MinecraftClient.getInstance().textRenderer, Arrays.asList(Text.of(targetPlayerEntry.getProfile().getName()), Text.translatable("hud.kinswathe.judge.ready").copy().withColor(Color.GREEN.getRGB())), this.getX() - 4 - MinecraftClient.getInstance().textRenderer.getWidth(targetPlayerEntry.getProfile().getName()) / 2, this.getY() - 19);
             }
         } else {
             context.setShaderColor(0.25f, 0.25f, 0.25f, 0.5f);
             context.drawGuiTexture(ShopEntry.Type.POISON.getTexture(), this.getX() - 7, this.getY() - 7, 30, 30);
-            PlayerSkinDrawer.draw(context, targetPlayer.getSkinTextures().texture(), this.getX(), this.getY(), 16);
+            PlayerSkinDrawer.draw(context, targetPlayerEntry.getSkinTextures().texture(), this.getX(), this.getY(), 16);
             if (this.isHovered()) {
                 this.drawShopSlotHighlight(context, this.getX(), this.getY());
                 if (ability.cooldown > 0) {
-                    context.drawTooltip(MinecraftClient.getInstance().textRenderer, targetPlayer.getName(), this.getX() - 4 - MinecraftClient.getInstance().textRenderer.getWidth(targetPlayer.getName()) / 2, this.getY() - 19);
+                    context.drawTooltip(MinecraftClient.getInstance().textRenderer, Text.of(targetPlayerEntry.getProfile().getName()), this.getX() - 4 - MinecraftClient.getInstance().textRenderer.getWidth(targetPlayerEntry.getProfile().getName()) / 2, this.getY() - 19);
                 } else {
-                    context.drawTooltip(MinecraftClient.getInstance().textRenderer, Arrays.asList(targetPlayer.getName(), Text.translatable("tip.kinswathe.ability.not_enough_money", ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).JudgeAbilityPrice)), this.getX() - 4 - MinecraftClient.getInstance().textRenderer.getWidth(targetPlayer.getName()) / 2, this.getY() - 19);
+                    context.drawTooltip(MinecraftClient.getInstance().textRenderer, Arrays.asList(Text.of(targetPlayerEntry.getProfile().getName()), Text.translatable("tip.kinswathe.ability.not_enough_money", ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).JudgeAbilityPrice)), this.getX() - 4 - MinecraftClient.getInstance().textRenderer.getWidth(targetPlayerEntry.getProfile().getName()) / 2, this.getY() - 19);
                 }
             }
             context.setShaderColor(1f, 1f, 1f, 1f);
