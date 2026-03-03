@@ -24,7 +24,7 @@ public abstract class InstinctMainMixin {
         if (MinecraftClient.getInstance().player == null) return;
         if (!ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).EnableAutoPsychoInstinct) return;
         PlayerPsychoComponent playerPsycho = PlayerPsychoComponent.KEY.get(MinecraftClient.getInstance().player);
-        if (WatheClient.isPlayerAliveAndInSurvival() && WatheClient.gameComponent != null && WatheClient.gameComponent.isPsychoActive()) {
+        if (WatheClient.isPlayerAliveAndInSurvival() && playerPsycho.psychoTicks > 0) {
             cir.setReturnValue(true);
         }
     }

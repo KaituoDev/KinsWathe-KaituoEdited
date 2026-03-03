@@ -43,6 +43,7 @@
   },
   "mixins": [
     "gui.IncomeIconMixin",
+    "gui.ItemCrosshairMixin",
     "host.EndTextRendererMixin",
     "host.KillerSidedTextMixin",
     "host.UnlockDistanceMixin",
