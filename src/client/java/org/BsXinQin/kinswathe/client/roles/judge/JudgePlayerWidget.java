@@ -13,7 +13,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
-import org.BsXinQin.kinswathe.packet.JudgeC2SPacket;
+import org.BsXinQin.kinswathe.packet.roles.JudgeC2SPacket;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;

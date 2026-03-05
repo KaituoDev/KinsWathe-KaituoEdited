@@ -14,7 +14,7 @@ import net.minecraft.text.Text;
 import org.BsXinQin.kinswathe.KinsWatheConfig;
 import org.BsXinQin.kinswathe.KinsWatheRoles;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
-import org.BsXinQin.kinswathe.packet.JudgeC2SPacket;
+import org.BsXinQin.kinswathe.packet.roles.JudgeC2SPacket;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;

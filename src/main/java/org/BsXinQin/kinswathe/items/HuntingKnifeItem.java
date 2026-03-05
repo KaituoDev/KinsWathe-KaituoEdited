@@ -3,6 +3,7 @@ package org.BsXinQin.kinswathe.items;
 import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.game.GameFunctions;
 import dev.doctor4t.wathe.index.WatheSounds;
+import lombok.SneakyThrows;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
@@ -14,9 +15,11 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
-import org.BsXinQin.kinswathe.KinsWatheItems;
+import org.BsXinQin.kinswathe.packet.items.HuntingKnifeC2SPacket;
 import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Method;
 
 public class HuntingKnifeItem extends Item {
 
@@ -34,19 +37,17 @@ public class HuntingKnifeItem extends Item {
         return TypedActionResult.consume(stack);
     }
 
-    @Override
+    @Override @SneakyThrows
     public void onStoppedUsing(@NotNull ItemStack stack, @NotNull World world, @NotNull LivingEntity livingEntity, int remainingUseTicks) {
         if (!(livingEntity instanceof @NotNull PlayerEntity player) || player.isSpectator() || remainingUseTicks >= this.getMaxUseTime(stack, player) - 10) return;
-        HitResult hitResult = ProjectileUtil.getCollision(player, entity -> entity instanceof @NotNull PlayerEntity target && GameFunctions.isPlayerAliveAndSurvival(target), 3.0f);
-        PlayerEntity targetPlayer = (hitResult instanceof @NotNull EntityHitResult entityHitResult) ? (PlayerEntity) entityHitResult.getEntity() : null;
-        HunterComponent playerHunter = HunterComponent.KEY.get(player);
         setTemporaryCooldown(world, player);
-        if (!world.isClient && targetPlayer != null && remainingUseTicks > 5) {
-            playerHunter.reset();
-            KinsWatheItems.setItemAfterUsing(player, this, null);
-            GameFunctions.killPlayer(targetPlayer, true, player, GameConstants.DeathReasons.KNIFE);
-            targetPlayer.playSound(WatheSounds.ITEM_KNIFE_STAB, 1.0f, 1.0f);
-            player.swingHand(Hand.MAIN_HAND);
+        if (world.isClient && remainingUseTicks > 5) {
+            HitResult hitResult = ProjectileUtil.getCollision(player, entity -> entity instanceof @NotNull PlayerEntity target && GameFunctions.isPlayerAliveAndSurvival(target), 3.0f);
+            if (hitResult instanceof @NotNull EntityHitResult entityHitResult) {
+                Class<?> networkingClass = Class.forName("net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking");
+                Method getMethod = networkingClass.getMethod("send", net.minecraft.network.packet.CustomPayload.class);
+                getMethod.invoke(null, new HuntingKnifeC2SPacket(entityHitResult.getEntity().getId()));
+            }
         }
     }
 

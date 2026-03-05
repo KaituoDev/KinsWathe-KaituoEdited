@@ -6,8 +6,10 @@ import dev.doctor4t.wathe.game.GameFunctions;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import org.BsXinQin.kinswathe.KinsWatheConfig;
+import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.BsXinQin.kinswathe.component.CustomWinnerComponent;
 import org.BsXinQin.kinswathe.component.GameSafeComponent;
+import org.BsXinQin.kinswathe.component.PlayerEffectComponent;
 import org.BsXinQin.kinswathe.roles.cook.CookComponent;
 import org.BsXinQin.kinswathe.roles.dreamer.DreamerComponent;
 import org.BsXinQin.kinswathe.roles.dreamer.DreamerKillerComponent;
@@ -34,6 +36,8 @@ public class GameFnctionsMixin {
     @Inject(method = "resetPlayer", at = @At("TAIL"))
     private static void resetPlayer(@NotNull ServerPlayerEntity player, CallbackInfo ci) {
         GameSafeComponent.KEY.get(player).reset();
+        PlayerEffectComponent.KEY.get(player).reset();
+        AbilityPlayerComponent.KEY.get(player).reset();
         CookComponent.KEY.get(player).reset();
         DreamerComponent.KEY.get(player).reset();
         DreamerKillerComponent.KEY.get(player).reset();

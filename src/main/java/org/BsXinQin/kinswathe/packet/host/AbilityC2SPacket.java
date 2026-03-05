@@ -1,4 +1,4 @@
-package org.BsXinQin.kinswathe.packet;
+package org.BsXinQin.kinswathe.packet.host;
 
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.RegistryByteBuf;

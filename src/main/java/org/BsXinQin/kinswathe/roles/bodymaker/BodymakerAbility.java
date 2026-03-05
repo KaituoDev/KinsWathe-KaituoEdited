@@ -17,7 +17,7 @@ import org.BsXinQin.kinswathe.KinsWatheConfig;
 import org.BsXinQin.kinswathe.KinsWatheRoles;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.BsXinQin.kinswathe.component.BodyDeathReasonComponent;
-import org.BsXinQin.kinswathe.packet.BodymakerC2SPacket;
+import org.BsXinQin.kinswathe.packet.roles.BodymakerC2SPacket;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;

@@ -1,4 +1,4 @@
-package org.BsXinQin.kinswathe.packet;
+package org.BsXinQin.kinswathe.packet.roles;
 
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.RegistryByteBuf;

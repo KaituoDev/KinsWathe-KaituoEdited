@@ -1,6 +1,7 @@
 package org.BsXinQin.kinswathe.client.mixin.host;
 
 import dev.doctor4t.wathe.Wathe;
+import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.client.WatheClient;
 import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.index.WatheSounds;
@@ -37,9 +38,10 @@ public abstract class BetterBlackOutMixin {
     private void getBetterBlackoutHud(@NotNull DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
         if (MinecraftClient.getInstance().player == null) return;
         if (!ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).EnableBetterBlackout) return;
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
         long currentTime = System.currentTimeMillis();
         long blackoutTime = KinsWatheInitializeClient.BLACKOUT_TIME;
-        if (currentTime < blackoutTime) {
+        if (gameWorld.isRunning() && currentTime < blackoutTime) {
             boolean isOutside = Wathe.isSkyVisibleAdjacent(MinecraftClient.getInstance().player);
             boolean isInstinctEnabled = WatheClient.isInstinctEnabled();
             float currentAlpha = CURRENT_ALPHA;
@@ -72,7 +74,8 @@ public abstract class BetterBlackOutMixin {
         private void onPlaySound(@NotNull SoundInstance sound, CallbackInfo ci) {
             if (MinecraftClient.getInstance().player == null) return;
             if (!ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).EnableBetterBlackout) return;
-            if (sound.getId().equals(WatheSounds.AMBIENT_BLACKOUT.getId())) {
+            GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
+            if (gameWorld.isRunning() && sound.getId().equals(WatheSounds.AMBIENT_BLACKOUT.getId())) {
                 KinsWatheInitializeClient.BLACKOUT_TIME = System.currentTimeMillis() + (GameConstants.BLACKOUT_MAX_DURATION * 50L);
             }
         }

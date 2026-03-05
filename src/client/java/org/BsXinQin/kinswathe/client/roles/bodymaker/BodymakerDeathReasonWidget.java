@@ -16,7 +16,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
-import org.BsXinQin.kinswathe.packet.BodymakerC2SPacket;
+import org.BsXinQin.kinswathe.packet.roles.BodymakerC2SPacket;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;

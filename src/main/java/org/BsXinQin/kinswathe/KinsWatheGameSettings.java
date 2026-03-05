@@ -2,10 +2,12 @@ package org.BsXinQin.kinswathe;
 
 import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
 import dev.doctor4t.wathe.api.event.GameEvents;
+import dev.doctor4t.wathe.cca.PlayerPoisonComponent;
 import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.index.WatheItems;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.MinecraftServer;
@@ -13,9 +15,13 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.BsXinQin.kinswathe.component.GameSafeComponent;
-import org.BsXinQin.kinswathe.packet.AbilityC2SPacket;
-import org.BsXinQin.kinswathe.packet.BodymakerC2SPacket;
-import org.BsXinQin.kinswathe.packet.JudgeC2SPacket;
+import org.BsXinQin.kinswathe.component.PlayerEffectComponent;
+import org.BsXinQin.kinswathe.packet.host.AbilityC2SPacket;
+import org.BsXinQin.kinswathe.packet.items.BlowgunC2SPacket;
+import org.BsXinQin.kinswathe.packet.items.HuntingKnifeC2SPacket;
+import org.BsXinQin.kinswathe.packet.items.PanC2SPacket;
+import org.BsXinQin.kinswathe.packet.roles.BodymakerC2SPacket;
+import org.BsXinQin.kinswathe.packet.roles.JudgeC2SPacket;
 import org.agmas.harpymodloader.events.ResetPlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -108,12 +114,20 @@ public class KinsWatheGameSettings {
         PayloadTypeRegistry.playC2S().register(AbilityC2SPacket.ID, AbilityC2SPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(BodymakerC2SPacket.ID, BodymakerC2SPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(JudgeC2SPacket.ID, JudgeC2SPacket.CODEC);
+        PayloadTypeRegistry.playC2S().register(BlowgunC2SPacket.ID, BlowgunC2SPacket.CODEC);
+        PayloadTypeRegistry.playC2S().register(HuntingKnifeC2SPacket.ID, HuntingKnifeC2SPacket.CODEC);
+        PayloadTypeRegistry.playC2S().register(PanC2SPacket.ID, PanC2SPacket.CODEC);
+        ServerPlayNetworking.registerGlobalReceiver(BlowgunC2SPacket.ID, new BlowgunC2SPacket.Receiver());
+        ServerPlayNetworking.registerGlobalReceiver(HuntingKnifeC2SPacket.ID, new HuntingKnifeC2SPacket.Receiver());
+        ServerPlayNetworking.registerGlobalReceiver(PanC2SPacket.ID, new PanC2SPacket.Receiver());
+
     }
 
     /// 注册游戏事件
     public static void registerEvents() {
         //死亡事件
         AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
+            PlayerPoisonComponent.KEY.get(player).reset();
             if (identifier == GameConstants.DeathReasons.FELL_OUT_OF_TRAIN) return true;
             return !GameSafeComponent.KEY.get(player).isGameSafe;
         }));
@@ -123,6 +137,7 @@ public class KinsWatheGameSettings {
     public static void resetEvents() {
         ResetPlayerEvent.EVENT.register(player -> {
             GameSafeComponent.KEY.get(player).reset();
+            PlayerEffectComponent.KEY.get(player).reset();
             AbilityPlayerComponent.KEY.get(player).reset();
         });
     }

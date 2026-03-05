@@ -13,6 +13,8 @@
     "host.GameSafeLimitKeysMixin",
     "host.InstinctMainMixin",
     "host.KeyBindingMixin",
+    "host.PlayerEffectLimitKyesMixin",
+    "host.PlayerEffectLimitMouseMixin",
     "modifiers.violator.ViolatorKeyBindingMixin",
     "roles.bellringer.BellringerHudMixin",
     "roles.bodymaker.BodymakerDoNotCloseMixin",

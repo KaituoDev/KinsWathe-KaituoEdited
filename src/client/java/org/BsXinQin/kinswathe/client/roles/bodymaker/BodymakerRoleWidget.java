@@ -9,7 +9,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ChatInputSuggestor;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.text.Text;
-import org.BsXinQin.kinswathe.packet.BodymakerC2SPacket;
+import org.BsXinQin.kinswathe.packet.roles.BodymakerC2SPacket;
 import org.agmas.harpymodloader.Harpymodloader;
 import org.agmas.harpymodloader.config.HarpyModLoaderConfig;
 import org.jetbrains.annotations.NotNull;

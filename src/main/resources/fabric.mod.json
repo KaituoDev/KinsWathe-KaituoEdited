@@ -30,6 +30,7 @@
     "cardinal-components": [
       "kinswathe:safe",
       "kinswathe:body",
+      "kinswathe:effect",
       "kinswathe:ability",
       "kinswathe:config",
       "kinswathe:winner",
