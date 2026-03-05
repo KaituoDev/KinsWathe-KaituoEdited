@@ -1,14 +1,14 @@
 ## Introduction
 
-- Kin's Wathe is an addon mod for [WATHE](https://modrinth.com/mod/wathe) by [doctor4t](https://www.youtube.com/@doctor4t).
+- Kin's Wathe is an addon mod for [WATHE](https://modrinth.com/mod/wathe) by [doctor4t](https://www.youtube.com/@doctor4t)
 
-- And it also undergoes some balance modifications and fix some issues present in [Noelle's Roles](https://modrinth.com/mod/noelles-roles-tmm).
+- And it also undergoes some balance modifications and fix some issues present in [Noelle's Roles](https://modrinth.com/mod/noelles-roles-tmm)
 
-- You can check out how to play with addon mods in [agmas' video](https://www.youtube-nocookie.com/embed/h_c-dpjlONY).
+- You can check out how to play with addon mods in [agmas' video](https://www.youtube-nocookie.com/embed/h_c-dpjlONY)
 
-- Download Kin's Wathe on Modrinth: [Kin's Wathe](https://modrinth.com/mod/kinswathe).
+- Download Kin's Wathe on Modrinth: [Kin's Wathe](https://modrinth.com/mod/kinswathe)
 
-- My video about Kin's Wathe (Chinese version): [Bsxin's video](https://www.bilibili.com/video/BV1sqkpByEq8).
+- My video about Kin's Wathe (Chinese version): [Bsxin's video](https://www.bilibili.com/video/BV1sqkpByEq8)
 
 
 ## Modifications to Noelle's Roles
@@ -42,9 +42,11 @@
 
 - Better modifications to Blackout and Psycho Mode
 
-- Neutral roles can announce separately when game ends.
+- Neutral roles can announce separately when game ends
 
 - Unlock 32 render distance limit when ultraPerfMode is disabled 
+
+- Poisoned state will be automatically cleared upon death
 
 - Switch player inventory to the last slot when game starts
 
