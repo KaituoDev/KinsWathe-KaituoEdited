@@ -113,6 +113,14 @@ public class KinsWatheShops {
             entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), getItemPrice("NOTE", 10), ShopEntry.Type.TOOL));
         });
     }
+    //执照恶棍商店
+    public static List<ShopEntry> getLicensedVillainShop(@NotNull World world) {
+        return Util.make(new ArrayList<>(), (entries) -> {
+            entries.add(new ShopEntry(WatheItems.REVOLVER.getDefaultStack(), 300, ShopEntry.Type.WEAPON));
+            entries.add(new ShopEntry(WatheItems.GRENADE.getDefaultStack(), 350, ShopEntry.Type.WEAPON));
+            entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), 50, ShopEntry.Type.TOOL));
+        });
+    }
     //杀手方中立商店
     public static List<ShopEntry> getKillerNeutralRolesShop() {
         return FRAMING_ROLES_SHOP;
