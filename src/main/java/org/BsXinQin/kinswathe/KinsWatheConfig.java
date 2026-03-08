@@ -134,4 +134,7 @@ public class KinsWatheConfig {
 
     @SerialEntry(comment = "Coroner: whether to enable instinct of seeing player bodies.")
     public boolean CoronerInstinctModify = false;
+
+    @SerialEntry(comment = "Jester: whether to enable prevent attack killer in Psycho Mode.")
+    public boolean JesterAttackKillerModify = false;
 }

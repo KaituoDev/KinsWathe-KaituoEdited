@@ -5,6 +5,7 @@ import dev.doctor4t.wathe.api.WatheRoles;
 import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
 import dev.doctor4t.wathe.api.event.AllowPlayerPunching;
 import dev.doctor4t.wathe.cca.GameWorldComponent;
+import dev.doctor4t.wathe.cca.PlayerPsychoComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
 import dev.doctor4t.wathe.client.gui.RoleAnnouncementTexts;
 import dev.doctor4t.wathe.game.GameConstants;
@@ -41,6 +42,7 @@ import org.agmas.harpymodloader.events.ModdedRoleAssigned;
 import org.agmas.harpymodloader.events.ResetPlayerEvent;
 import org.agmas.harpymodloader.modifiers.HMLModifiers;
 import org.agmas.harpymodloader.modifiers.Modifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -239,7 +241,7 @@ public class KinsWatheRoles {
     /// 引入其他模组角色
     //引入NoellesRoles角色
     @SneakyThrows
-    public static Role noellesrolesRoles(String role) {
+    public static Role noellesrolesRoles(@NotNull String role) {
         Class<?> roleClass = Class.forName("org.agmas.noellesroles.Noellesroles");
         Field roleField = roleClass.getField(role);
         return (Role) roleField.get(null);
@@ -409,8 +411,10 @@ public class KinsWatheRoles {
     public static void registerEvents() {
         //死亡事件
         AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
+            GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
             DreamerComponent playerDream = DreamerComponent.KEY.get(player);
             PhysicianComponent playerPhysician = PhysicianComponent.KEY.get(player);
+            PlayerPsychoComponent killerPsycho = PlayerPsychoComponent.KEY.get(killer);
             //厨师死亡事件
             if (player.getMainHandStack().isOf(KinsWatheItems.PAN) && player.isUsingItem() && player.getActiveItem().getItem().getUseAction(player.getActiveItem()) == UseAction.SPEAR) {
                 if (identifier == GameConstants.DeathReasons.GUN) {
@@ -431,6 +435,14 @@ public class KinsWatheRoles {
                 playerPhysician.armorSound();
                 playerPhysician.reset();
                 return false;
+            }
+            //狂信死亡事件
+            if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
+                if (KinsWatheConfig.HANDLER.instance().EnableNoellesRolesModify && KinsWatheConfig.HANDLER.instance().JesterAttackKillerModify) {
+                    if (gameWorld.getRole(player).canUseKiller() && killerPsycho.psychoTicks > 0 && gameWorld.isRole(killer, noellesrolesRoles("JESTER"))) {
+                        return identifier != GameConstants.DeathReasons.BAT;
+                    }
+                }
             }
             return true;
         }));
