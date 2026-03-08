@@ -98,7 +98,7 @@ public class KinsWatheConfig {
     public int HunterAbilityCooldown = GameConstants.getInTicks(0,5) / 20;
 
     @SerialEntry(comment = "Judge: modify price and cooldown of ability.")
-    public int JudgeAbilityPrice = 300;
+    public int JudgeAbilityPrice = 150;
     @SerialEntry
     public int JudgeAbilityGlowing = GameConstants.getInTicks(1,30) / 20;
     @SerialEntry
@@ -113,6 +113,8 @@ public class KinsWatheConfig {
     public int LicensedVillainPlayerLimit = 10;
     @SerialEntry
     public int LicensedVillainRevolverPrice = 300;
+    @SerialEntry
+    public int LicensedVillainGrenadePrice = 350;
 
     @SerialEntry(comment = "Physician: modify price of Pill.")
     public int PhysicianPillPrice = 300;
