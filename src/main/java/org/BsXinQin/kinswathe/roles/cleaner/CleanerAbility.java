@@ -21,7 +21,11 @@ public class CleanerAbility {
             if (playerShop.balance < KinsWatheConfig.HANDLER.instance().CleanerAbilityPrice) return;
             playerShop.balance -= KinsWatheConfig.HANDLER.instance().CleanerAbilityPrice;
             playerShop.sync();
-            player.getServer().getCommandManager().executeWithPrefix(player.getServer().getCommandSource().withSilent(), "kill @e[type=item]");
+            player.getServer().getCommandManager().executeWithPrefix(player.getServer().getCommandSource().withSilent(),
+                    "execute " +
+                            "at " + player.getUuidAsString() + " " +
+                            "run " +
+                            "kill @e[type=item,distance=..300]");
             player.playSoundToPlayer(SoundEvents.ENTITY_ENDER_DRAGON_FLAP, SoundCategory.PLAYERS, 1.0f, 1.0f);
             ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().CleanerAbilityCooldown);
         }
