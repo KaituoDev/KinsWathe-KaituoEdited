@@ -1,7 +1,9 @@
 package org.BsXinQin.kinswathe;
 
+import dev.doctor4t.wathe.api.WatheGameModes;
 import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
 import dev.doctor4t.wathe.api.event.GameEvents;
+import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerPoisonComponent;
 import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.index.WatheItems;
@@ -76,12 +78,14 @@ public class KinsWatheGameSettings {
         GameSafeComponent.resetGlobalSafeTicks();
         for (ServerPlayerEntity serverPlayer : server.getPlayerManager().getPlayerList()) {
             if (serverPlayer == null) return;
+            if (GameWorldComponent.KEY.get(serverPlayer.getWorld()).getGameMode() == WatheGameModes.DISCOVERY || GameWorldComponent.KEY.get(serverPlayer.getWorld()).getGameMode() == WatheGameModes.LOOSE_ENDS) return;
             //KinsWathe物品安全时间
             serverPlayer.getItemCooldownManager().set(KinsWatheItems.BLOWGUN, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
             serverPlayer.getItemCooldownManager().set(KinsWatheItems.HUNTING_KNIFE, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
             serverPlayer.getItemCooldownManager().set(KinsWatheItems.KNOCKOUT_DRUG, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
             serverPlayer.getItemCooldownManager().set(KinsWatheItems.POISON_INJECTOR, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
             //Wathe物品安全时间
+            serverPlayer.getItemCooldownManager().set(WatheItems.DERRINGER, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
             serverPlayer.getItemCooldownManager().set(WatheItems.KNIFE, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
             serverPlayer.getItemCooldownManager().set(WatheItems.GRENADE, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));
             serverPlayer.getItemCooldownManager().set(WatheItems.REVOLVER, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().StartingCooldown));

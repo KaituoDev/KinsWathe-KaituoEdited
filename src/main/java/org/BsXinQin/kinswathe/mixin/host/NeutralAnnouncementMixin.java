@@ -26,8 +26,7 @@ public class NeutralAnnouncementMixin {
         if (!KinsWatheConfig.HANDLER.instance().EnableNeutralAnnouncement) return;
         int killerCount = gameWorld.getAllWithRole(WatheRoles.KILLER).size();
         if (gameWorld.getRole(player) != null) {
-            ServerPlayNetworking.send(player, new AnnounceWelcomePayload(RoleAnnouncementTexts.ROLE_ANNOUNCEMENT_TEXTS.indexOf(gameWorld.isRole(player, WatheRoles.KILLER) ? RoleAnnouncementTexts.KILLER : gameWorld.isRole(player, WatheRoles.VIGILANTE) ? RoleAnnouncementTexts.VIGILANTE : !gameWorld.isInnocent(player) && !gameWorld.canUseKillerFeatures(player) ? KinsWatheRoles.NEUTRAL_TEXT : RoleAnnouncementTexts.CIVILIAN), killerCount, players.size() - killerCount)
-            );
+            ServerPlayNetworking.send(player, new AnnounceWelcomePayload(RoleAnnouncementTexts.ROLE_ANNOUNCEMENT_TEXTS.indexOf(gameWorld.isRole(player, WatheRoles.KILLER) ? RoleAnnouncementTexts.KILLER : gameWorld.isRole(player, WatheRoles.VIGILANTE) ? RoleAnnouncementTexts.VIGILANTE : !gameWorld.isInnocent(player) && !gameWorld.canUseKillerFeatures(player) ? KinsWatheRoles.NEUTRAL_TEXT : RoleAnnouncementTexts.CIVILIAN), killerCount, players.size() - killerCount));
         }
     }
 }

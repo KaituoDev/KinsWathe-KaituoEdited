@@ -21,6 +21,7 @@
   - Clear Trapper's Role Mine entity when game ends
   - Conductor can see dropped items (disabled by default)
   - Coroner can see bodies when mood is higher than mid (disabled by default)
+  - Jester is unable to attack killer in Psycho Mode (disabled by default)
 
 
 ## Modifications to Wathe
