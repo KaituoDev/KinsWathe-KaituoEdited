@@ -79,6 +79,9 @@
   "item.kinswathe.dream_imprint": "Dream Imprint",
   "item.kinswathe.dream_imprint.tooltip": "Use on a player to protect one extra hit of life\nTarget will teleport to user if it dies and give a delusion count\nSingle use",
 
+  "item.kinswathe.gavel": "Gavel",
+  "item.kinswathe.gavel.tooltip": "Right-click, hold for a second and get close to your suspect\nIf the suspect is not innocent, he will be sentenced to death\nIf the suspect is innocent, you will be executed\nSingle use",
+
   "item.kinswathe.hunting_knife": "Hunting Knife",
   "item.kinswathe.hunting_knife.tooltip": "Right-click, hold for a second and get close to your victim\nCompared to Knife, it has a longer holding-time\nIf stop holding after sprinting, two times holding-time cooldown\nAfter a kill, cannot be used for 45 seconds\nAttack to knock back / push a player (no cooldown)",
 
@@ -111,7 +114,7 @@
   "death_reason.wathe.grenade": "an explosion!",
   "death_reason.wathe.poison": "poison!",
   "death_reason.wathe.fell_out_of_train": "being ran over.",
-
+  "death_reason.kinswathe.death_penalty": "was sentenced to death.",
 
   "guidebook.namespace.kinswathe": "Mod: Kin's Wathe",
 

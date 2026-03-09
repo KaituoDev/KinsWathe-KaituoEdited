@@ -29,6 +29,7 @@
     "roles.hunter.HunterLockSlotMixin",
     "roles.hunter.HunterShopMixin",
     "roles.hunter.HunterSprintMixin",
+    "roles.judge.JudgeShopMixin",
     "roles.kidnapper.KidnapperMoneyIncreaseMixin",
     "roles.kidnapper.KidnapperShopMixin",
     "roles.licensed_villain.LicensedVillainGiveCoinsMixin",

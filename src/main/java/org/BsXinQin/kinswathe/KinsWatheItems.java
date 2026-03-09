@@ -26,6 +26,11 @@ public class KinsWatheItems {
             new DreamImprintItem(new Item.Settings().maxCount(4)),
             "dream_imprint"
     );
+    //法槌
+    public static final Item GAVEL = registerItem(
+            new GavelItem(new Item.Settings().maxCount(1)),
+            "gavel"
+    );
     //猎刀
     public static final Item HUNTING_KNIFE = registerItem(
             new HuntingKnifeItem(new Item.Settings().maxCount(1)),
@@ -93,6 +98,7 @@ public class KinsWatheItems {
         ItemGroupEvents.modifyEntriesEvent(WatheItems.EQUIPMENT_GROUP).register(entries -> {
             entries.add(BLOWGUN);
             entries.add(DREAM_IMPRINT);
+            entries.add(GAVEL);
             entries.add(HUNTING_KNIFE);
             entries.add(KNOCKOUT_DRUG);
             entries.add(MEDICAL_KIT);

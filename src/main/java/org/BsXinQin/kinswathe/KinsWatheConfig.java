@@ -18,10 +18,10 @@ public class KinsWatheConfig {
     public boolean EnableStaminaBar = true;
 
     @SerialEntry(comment = "Whether to enable jump when not in game.")
-    public boolean EnableJumpNotInGame = false;
+    public boolean EnableJumpNotInGame = true;
 
     @SerialEntry(comment = "Whether to enable safe time when game starts.")
-    public boolean EnableStartSafeTime = false;
+    public boolean EnableStartSafeTime = true;
 
     @SerialEntry(comment = "Whether to enable auto join voice chat group for spectators.")
     public boolean EnableAutoJoinVoiceChat = true;
@@ -99,6 +99,8 @@ public class KinsWatheConfig {
 
     @SerialEntry(comment = "Judge: modify price and cooldown of ability.")
     public int JudgeAbilityPrice = 150;
+    @SerialEntry
+    public int JudgeGavelPrice = 300;
     @SerialEntry
     public int JudgeAbilityGlowing = GameConstants.getInTicks(1,30) / 20;
     @SerialEntry

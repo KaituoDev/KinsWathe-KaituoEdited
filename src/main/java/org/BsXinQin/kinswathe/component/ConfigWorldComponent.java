@@ -40,7 +40,8 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public int DrugmakerPoisonInjectorPrice = 125;
     public int DrugmakerBlowgunPrice = 175;
     public int HunterAbilityPrice = 125;
-    public int JudgeAbilityPrice = 300;
+    public int JudgeAbilityPrice = 150;
+    public int JudgeGavelPrice = 300;
     public int KidnapperKnockoutDrugPrice = 250;
     public int LicensedVillainRevolverPrice = 300;
     public int LicensedVillainGrenadePrice = 350;
@@ -71,6 +72,7 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         DrugmakerBlowgunPrice = KinsWatheConfig.HANDLER.instance().DrugmakerBlowgunPrice; tag.putInt("DrugmakerBlowgunPrice", this.DrugmakerBlowgunPrice);
         HunterAbilityPrice = KinsWatheConfig.HANDLER.instance().HunterAbilityPrice; tag.putInt("HunterAbilityPrice", this.HunterAbilityPrice);
         JudgeAbilityPrice = KinsWatheConfig.HANDLER.instance().JudgeAbilityPrice; tag.putInt("JudgeAbilityPrice", this.JudgeAbilityPrice);
+        JudgeGavelPrice = KinsWatheConfig.HANDLER.instance().JudgeGavelPrice; tag.putInt("JudgeGavelPrice", this.JudgeGavelPrice);
         KidnapperKnockoutDrugPrice = KinsWatheConfig.HANDLER.instance().KidnapperKnockoutDrugPrice; tag.putInt("KidnapperKnockoutDrugPrice", this.KidnapperKnockoutDrugPrice);
         LicensedVillainRevolverPrice = KinsWatheConfig.HANDLER.instance().LicensedVillainRevolverPrice; tag.putInt("LicensedVillainRevolverPrice", this.LicensedVillainRevolverPrice);
         LicensedVillainGrenadePrice = KinsWatheConfig.HANDLER.instance().LicensedVillainGrenadePrice; tag.putInt("LicensedVillainGrenadePrice", this.LicensedVillainGrenadePrice);
@@ -101,6 +103,7 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         if (tag.contains("DrugmakerBlowgunPrice"))   this.DrugmakerBlowgunPrice = tag.getInt("DrugmakerBlowgunPrice");
         if (tag.contains("HunterAbilityPrice"))   this.HunterAbilityPrice = tag.getInt("HunterAbilityPrice");
         if (tag.contains("JudgeAbilityPrice"))   this.JudgeAbilityPrice = tag.getInt("JudgeAbilityPrice");
+        if (tag.contains("JudgeGavelPrice"))   this.JudgeGavelPrice = tag.getInt("JudgeGavelPrice");
         if (tag.contains("KidnapperKnockoutDrugPrice"))   this.KidnapperKnockoutDrugPrice = tag.getInt("KidnapperKnockoutDrugPrice");
         if (tag.contains("LicensedVillainRevolverPrice"))   this.LicensedVillainRevolverPrice = tag.getInt("LicensedVillainRevolverPrice");
         if (tag.contains("LicensedVillainGrenadePrice"))   this.LicensedVillainGrenadePrice = tag.getInt("LicensedVillainGrenadePrice");

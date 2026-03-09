@@ -79,6 +79,9 @@
   "item.kinswathe.dream_imprint": "梦之印记",
   "item.kinswathe.dream_imprint.tooltip": "用于玩家，使其额外承受一次伤害\n对方受到伤害后传送到使用者身边，并给予一个服用幻觉试剂次数\n一次性物品",
 
+  "item.kinswathe.gavel": "法槌",
+  "item.kinswathe.gavel.tooltip": "右键蓄力一秒，靠近嫌疑人即可进行审判\n若嫌疑人不是平民，则嫌疑人将被判处死刑\n若嫌疑人是平民，则自己将被处决\n一次性用品",
+
   "item.kinswathe.hunting_knife": "猎刀",
   "item.kinswathe.hunting_knife.tooltip": "右键蓄力一秒，靠近目标即可发动暗杀\n相较于匕首，拥有更持久的蓄力时间\n如果疾跑后停止蓄力，冷却两倍蓄力时间\n击杀后冷却 45 秒\n攻击可击退玩家（无冷却）",
 
@@ -111,7 +114,7 @@
   "death_reason.wathe.grenade": "被手雷炸死",
   "death_reason.wathe.poison": "中毒而亡",
   "death_reason.wathe.fell_out_of_train": "被列车碾死",
-
+  "death_reason.kinswathe.death_penalty": "被判处死刑",
 
   "guidebook.namespace.kinswathe": "模组: Kin's Wathe",
 

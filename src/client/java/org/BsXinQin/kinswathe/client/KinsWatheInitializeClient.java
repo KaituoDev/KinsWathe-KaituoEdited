@@ -71,6 +71,7 @@ public class KinsWatheInitializeClient {
             //添加KinsWathe物品描述
             ItemToolTip.addItemtip(KinsWatheItems.BLOWGUN, itemStack, list);
             ItemToolTip.addItemtip(KinsWatheItems.DREAM_IMPRINT, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.GAVEL, itemStack, list);
             ItemToolTip.addItemtip(KinsWatheItems.HUNTING_KNIFE, itemStack, list);
             ItemToolTip.addItemtip(KinsWatheItems.KNOCKOUT_DRUG, itemStack, list);
             ItemToolTip.addItemtip(KinsWatheItems.MEDICAL_KIT, itemStack, list);
