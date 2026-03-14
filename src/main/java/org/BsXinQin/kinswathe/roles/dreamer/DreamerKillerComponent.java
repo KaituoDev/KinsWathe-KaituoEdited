@@ -68,7 +68,18 @@ public class DreamerKillerComponent implements AutoSyncedComponent, ServerTickin
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
         if (!gameWorld.isRole(this.player, KinsWatheRoles.DREAMER) && GameFunctions.isPlayerSpectatingOrCreative(this.player)) return;
         ArrayList<Role> shuffledKillerRoles = new ArrayList<>(WatheRoles.ROLES);
-        shuffledKillerRoles.removeIf(role -> Harpymodloader.VANNILA_ROLES.contains(role) || !role.canUseKiller() || HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().getPath()));
+        ArrayList<String> disabledRolePaths = new ArrayList<>(HarpyModLoaderConfig.HANDLER.instance().disabled);
+        disabledRolePaths.replaceAll(path -> {
+            int colonIndex = path.lastIndexOf(':');
+            if (colonIndex == -1) {
+                return path;
+            } else {
+                return path.substring(colonIndex + 1);
+            }
+        });
+        shuffledKillerRoles.removeIf(role -> Harpymodloader.VANNILA_ROLES.contains(role)
+                || !role.canUseKiller()
+                || disabledRolePaths.contains(role.identifier().getPath()));
         if (shuffledKillerRoles.isEmpty()) shuffledKillerRoles.add(WatheRoles.KILLER);
         Collections.shuffle(shuffledKillerRoles);
         PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(this.player);
