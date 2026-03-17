@@ -21,11 +21,11 @@ public abstract class GameSafeLimitKeysMixin {
         if (MinecraftClient.getInstance().player == null) return;
         if (!ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).EnableStartSafeTime) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
-        GameSafeComponent playerSafe = GameSafeComponent.KEY.get(MinecraftClient.getInstance().player);
+        GameSafeComponent gameSafe = GameSafeComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
         if (WatheClient.isPlayerAliveAndInSurvival()) {
             KeyBinding key = (KeyBinding) (Object) this;
             boolean attackKey = key.equals(MinecraftClient.getInstance().options.attackKey);
-            if (gameWorld.isRunning() && playerSafe.isGameSafe && attackKey) {
+            if (gameWorld.isRunning() && gameSafe.isSafe() && attackKey) {
                 cir.setReturnValue(false);
             }
         }

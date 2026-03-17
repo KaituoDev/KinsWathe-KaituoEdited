@@ -41,6 +41,6 @@ public class PillItem extends Item {
             }
             player.playSoundToPlayer(SoundEvents.ITEM_HONEY_BOTTLE_DRINK, SoundCategory.PLAYERS, 1.0f, 1.0f);
         }
-        return TypedActionResult.pass(stack);
+        return TypedActionResult.success(stack, false);
     }
 }

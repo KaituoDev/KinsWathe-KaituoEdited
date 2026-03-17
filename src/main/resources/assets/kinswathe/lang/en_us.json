@@ -39,6 +39,21 @@
   "tip.kinswathe.drugmaker.poison_failed": "It seems to be immune to poisoning...",
   "tip.kinswathe.drugmaker.poisoned": "Someone was poisoned",
 
+  "announcement.role.kinswathe.hacker": "Hacker",
+  "announcement.goals.kinswathe.hacker": "Attempting to hack into the entire train...",
+  "hud.kinswathe.hacker.target": "Cracking role",
+  "hud.kinswathe.hacker.target_hacked": "Role cracking completed",
+  "hud.kinswathe.hacker.target_safe": "Unable to crack role in safe time",
+  "item.kinswathe.icon_ability_cooldown_refresh": "Refresh Ability Cooldown",
+  "item.kinswathe.icon_ability_cooldown_refresh.tooltip": "Refresh cooldown of all killers' ability and Psycho Mode\nActivated instantly on purchase, 5 minutes cooldown",
+  "tip.kinswathe.hacker.ability_cooldown_refresh": "Hacker refresh ability cooldown for you",
+  "item.kinswathe.icon_potion_effect_refresh": "Refresh Potion Effect",
+  "item.kinswathe.icon_potion_effect_refresh.tooltip": "Clear killers' potion effect\nActivated instantly on purchase, 3 minutes cooldown",
+  "tip.kinswathe.hacker.potion_effect_refresh": "Hacker clear potion effect for you",
+  "item.kinswathe.icon_weapon_cooldown_refresh": "Refresh Weapon Cooldown",
+  "item.kinswathe.icon_weapon_cooldown_refresh.tooltip": "Refresh cooldown of all killers' weapon\nActivated instantly on purchase, 5 minutes cooldown",
+  "tip.kinswathe.hacker.weapon_cooldown_refresh": "Hacker refresh weapon cooldown for you",
+
   "announcement.role.kinswathe.hunter": "Hunter",
   "announcement.goals.kinswathe.hunter": "Enjoy your prey to the fullest!",
 
@@ -91,8 +106,11 @@
   "item.kinswathe.pan": "Pan",
   "item.kinswathe.pan.tooltip": "Right-click, hold for a second and stun target for 5 seconds\nIf shot during holding, destroy pan to protects player one extra hit of life\n45 seconds cooldown",
 
+  "item.kinswathe.phone": "Phone",
+  "item.kinswathe.phone.tooltip": "Right-click to switch between Free-Voice-Group and Killer-Voice-Group",
+
   "item.kinswathe.pill": "Pill",
-  "item.kinswathe.pill.tooltip": "Right-click to eat\nProtects player one extra hit of life\nSingle use, 2 minute cooldown",
+  "item.kinswathe.pill.tooltip": "Right-click to eat\nProtects player one extra hit of life\nSingle use, 3 minute cooldown",
 
   "item.kinswathe.poison_injector": "Poison Injector",
   "item.kinswathe.poison_injector.tooltip": "Use on a player to poison it\nIf target have been poisoned, directly cause death\n1 minute cooldown",
@@ -142,6 +160,10 @@
   "guidebook.role.kinswathe:drugmaker": "Drugmaker",
   "guidebook.role.title.kinswathe:drugmaker": "Lethal Formula",
   "guidebook.role.description.kinswathe:drugmaker": "The Drugmaker is the killer most skilled with poisons, savoring every second of his prey's suffering after being poisoned. He is only deployed to assist killers when there are enough players.\n\nThe Drugmaker can see players who are genuinely poisoned — after all, they are his masterpieces. Whenever a player is poisoned, he receives a reward of gold coins.\n\nPoison Injector and Blowgun can be purchased at the shop — two distinctly different methods of poisoning.\n\nFor the Drugmaker, death is just a matter of prescription.",
+
+  "guidebook.role.kinswathe:hacker": "Hacker",
+  "guidebook.role.title.kinswathe:hacker": "Shadow Supporter",
+  "guidebook.role.description.kinswathe:hacker": "The Hacker is the technical elite of the killer team, working in the shadows to help killers achieve their winning goal.\n\nThe Hacker equips all killers with phones, enabling them to communicate remotely.\n\nCracking roles is also a skill a hacker should possess — after staring at a player long enough, they can crack their role and send it to all killers' phones, and get coins.\n\nOf course, the Hacker can also use their technology to help killers turn off lights, refresh weapon cooldowns or ability cooldowns, and even clear potion effects from them!\n\nRemember, the Hacker needs to stay undercover — never reveal their role to civilians too early...",
 
   "guidebook.role.kinswathe:hunter": "Hunter",
   "guidebook.role.title.kinswathe:hunter": "Hunting Time",

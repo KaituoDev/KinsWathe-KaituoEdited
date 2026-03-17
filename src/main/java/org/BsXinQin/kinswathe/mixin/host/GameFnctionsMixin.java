@@ -13,6 +13,8 @@ import org.BsXinQin.kinswathe.component.PlayerEffectComponent;
 import org.BsXinQin.kinswathe.roles.cook.CookComponent;
 import org.BsXinQin.kinswathe.roles.dreamer.DreamerComponent;
 import org.BsXinQin.kinswathe.roles.dreamer.DreamerKillerComponent;
+import org.BsXinQin.kinswathe.roles.hacker.HackerComponent;
+import org.BsXinQin.kinswathe.roles.hacker.HackerPhoneComponent;
 import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.BsXinQin.kinswathe.roles.kidnapper.KidnapperComponent;
 import org.BsXinQin.kinswathe.roles.physician.PhysicianComponent;
@@ -35,12 +37,14 @@ public class GameFnctionsMixin {
 
     @Inject(method = "resetPlayer", at = @At("TAIL"))
     private static void resetPlayer(@NotNull ServerPlayerEntity player, CallbackInfo ci) {
-        GameSafeComponent.KEY.get(player).reset();
+        GameSafeComponent.KEY.get(player.getWorld()).reset();
         PlayerEffectComponent.KEY.get(player).reset();
         AbilityPlayerComponent.KEY.get(player).reset();
         CookComponent.KEY.get(player).reset();
         DreamerComponent.KEY.get(player).reset();
         DreamerKillerComponent.KEY.get(player).reset();
+        HackerComponent.KEY.get(player).reset();
+        HackerPhoneComponent.KEY.get(player).reset();
         HunterComponent.KEY.get(player).reset();
         KidnapperComponent.KEY.get(player).reset();
         PhysicianComponent.KEY.get(player).reset();

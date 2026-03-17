@@ -37,8 +37,10 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public int CookPanPrice = 250;
     public int DetectiveAbilityPrice = 200;
     public int DrugmakerGetCoins = 50;
-    public int DrugmakerPoisonInjectorPrice = 125;
+    public int DrugmakerPoisonInjectorPrice = 100;
     public int DrugmakerBlowgunPrice = 175;
+    public int HackerHackingTime = GameConstants.getInTicks(0,30) / 20;
+    public boolean HackerHasShop = true;
     public int HunterAbilityPrice = 125;
     public int JudgeAbilityPrice = 300;
     public int KidnapperKnockoutDrugPrice = 250;
@@ -68,6 +70,8 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         DrugmakerGetCoins = KinsWatheConfig.HANDLER.instance().DrugmakerGetCoins; tag.putInt("DrugmakerGetCoins", this.DrugmakerGetCoins);
         DrugmakerPoisonInjectorPrice = KinsWatheConfig.HANDLER.instance().DrugmakerPoisonInjectorPrice; tag.putInt("DrugmakerPoisonInjectorPrice", this.DrugmakerPoisonInjectorPrice);
         DrugmakerBlowgunPrice = KinsWatheConfig.HANDLER.instance().DrugmakerBlowgunPrice; tag.putInt("DrugmakerBlowgunPrice", this.DrugmakerBlowgunPrice);
+        HackerHackingTime = KinsWatheConfig.HANDLER.instance().HackerHackingTime; tag.putInt("HackerHackingTime", this.HackerHackingTime);
+        HackerHasShop = KinsWatheConfig.HANDLER.instance().HackerHasShop; tag.putBoolean("HackerHasShop", this.HackerHasShop);
         HunterAbilityPrice = KinsWatheConfig.HANDLER.instance().HunterAbilityPrice; tag.putInt("HunterAbilityPrice", this.HunterAbilityPrice);
         JudgeAbilityPrice = KinsWatheConfig.HANDLER.instance().JudgeAbilityPrice; tag.putInt("JudgeAbilityPrice", this.JudgeAbilityPrice);
         KidnapperKnockoutDrugPrice = KinsWatheConfig.HANDLER.instance().KidnapperKnockoutDrugPrice; tag.putInt("KidnapperKnockoutDrugPrice", this.KidnapperKnockoutDrugPrice);
@@ -97,6 +101,8 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         if (tag.contains("DrugmakerGetCoins"))   this.DrugmakerGetCoins = tag.getInt("DrugmakerGetCoins");
         if (tag.contains("DrugmakerPoisonInjectorPrice"))   this.DrugmakerPoisonInjectorPrice = tag.getInt("DrugmakerPoisonInjectorPrice");
         if (tag.contains("DrugmakerBlowgunPrice"))   this.DrugmakerBlowgunPrice = tag.getInt("DrugmakerBlowgunPrice");
+        if (tag.contains("HackerHackingTime"))   this.HackerHackingTime = tag.getInt("HackerHackingTime");
+        if (tag.contains("HackerHasShop"))   this.HackerHasShop = tag.getBoolean("HackerHasShop");
         if (tag.contains("HunterAbilityPrice"))   this.HunterAbilityPrice = tag.getInt("HunterAbilityPrice");
         if (tag.contains("JudgeAbilityPrice"))   this.JudgeAbilityPrice = tag.getInt("JudgeAbilityPrice");
         if (tag.contains("KidnapperKnockoutDrugPrice"))   this.KidnapperKnockoutDrugPrice = tag.getInt("KidnapperKnockoutDrugPrice");

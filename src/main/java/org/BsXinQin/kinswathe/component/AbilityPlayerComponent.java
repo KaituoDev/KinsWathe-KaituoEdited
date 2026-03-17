@@ -53,7 +53,7 @@ public class AbilityPlayerComponent implements AutoSyncedComponent, ServerTickin
             Method getMethod = componentKey.getClass().getMethod("get", Object.class);
             Object playerAbility = getMethod.invoke(componentKey, this.player);
             Field cooldownField = abilityClass.getField("cooldown");
-            if (ticks >= 120) {
+            if (ticks <= 0 || ticks >= 120) {
                 cooldownField.setInt(playerAbility, ticks * 20);
             } else {
                 cooldownField.setInt(playerAbility, 2400);

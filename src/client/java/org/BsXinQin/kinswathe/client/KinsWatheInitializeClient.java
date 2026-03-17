@@ -82,9 +82,14 @@ public class KinsWatheInitializeClient {
             if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
                 ItemToolTip.addCooldowntip(Registries.ITEM.get(Identifier.of("noellesroles", "fake_revolver")), itemStack, list);
             }
+            //添加图标描述
+            ItemToolTip.addItemtip(KinsWatheItems.ICON_ABILITY_COOLDOWN_REFRESH, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.ICON_POTION_EFFECT_REFRESH, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.ICON_WEAPON_COOLDOWN_REFRESH, itemStack, list);
         }));
         //注册物品额外材质
-        ItemExtraModel.registerCooldownModel(KinsWatheItems.POISON_INJECTOR);
+        ItemExtraModel.registerExtraModel(KinsWatheItems.PHONE);
+        ItemExtraModel.registerExtraModel(KinsWatheItems.POISON_INJECTOR);
     }
 
     public static void init() {

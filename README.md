@@ -51,7 +51,7 @@
 
 - Switch player inventory to the last slot when game starts
 
-- Clear field drops and player effects and bodies when game ends
+- Clear field drops and player effects, inventory and bodies when game ends
 
 - Add safe time when game starts, players can't damage or die in duration
 
@@ -122,7 +122,7 @@
 - Kidnapper
   - Can purchase Knockout Drug in shop
   - Initially equip with a Knockout Drug
-  - Knockout Drug can daze target and let it foolow you
+  - Knockout Drug can daze target and let it follow you
   - Players that be dazed can not see, attack, use or voice chat
   - Can get additional coins for personally killing the dazed target
   - If distance between Kidnapper and dazed player exceeds 5 blocks, the player will be lifted
@@ -138,6 +138,15 @@
   - When imprinted target is damaged, it will teleport to user and give Dreamer a count to turn into killer
   - Turn into killer based on the non-killer players who taking Delusion Vial
   - The number of non-killer players taking Delusion Vial is one-fourth of the total number of players
+
+- Hacker
+  - Killer side neutral role
+  - Limit on the number of players that can be generated
+  - Can not generate with Mimic by default if Nolle's Roles was loaded
+  - Initially equip with Phone for killers and Hacker
+  - Phone can allow killers and Hacker voice chat in a group
+  - Staring at a civilian for enough time to crack role and send it to every Phone, and get coins
+  - Can purchase killer side powerful auxiliary props in shop
 
 - Licensed Villain
   - Limit on the number of players that can be generated
@@ -173,6 +182,11 @@
 - Generation conditions of roles are configurable
 
 - Most price of items in shop are configurable
+
+
+## Commands
+
+- Use /kinswathe to modify general config settings in game
 
 
 ## Requires

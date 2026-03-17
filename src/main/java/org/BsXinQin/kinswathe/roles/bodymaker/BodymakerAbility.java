@@ -3,12 +3,21 @@ package org.BsXinQin.kinswathe.roles.bodymaker;
 import dev.doctor4t.wathe.api.WatheRoles;
 import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.entity.PlayerBodyEntity;
+import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.game.GameFunctions;
 import dev.doctor4t.wathe.index.WatheEntities;
+import dev.doctor4t.wathe.index.WatheItems;
+import dev.doctor4t.wathe.index.WatheParticles;
+import dev.doctor4t.wathe.index.WatheSounds;
 import lombok.SneakyThrows;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ItemStackParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -67,12 +76,26 @@ public class BodymakerAbility {
                         } else {
                             playerRoleField.set(deathReasonInstance, Identifier.of(payload.role()));
                         }
+                        if (Identifier.of(payload.role()).equals(Identifier.of("noellesroles", "noisemaker"))) {
+                            playerBody.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 1200, 0));
+                        }
                         syncMethod.invoke(deathReasonInstance);
                     }
+                    if (Identifier.of(payload.deathReason()).equals(GameConstants.DeathReasons.GUN)) {
+                        player.getWorld().playSound(null, player.getX(), player.getEyeY(), player.getZ(), WatheSounds.ITEM_REVOLVER_SHOOT, SoundCategory.PLAYERS, 5f, 1f + player.getRandom().nextFloat() * .1f - .05f);
+                    } else if (Identifier.of(payload.deathReason()).equals(GameConstants.DeathReasons.GRENADE)) {
+                        if (player.getWorld() instanceof @NotNull ServerWorld serverWorld) {
+                            serverWorld.playSound(null, playerBody.getBlockPos(), WatheSounds.ITEM_GRENADE_EXPLODE, SoundCategory.PLAYERS, 5f, 1f + playerBody.getRandom().nextFloat() * .1f - .05f);
+                            serverWorld.spawnParticles(WatheParticles.BIG_EXPLOSION, playerBody.getX(), playerBody.getY() + .1f, playerBody.getZ(), 1, 0, 0, 0, 0);
+                            serverWorld.spawnParticles(ParticleTypes.SMOKE, playerBody.getX(), playerBody.getY() + .1f, playerBody.getZ(), 100, 0, 0, 0, .2f);
+                            serverWorld.spawnParticles(new ItemStackParticleEffect(ParticleTypes.ITEM, WatheItems.THROWN_GRENADE.getDefaultStack()), playerBody.getX(), playerBody.getY() + .1f, playerBody.getZ(), 100, 0, 0, 0, 1f);
+                        }
+                    } else {
+                        player.playSoundToPlayer(SoundEvents.ENTITY_SKELETON_CONVERTED_TO_STRAY, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                    }
                 }
+                ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().BodymakerAbilityCooldown);
             }
-            player.playSoundToPlayer(SoundEvents.ENTITY_SKELETON_CONVERTED_TO_STRAY, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().BodymakerAbilityCooldown);
         }
     }
 }

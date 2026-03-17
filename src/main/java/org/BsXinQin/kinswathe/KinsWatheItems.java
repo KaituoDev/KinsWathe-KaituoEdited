@@ -46,6 +46,11 @@ public class KinsWatheItems {
             new PanItem(new Item.Settings().maxCount(1)),
             "pan"
     );
+    //手机
+    public static final Item PHONE = registerItem(
+            new PhoneItem(new Item.Settings().maxCount(1)),
+            "phone"
+    );
     //药丸
     public static final Item PILL = registerItem(
             new PillItem(new Item.Settings().maxCount(1)),
@@ -62,8 +67,25 @@ public class KinsWatheItems {
             "sulfuric_acid_barrel"
     );
 
+    /// 新增图标
+    //刷新技能冷却图标
+    public static final Item ICON_ABILITY_COOLDOWN_REFRESH = registerItem(
+            new Item(new Item.Settings().maxCount(1)),
+            "icon_ability_cooldown_refresh"
+    );
+    //刷新药水状态图标
+    public static final Item ICON_POTION_EFFECT_REFRESH = registerItem(
+            new Item(new Item.Settings().maxCount(1)),
+            "icon_potion_effect_refresh"
+    );
+    //刷新武器冷却图标
+    public static final Item ICON_WEAPON_COOLDOWN_REFRESH = registerItem(
+            new Item(new Item.Settings().maxCount(1)),
+            "icon_weapon_cooldown_refresh"
+    );
+
     /// 注册方法
-    public static Item registerItem(Item item, String id) {
+    public static Item registerItem(@NotNull Item item, @NotNull String id) {
         Identifier itemID = Identifier.of(KinsWathe.MOD_ID, id);
         return Registry.register(Registries.ITEM, itemID, item);
     }
@@ -78,14 +100,19 @@ public class KinsWatheItems {
 
     /// 添加物品冷却
     public static void addItemCooldowns() {
+        //物品冷却
         GameConstants.ITEM_COOLDOWNS.put(BLOWGUN, GameConstants.getInTicks(1,0));
         GameConstants.ITEM_COOLDOWNS.put(HUNTING_KNIFE, GameConstants.getInTicks(0,45));
         GameConstants.ITEM_COOLDOWNS.put(KNOCKOUT_DRUG, GameConstants.getInTicks(0,45));
         GameConstants.ITEM_COOLDOWNS.put(MEDICAL_KIT, GameConstants.getInTicks(1,0));
         GameConstants.ITEM_COOLDOWNS.put(PAN, GameConstants.getInTicks(0,45));
-        GameConstants.ITEM_COOLDOWNS.put(PILL, GameConstants.getInTicks(2,0));
+        GameConstants.ITEM_COOLDOWNS.put(PILL, GameConstants.getInTicks(3,0));
         GameConstants.ITEM_COOLDOWNS.put(POISON_INJECTOR, GameConstants.getInTicks(1,0));
         GameConstants.ITEM_COOLDOWNS.put(SULFURIC_ACID_BARREL, GameConstants.getInTicks(1,0));
+        //图标冷却
+        GameConstants.ITEM_COOLDOWNS.put(ICON_ABILITY_COOLDOWN_REFRESH, GameConstants.getInTicks(5,0));
+        GameConstants.ITEM_COOLDOWNS.put(ICON_POTION_EFFECT_REFRESH, GameConstants.getInTicks(3,0));
+        GameConstants.ITEM_COOLDOWNS.put(ICON_WEAPON_COOLDOWN_REFRESH, GameConstants.getInTicks(3,0));
     }
 
     /// 添加物品组别
@@ -97,6 +124,7 @@ public class KinsWatheItems {
             entries.add(KNOCKOUT_DRUG);
             entries.add(MEDICAL_KIT);
             entries.add(PAN);
+            entries.add(PHONE);
             entries.add(PILL);
             entries.add(POISON_INJECTOR);
             entries.add(SULFURIC_ACID_BARREL);

@@ -88,9 +88,18 @@ public class KinsWatheConfig {
     @SerialEntry
     public int DrugmakerGetCoins = 50;
     @SerialEntry
-    public int DrugmakerPoisonInjectorPrice = 125;
+    public int DrugmakerPoisonInjectorPrice = 100;
     @SerialEntry
     public int DrugmakerBlowgunPrice = 175;
+
+    @SerialEntry(comment = "Hacker: modify generation limit, hacking time and whether to enable shop.")
+    public int HackerPlayerLimit = 10;
+    @SerialEntry
+    public boolean HackerGenerateWithMimic = false;
+    @SerialEntry
+    public int HackerHackingTime = GameConstants.getInTicks(0,30) / 20;
+    @SerialEntry
+    public boolean HackerHasShop = true;
 
     @SerialEntry(comment = "Hunter: modify price and cooldown of ability.")
     public int HunterAbilityPrice = 125;

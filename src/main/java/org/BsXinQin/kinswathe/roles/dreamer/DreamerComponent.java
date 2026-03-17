@@ -78,10 +78,12 @@ public class DreamerComponent implements AutoSyncedComponent, ServerTickingCompo
                     playerDreamer.sync();
                 }
             }
-            ((ServerWorld) this.player.getWorld()).spawnParticles(ParticleTypes.PORTAL, this.player.getX(), this.player.getY(), this.player.getZ(), 75, 0.5, 1.5, 0.5, 0.1);
-            this.player.getWorld().playSound(null, this.player.getBlockPos(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-            if (playerPsycho.psychoTicks <= 0) {
-                this.player.teleport((ServerWorld) this.player.getWorld(), dreamer.getX(), dreamer.getY(), dreamer.getZ(), Set.of(), dreamer.getYaw(), dreamer.getPitch());
+            if (this.player.getWorld() instanceof @NotNull ServerWorld serverWorld) {
+                serverWorld.spawnParticles(ParticleTypes.PORTAL, this.player.getX(), this.player.getY(), this.player.getZ(), 75, 0.5, 1.5, 0.5, 0.1);
+                serverWorld.playSound(null, this.player.getBlockPos(), SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                if (playerPsycho.psychoTicks <= 0) {
+                    this.player.teleport(serverWorld, dreamer.getX(), dreamer.getY(), dreamer.getZ(), Set.of(), dreamer.getYaw(), dreamer.getPitch());
+                }
             }
             dreamer.playSoundToPlayer(SoundEvents.ENTITY_ENDERMAN_TELEPORT, SoundCategory.PLAYERS, 1.0f, 1.0f);
         }

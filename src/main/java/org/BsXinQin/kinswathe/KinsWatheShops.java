@@ -1,13 +1,23 @@
 package org.BsXinQin.kinswathe;
 
+import dev.doctor4t.wathe.cca.PlayerShopComponent;
 import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.index.WatheItems;
+import dev.doctor4t.wathe.index.WatheSounds;
 import dev.doctor4t.wathe.util.ShopEntry;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
+import net.minecraft.registry.Registries;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.text.Text;
 import net.minecraft.util.Util;
 import net.minecraft.world.World;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
+import org.BsXinQin.kinswathe.roles.hacker.HackerComponent;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
@@ -77,6 +87,19 @@ public class KinsWatheShops {
             entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), getItemPrice("NOTE", 10), ShopEntry.Type.TOOL));
         });
     }
+    //黑客商店
+    public static List<ShopEntry> getHackerShop(@NotNull World world) {
+        if (!KinsWatheConfig.HANDLER.instance().HackerHasShop) return null;
+        return Util.make(new ArrayList<>(), (entries) -> {
+            entries.add(new ShopEntry(WatheItems.LOCKPICK.getDefaultStack(), getItemPrice("LOCKPICK", 50), ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(WatheItems.BLACKOUT.getDefaultStack(), getItemPrice("BLACKOUT", 200), ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(KinsWatheItems.ICON_WEAPON_COOLDOWN_REFRESH.getDefaultStack(), 300, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(KinsWatheItems.ICON_ABILITY_COOLDOWN_REFRESH.getDefaultStack(), 400, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(KinsWatheItems.ICON_POTION_EFFECT_REFRESH.getDefaultStack(), 200, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(WatheItems.FIRECRACKER.getDefaultStack(), getItemPrice("FIRECRACKER", 10) / 2, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), getItemPrice("NOTE", 10) / 2, ShopEntry.Type.TOOL));
+        });
+    }
     //追猎者商店
     public static List<ShopEntry> getHunterShop(@NotNull World world) {
         return Util.make(new ArrayList<>(), (entries) -> {
@@ -116,5 +139,29 @@ public class KinsWatheShops {
     //杀手方中立商店
     public static List<ShopEntry> getKillerNeutralRolesShop() {
         return FRAMING_ROLES_SHOP;
+    }
+
+    /// 商店处理方法
+    public static boolean handlePurchase(@NotNull PlayerEntity player, int balance, @NotNull Item item, int price) {
+        if (balance >= price && !player.getItemCooldownManager().isCoolingDown(item)) {
+            if (item == WatheItems.NOTE) player.giveItemStack((new ItemStack(WatheItems.NOTE, 4)));
+            else if (item == WatheItems.BLACKOUT) PlayerShopComponent.useBlackout(player);
+            else if (item == WatheItems.PSYCHO_MODE) PlayerShopComponent.usePsychoMode(player);
+            else if (item == KinsWatheItems.ICON_WEAPON_COOLDOWN_REFRESH) HackerComponent.refreshWeaponCooldown(player);
+            else if (item == KinsWatheItems.ICON_ABILITY_COOLDOWN_REFRESH) HackerComponent.refreshAbilityCooldown(player);
+            else if (item == KinsWatheItems.ICON_POTION_EFFECT_REFRESH) HackerComponent.refreshPotionEffect(player);
+            else player.giveItemStack(item.getDefaultStack());
+            if (player instanceof @NotNull ServerPlayerEntity serverPlayer) {
+                serverPlayer.playSoundToPlayer(WatheSounds.UI_SHOP_BUY, SoundCategory.PLAYERS,1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F);
+                serverPlayer.networkHandler.sendPacket(new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(WatheSounds.UI_SHOP_BUY), SoundCategory.PLAYERS, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), 1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F, serverPlayer.getRandom().nextLong()));
+            }
+            return true;
+        } else {
+            player.sendMessage(Text.translatable("shop.purchase_failed").withColor(0xAA0000), true);
+            if (player instanceof @NotNull ServerPlayerEntity serverPlayer) {
+                serverPlayer.networkHandler.sendPacket(new PlaySoundS2CPacket(Registries.SOUND_EVENT.getEntry(WatheSounds.UI_SHOP_BUY_FAIL), SoundCategory.PLAYERS, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), 1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F, serverPlayer.getRandom().nextLong()));
+            }
+            return false;
+        }
     }
 }

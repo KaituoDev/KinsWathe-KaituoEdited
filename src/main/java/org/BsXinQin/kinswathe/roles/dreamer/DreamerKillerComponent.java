@@ -68,14 +68,13 @@ public class DreamerKillerComponent implements AutoSyncedComponent, ServerTickin
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
         if (!gameWorld.isRole(this.player, KinsWatheRoles.DREAMER) && GameFunctions.isPlayerSpectatingOrCreative(this.player)) return;
         ArrayList<Role> shuffledKillerRoles = new ArrayList<>(WatheRoles.ROLES);
-        shuffledKillerRoles.removeIf(role -> Harpymodloader.VANNILA_ROLES.contains(role) || !role.canUseKiller() || HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().getPath()));
+        shuffledKillerRoles.removeIf(role -> Harpymodloader.VANNILA_ROLES.contains(role) || !role.canUseKiller() || HarpyModLoaderConfig.HANDLER.instance().disabled.contains(role.identifier().toString()));
         if (shuffledKillerRoles.isEmpty()) shuffledKillerRoles.add(WatheRoles.KILLER);
         Collections.shuffle(shuffledKillerRoles);
         PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(this.player);
         gameWorld.addRole(this.player, shuffledKillerRoles.getFirst());
         ModdedRoleAssigned.EVENT.invoker().assignModdedRole(this.player, shuffledKillerRoles.getFirst());
-        playerShop.balance += 100;
-        playerShop.sync();
+        playerShop.addToBalance(100);
         PlayerPoisonComponent.KEY.get(this.player).reset();
         if (Harpymodloader.VANNILA_ROLES.contains(gameWorld.getRole(this.player))) {
             ServerPlayNetworking.send((ServerPlayerEntity) this.player, new AnnounceWelcomePayload(RoleAnnouncementTexts.ROLE_ANNOUNCEMENT_TEXTS.indexOf(WatheRoles.KILLER), gameWorld.getAllKillerTeamPlayers().size(), 0));
