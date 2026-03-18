@@ -25,6 +25,7 @@ import org.BsXinQin.kinswathe.component.GameSafeComponent;
 import org.BsXinQin.kinswathe.component.PlayerEffectComponent;
 import org.BsXinQin.kinswathe.packet.host.AbilityC2SPacket;
 import org.BsXinQin.kinswathe.packet.items.BlowgunC2SPacket;
+import org.BsXinQin.kinswathe.packet.items.GavelC2SPacket;
 import org.BsXinQin.kinswathe.packet.items.HuntingKnifeC2SPacket;
 import org.BsXinQin.kinswathe.packet.items.PanC2SPacket;
 import org.BsXinQin.kinswathe.packet.roles.BodymakerC2SPacket;
@@ -134,9 +135,11 @@ public class KinsWatheGameSettings {
         PayloadTypeRegistry.playC2S().register(BodymakerC2SPacket.ID, BodymakerC2SPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(JudgeC2SPacket.ID, JudgeC2SPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(BlowgunC2SPacket.ID, BlowgunC2SPacket.CODEC);
+        PayloadTypeRegistry.playC2S().register(GavelC2SPacket.ID, GavelC2SPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(HuntingKnifeC2SPacket.ID, HuntingKnifeC2SPacket.CODEC);
         PayloadTypeRegistry.playC2S().register(PanC2SPacket.ID, PanC2SPacket.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(BlowgunC2SPacket.ID, new BlowgunC2SPacket.Receiver());
+        ServerPlayNetworking.registerGlobalReceiver(GavelC2SPacket.ID, new GavelC2SPacket.Receiver());
         ServerPlayNetworking.registerGlobalReceiver(HuntingKnifeC2SPacket.ID, new HuntingKnifeC2SPacket.Receiver());
         ServerPlayNetworking.registerGlobalReceiver(PanC2SPacket.ID, new PanC2SPacket.Receiver());
     }

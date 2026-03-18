@@ -107,7 +107,9 @@ public class KinsWatheConfig {
     public int HunterAbilityCooldown = GameConstants.getInTicks(0,5) / 20;
 
     @SerialEntry(comment = "Judge: modify price and cooldown of ability.")
-    public int JudgeAbilityPrice = 300;
+    public int JudgeAbilityPrice = 150;
+    @SerialEntry
+    public int JudgeGavelPrice = 300;
     @SerialEntry
     public int JudgeAbilityGlowing = GameConstants.getInTicks(1,30) / 20;
     @SerialEntry

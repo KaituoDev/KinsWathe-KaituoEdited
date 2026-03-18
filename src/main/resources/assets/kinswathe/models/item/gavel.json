@@ -1,0 +1,18 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "kinswathe:item/gavel"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ -80, 260, -40 ],
+      "translation": [ 0, 3, 2 ],
+      "scale": [ 0.6, 0.6, 0.6 ]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [ -80, -280, 40 ],
+      "translation": [ 0, 3, 2 ],
+      "scale": [ 0.6, 0.6, 0.6 ]
+    }
+  }
+}

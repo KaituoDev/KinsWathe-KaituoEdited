@@ -32,6 +32,7 @@
     "roles.hunter.HunterLockSlotMixin",
     "roles.hunter.HunterShopMixin",
     "roles.judge.JudgeScreenMixin",
+    "roles.judge.JudgeShopMixin",
     "roles.kidnapper.KidnapperControlledMixin",
     "roles.kidnapper.KidnapperKeyControlledMixin",
     "roles.kidnapper.KidnapperShopMixin",
