@@ -45,10 +45,14 @@ public class KinsWatheGameSettings {
     private static boolean GAME_START = false;
     private static boolean GAME_STOP = false;
 
-    /// 初始化配置文件和指令
-    public static void initializeConfigAndCommand() {
+    /// 初始化配置文件
+    public static void initializeConfig() {
         KinsWatheConfig.HANDLER.load();
-        KinsWatheCommand.register();
+    }
+
+    /// 初始化指令
+    public static void initializeCommands() {
+        KinsWatheCommands.register();
     }
 
     /// 设置游戏开始和结束功能
@@ -211,8 +215,10 @@ public class KinsWatheGameSettings {
 
     /// 初始化方法
     public static void init() {
-        //初始化配置文件和指令
-        initializeConfigAndCommand();
+        //初始化配置文件
+        initializeConfig();
+        //初始化指令
+        initializeCommands();
         //设置游戏开始和结束功能
         betterGameSettings();
         //注册网络数据包

@@ -5,7 +5,6 @@ import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
 import dev.doctor4t.wathe.game.GameFunctions;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import org.BsXinQin.kinswathe.KinsWatheConfig;
@@ -25,10 +24,7 @@ public class BellringerAbility {
             playerShop.balance -= KinsWatheConfig.HANDLER.instance().BellringerAbilityPrice;
             playerShop.sync();
             time.setTime(Math.max(0, time.getTime() - 1200));
-            for (ServerPlayerEntity serverPlayer : player.getServer().getPlayerManager().getPlayerList()) {
-                if (serverPlayer == null) continue;
-                serverPlayer.playSoundToPlayer(SoundEvents.BLOCK_BELL_USE, SoundCategory.PLAYERS, 1.0f, 1.0f);
-            }
+            player.playSoundToPlayer(SoundEvents.BLOCK_BELL_USE, SoundCategory.PLAYERS, 1.0f, 1.0f);
             ability.setAbilityCooldown(KinsWatheConfig.HANDLER.instance().BellringerAbilityCooldown);
         }
     }

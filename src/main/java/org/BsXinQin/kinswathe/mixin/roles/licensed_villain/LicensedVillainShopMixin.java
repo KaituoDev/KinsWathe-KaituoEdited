@@ -28,16 +28,14 @@ public abstract class LicensedVillainShopMixin {
 
 
     @Inject(method = "tryBuy", at = @At("HEAD"), cancellable = true)
-    void tryBuy(int index, CallbackInfo ci) {
+    void tryBuy(int index, @NotNull CallbackInfo ci) {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
         if (gameWorld.isRole(this.player, KinsWatheRoles.LICENSED_VILLAIN)) {
-            switch (index) {
-                case 0:
-                    this.item = WatheItems.REVOLVER;
-                    this.price = KinsWatheConfig.HANDLER.instance().LicensedVillainRevolverPrice;
-                    break;
-                default:
-                    return;
+            if (index == 0) {
+                this.item = WatheItems.REVOLVER;
+                this.price = KinsWatheConfig.HANDLER.instance().LicensedVillainRevolverPrice;
+            } else {
+                return;
             }
             if (index != 0) return;
             if (KinsWatheShops.handlePurchase(this.player, this.balance, this.item, this.price)) {
