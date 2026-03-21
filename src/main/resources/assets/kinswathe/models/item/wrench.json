@@ -1,0 +1,30 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "kinswathe:item/wrench"
+	},
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [70, -90, 4],
+			"translation": [0.5, 3.25, 2.5],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [70, 90, 4],
+			"translation": [-0.5, 3.25, 2.5],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"firstperson_righthand": {
+			"rotation": [10, -90, 0],
+			"translation": [0, 3, 1],
+			"scale": [0.75, 0.75, 0.75]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 90, 0],
+			"translation": [0, 3, 1],
+			"scale": [0.75, 0.75, 0.75]
+		}
+	}
+}

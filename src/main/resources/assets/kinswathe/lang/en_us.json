@@ -84,6 +84,9 @@
   "announcement.role.kinswathe.robot": "Robot",
   "announcement.goals.kinswathe.robot": "A machine devoid of any emotion.",
 
+  "announcement.role.kinswathe.technician": "Technician",
+  "announcement.goals.kinswathe.technician": "Solve problems with technology!",
+
   "announcement.modifier.kinswathe.magnate": "Magnate",
   "announcement.modifier.kinswathe.taskmaster": "Taskmaster",
   "announcement.modifier.kinswathe.violator": "Violator",
@@ -117,6 +120,16 @@
 
   "item.kinswathe.sulfuric_acid_barrel": "Sulfuric Acid Barrel",
   "item.kinswathe.sulfuric_acid_barrel.tooltip": "Use on a dead body to dissolve it\n1 minute cooldown",
+
+  "item.kinswathe.wrench": "Wrench",
+  "item.kinswathe.wrench.tooltip": "Right-click a door that has been damaged by a crowbar with the wrench to repair it once.\nRight-click a door that has been jammed by a lockpick to unjam it.\nEnters cooldown after use.",
+
+  "item.kinswathe.capture_device": "Capture Device",
+  "item.kinswathe.capture_device.tooltip": "Capture devices can be placed on the floor or ceiling. This item is invisible to other players when held.\nWhen placed on the floor, it will detect everyone except yourself.\nIf 1 or more players pass through the area, all players in the area (except yourself) will be immobilized for a few seconds.\nA report will also be generated, recording the names of the captured players.\nAfter the device has been placed for a certain period of time, it will automatically destroy itself.",
+  "item.kinswathe.capture_report.tooltip": "You captured %s people with the Capture Device. Their names are:",
+
+  "item.kinswathe.power_restoration": "Power Restoration System",
+  "item.kinswathe.power_restoration.tooltip": "When in a power outage state, using the Power Restoration System can immediately eliminate one power outage effect.\nFacing unexpected darkness, the Power Restoration System will perform its intended function.",
 
   "shop.purchase_failed": "Purchase Failed",
   "tip.cooldown_temporary": "On cooldown...",
@@ -188,6 +201,10 @@
   "guidebook.role.kinswathe:robot": "Robot",
   "guidebook.role.title.kinswathe:robot": "Mechanical Being",
   "guidebook.role.description.kinswathe:robot": "The Robot has infiltrated this train; no one knows its purpose.\n\nAs a mechanical construct, it has no mood, is immune to poison, cannot be knocked out by Knockout Drug, and has unlimited stamina.\n\nEvery so often, the Robot can activate Night Vision mode, allowing it to see clearly in the dark.\n\nSome say it's just malfunctioning, while others believe it carries some kind of mission...",
+
+  "guidebook.role.kinswathe:technician": "Technician",
+  "guidebook.role.title.kinswathe:technician": "Master Mechanic",
+  "guidebook.role.description.kinswathe:technician": "The Technician is a maintenance expert aboard the train, capable of solving any mechanical malfunction with ease.\n\nThe Technician earns 50 coins for each task completed. His wrench can repair doors that have been damaged by a crowbar or jammed, restoring them to normal function.\n\nThe Technician can also purchase a Capture Device and a Power Restoration System from the shop. The Capture Device can immobilize intruding enemies and generate a report; the Power Restoration System can instantly restore lighting during a power outage, bringing light to everyone.\n\nDon't underestimate the Technician—his tools can change the course of the entire game.",
 
   "guidebook.role.kinswathe:magnate": "Magnate",
   "guidebook.role.title.kinswathe:magnate": "Fortune's Favorite",

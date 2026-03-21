@@ -91,6 +91,12 @@
   - Immune poison and dazing
   - Use ability to see the darkness clearly
 
+- Technician
+  - Can purchase Props in shop
+  - Wrench can fix the abnormal state of the door
+  - The capture device can capture a person and keep them in place for a period of time
+  - The power restoration system can solve blackout problems
+
 
 ## New Killers
 

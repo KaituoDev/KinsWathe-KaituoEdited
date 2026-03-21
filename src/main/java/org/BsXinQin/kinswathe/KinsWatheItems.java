@@ -67,6 +67,22 @@ public class KinsWatheItems {
             "sulfuric_acid_barrel"
     );
 
+    //扳手
+    public static final Item WRENCH = registerItem(
+            new WrenchItem(new Item.Settings().maxCount(1)),
+            "wrench"
+    );
+    //捕捉装置
+    public static final Item CAPTURE_DEVICE = registerItem(
+            new CaptureDeviceItem(new Item.Settings().maxCount(1)),
+            "capture_device"
+    );
+    //电力恢复系统
+    public static final Item POWER_RESTORATION = registerItem(
+            new PowerRestorationItem(new Item.Settings().maxCount(1)),
+            "power_restoration"
+    );
+
     /// 新增图标
     //刷新技能冷却图标
     public static final Item ICON_ABILITY_COOLDOWN_REFRESH = registerItem(
@@ -109,6 +125,8 @@ public class KinsWatheItems {
         GameConstants.ITEM_COOLDOWNS.put(PILL, GameConstants.getInTicks(3,0));
         GameConstants.ITEM_COOLDOWNS.put(POISON_INJECTOR, GameConstants.getInTicks(1,0));
         GameConstants.ITEM_COOLDOWNS.put(SULFURIC_ACID_BARREL, GameConstants.getInTicks(1,0));
+        GameConstants.ITEM_COOLDOWNS.put(WRENCH, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().TechnicianWrenchCooldown));
+        GameConstants.ITEM_COOLDOWNS.put(POWER_RESTORATION, GameConstants.getInTicks(0, KinsWatheConfig.HANDLER.instance().TechnicianPowerRestorationCooldown));
         //图标冷却
         GameConstants.ITEM_COOLDOWNS.put(ICON_ABILITY_COOLDOWN_REFRESH, GameConstants.getInTicks(5,0));
         GameConstants.ITEM_COOLDOWNS.put(ICON_POTION_EFFECT_REFRESH, GameConstants.getInTicks(3,0));
@@ -128,6 +146,9 @@ public class KinsWatheItems {
             entries.add(PILL);
             entries.add(POISON_INJECTOR);
             entries.add(SULFURIC_ACID_BARREL);
+            entries.add(WRENCH);
+            entries.add(CAPTURE_DEVICE);
+            entries.add(POWER_RESTORATION);
         });
     }
 

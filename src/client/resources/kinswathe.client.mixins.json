@@ -66,6 +66,9 @@
     "roles.licensed_villain.LicensedVillainMoodMixin",
     "roles.physician.PhysicianDeathReasonMixin",
     "roles.physician.PhysicianInstinctMixin",
-    "roles.robot.RobotMoodMixin"
+    "roles.robot.RobotMoodMixin",
+    "roles.technician.TechnicianHandMixin",
+    "roles.technician.TechnicianInvisPaperMixin",
+    "roles.technician.TechnicianShopMixin"
   ]
 }

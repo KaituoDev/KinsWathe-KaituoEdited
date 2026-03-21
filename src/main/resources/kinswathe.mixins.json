@@ -41,7 +41,8 @@
     "roles.licensed_villain.LicensedVillainShopMixin",
     "roles.physician.PhysicianShopMixin",
     "roles.physician.PhysicianTipPoisonMixin",
-    "roles.robot.RobotNoPoisonMixin"
+    "roles.robot.RobotNoPoisonMixin",
+    "roles.technician.TechnicianShopMixin"
   ],
   "injectors": {
     "defaultRequire": 1

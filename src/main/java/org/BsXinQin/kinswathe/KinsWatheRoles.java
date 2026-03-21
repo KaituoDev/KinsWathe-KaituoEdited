@@ -186,6 +186,16 @@ public class KinsWatheRoles {
             -1,
             false
     ));
+    //技术师
+    public static Role TECHNICIAN = registerRole(new Role(
+            Identifier.of(KinsWathe.MOD_ID, "technician"),
+            0x66B2FF, // 颜色（与工程师保持一致）
+            true,     // 平民方
+            false,    // 不是杀手
+            Role.MoodType.REAL,
+            WatheRoles.CIVILIAN.getMaxSprintTime(),
+            true
+    ));
 
     /// 新增词条
     //富豪
@@ -273,6 +283,7 @@ public class KinsWatheRoles {
         roles.add(KIDNAPPER);
         roles.add(LICENSED_VILLAIN);
         roles.add(PHYSICIAN);
+        roles.add(TECHNICIAN);
         if (KinsWatheConfig.HANDLER.instance().HackerHasShop) roles.add(HACKER);
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
             roles.add(noellesrolesRoles("PHANTOM"));
@@ -299,6 +310,7 @@ public class KinsWatheRoles {
         roles.add(HUNTER);
         roles.add(JUDGE);
         roles.add(KIDNAPPER);
+        roles.add(TECHNICIAN);
         if (KinsWatheConfig.HANDLER.instance().HackerHasShop) roles.add(HACKER);
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
             roles.add(noellesrolesRoles("MIMIC"));
@@ -308,6 +320,7 @@ public class KinsWatheRoles {
             roles.add(noellesrolesRoles("MORPHLING"));
             roles.add(noellesrolesRoles("NOISEMAKER"));
             roles.add(noellesrolesRoles("EXECUTIONER"));
+            roles.add(noellesrolesRoles("CONTROLLER"));
             roles.add(noellesrolesRoles("THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES"));
         }
         return List.copyOf(roles);

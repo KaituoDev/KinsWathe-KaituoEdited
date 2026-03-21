@@ -78,6 +78,9 @@ public class KinsWatheInitializeClient {
             ItemToolTip.addItemtip(KinsWatheItems.PILL, itemStack, list);
             ItemToolTip.addItemtip(KinsWatheItems.POISON_INJECTOR, itemStack, list);
             ItemToolTip.addItemtip(KinsWatheItems.SULFURIC_ACID_BARREL, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.WRENCH, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.CAPTURE_DEVICE, itemStack, list);
+            ItemToolTip.addItemtip(KinsWatheItems.POWER_RESTORATION, itemStack, list);
             //添加NoellreRoles物品冷却描述
             if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
                 ItemToolTip.addCooldowntip(Registries.ITEM.get(Identifier.of("noellesroles", "fake_revolver")), itemStack, list);

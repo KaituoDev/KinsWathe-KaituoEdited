@@ -36,6 +36,7 @@ public abstract class IncomeIconMixin {
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.JUDGE) ||
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.LICENSED_VILLAIN) ||
                 GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.PHYSICIAN) ||
+                GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.TECHNICIAN) ||
                (ConfigWorldComponent.KEY.get(player.getWorld()).HackerHasShop && GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.HACKER))) {
                 int balance = PlayerShopComponent.KEY.get(player).balance;
                 if (view.getTarget() != (float) balance) {

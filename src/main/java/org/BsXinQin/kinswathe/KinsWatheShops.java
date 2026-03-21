@@ -106,8 +106,6 @@ public class KinsWatheShops {
             entries.add(new ShopEntry(WatheItems.REVOLVER.getDefaultStack(), getItemPrice("REVOLVER", 300), ShopEntry.Type.WEAPON));
             entries.add(new ShopEntry(WatheItems.GRENADE.getDefaultStack(), getItemPrice("GRENADE", 350), ShopEntry.Type.WEAPON));
             entries.add(new ShopEntry(WatheItems.PSYCHO_MODE.getDefaultStack(), getItemPrice("PSYCHO_MODE", 300), ShopEntry.Type.WEAPON));
-            entries.add(new ShopEntry(WatheItems.POISON_VIAL.getDefaultStack(), getItemPrice("POISON_VIAL", 100), ShopEntry.Type.POISON));
-            entries.add(new ShopEntry(WatheItems.SCORPION.getDefaultStack(), getItemPrice("SCORPION", 50), ShopEntry.Type.POISON));
             entries.add(new ShopEntry(WatheItems.FIRECRACKER.getDefaultStack(), getItemPrice("FIRECRACKER", 10), ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.LOCKPICK.getDefaultStack(), getItemPrice("LOCKPICK", 50), ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.CROWBAR.getDefaultStack(), getItemPrice("CROWBAR", 25), ShopEntry.Type.TOOL));
@@ -128,8 +126,7 @@ public class KinsWatheShops {
             entries.add(new ShopEntry(WatheItems.SCORPION.getDefaultStack(), getItemPrice("SCORPION", 50), ShopEntry.Type.POISON));
             entries.add(new ShopEntry(WatheItems.FIRECRACKER.getDefaultStack(), getItemPrice("FIRECRACKER", 10), ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.LOCKPICK.getDefaultStack(), getItemPrice("LOCKPICK", 50), ShopEntry.Type.TOOL));
-            entries.add(new ShopEntry(WatheItems.CROWBAR.getDefaultStack(), getItemPrice("CROWBAR", 25), ShopEntry.Type.TOOL));
-            entries.add(new ShopEntry(WatheItems.BODY_BAG.getDefaultStack(), getItemPrice("BODY_BAG", 200), ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(WatheItems.BODY_BAG.getDefaultStack(), getItemPrice("BODY_BAG", 200)/2, ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.BLACKOUT.getDefaultStack(), getItemPrice("BLACKOUT", 200), ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), getItemPrice("NOTE", 10), ShopEntry.Type.TOOL));
         });
@@ -159,6 +156,23 @@ public class KinsWatheShops {
                 serverPlayer.playSoundToPlayer(WatheSounds.UI_SHOP_BUY_FAIL, SoundCategory.PLAYERS,1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F);
             }
             return false;
+        }
+    }
+    /**
+     * 播放购买成功音效（仅服务端）
+     */
+    public static void playBuySound(@NotNull PlayerEntity player) {
+        if (player instanceof ServerPlayerEntity sp) {
+            sp.playSoundToPlayer(WatheSounds.UI_SHOP_BUY, SoundCategory.PLAYERS, 1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F);
+        }
+    }
+
+    /**
+     * 播放购买失败音效（仅服务端）
+     */
+    public static void playFailSound(@NotNull PlayerEntity player) {
+        if (player instanceof ServerPlayerEntity sp) {
+            sp.playSoundToPlayer(WatheSounds.UI_SHOP_BUY_FAIL, SoundCategory.PLAYERS, 1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F);
         }
     }
 }

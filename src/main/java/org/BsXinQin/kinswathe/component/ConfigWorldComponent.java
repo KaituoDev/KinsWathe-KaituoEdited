@@ -46,6 +46,17 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
     public int KidnapperKnockoutDrugPrice = 250;
     public int LicensedVillainRevolverPrice = 300;
     public int PhysicianPillPrice = 300;
+
+    // 技术师配置
+    public int TechnicianWrenchCooldown = GameConstants.getInTicks(0,90) / 20;
+    public int TechnicianWrenchPrice = 125;
+    public int TechnicianCaptureDevicePrice = 150;
+    public int TechnicianPowerRestorationPrice = 225;
+    public int TechnicianCaptureDeviceRadius = 5;
+    public int TechnicianCaptureDeviceStunSeconds = 5;
+    public int TechnicianCaptureDeviceLifetimeSeconds = 120;
+    public int TechnicianPowerRestorationCooldown = GameConstants.getInTicks(2,0) / 20;
+
     //关于NoellesRoles修改
     public boolean EnableNoellesRolesModify = false;
     public boolean ConductorInstinctModify = false;
@@ -77,6 +88,18 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         KidnapperKnockoutDrugPrice = KinsWatheConfig.HANDLER.instance().KidnapperKnockoutDrugPrice; tag.putInt("KidnapperKnockoutDrugPrice", this.KidnapperKnockoutDrugPrice);
         LicensedVillainRevolverPrice = KinsWatheConfig.HANDLER.instance().LicensedVillainRevolverPrice; tag.putInt("LicensedVillainRevolverPrice", this.LicensedVillainRevolverPrice);
         PhysicianPillPrice = KinsWatheConfig.HANDLER.instance().PhysicianPillPrice; tag.putInt("PhysicianPillPrice", this.PhysicianPillPrice);
+
+        // 技术师
+        tag.putInt("TechnicianWrenchCooldown", KinsWatheConfig.HANDLER.instance().TechnicianWrenchCooldown);
+        tag.putInt("TechnicianWrenchPrice", KinsWatheConfig.HANDLER.instance().TechnicianWrenchPrice);
+        tag.putInt("TechnicianCaptureDevicePrice", KinsWatheConfig.HANDLER.instance().TechnicianCaptureDevicePrice);
+        tag.putInt("TechnicianPowerRestorationPrice", KinsWatheConfig.HANDLER.instance().TechnicianPowerRestorationPrice);
+        tag.putInt("TechnicianCaptureDeviceRadius", KinsWatheConfig.HANDLER.instance().TechnicianCaptureDeviceRadius);
+        tag.putInt("TechnicianCaptureDeviceStunSeconds", KinsWatheConfig.HANDLER.instance().TechnicianCaptureDeviceStunSeconds);
+        tag.putInt("TechnicianCaptureDeviceLifetimeSeconds", KinsWatheConfig.HANDLER.instance().TechnicianCaptureDeviceLifetimeSeconds);
+        tag.putInt("TechnicianPowerRestorationCooldown", KinsWatheConfig.HANDLER.instance().TechnicianPowerRestorationCooldown);
+
+
         //关于NoellesRoles修改
         EnableNoellesRolesModify = KinsWatheConfig.HANDLER.instance().EnableNoellesRolesModify; tag.putBoolean("EnableNoellesRolesModify", this.EnableNoellesRolesModify);
         ConductorInstinctModify = KinsWatheConfig.HANDLER.instance().ConductorInstinctModify; tag.putBoolean("ConductorInstinctModify", this.ConductorInstinctModify);
@@ -108,6 +131,15 @@ public class ConfigWorldComponent implements AutoSyncedComponent, ServerTickingC
         if (tag.contains("KidnapperKnockoutDrugPrice"))   this.KidnapperKnockoutDrugPrice = tag.getInt("KidnapperKnockoutDrugPrice");
         if (tag.contains("LicensedVillainRevolverPrice"))   this.LicensedVillainRevolverPrice = tag.getInt("LicensedVillainRevolverPrice");
         if (tag.contains("PhysicianPillPrice"))   this.PhysicianPillPrice = tag.getInt("PhysicianPillPrice");
+
+        if (tag.contains("TechnicianWrenchCooldown")) this.TechnicianWrenchCooldown = tag.getInt("TechnicianWrenchCooldown");
+        if (tag.contains("TechnicianWrenchPrice")) this.TechnicianWrenchPrice = tag.getInt("TechnicianWrenchPrice");
+        if (tag.contains("TechnicianCaptureDevicePrice")) this.TechnicianCaptureDevicePrice = tag.getInt("TechnicianCaptureDevicePrice");
+        if (tag.contains("TechnicianPowerRestorationPrice")) this.TechnicianPowerRestorationPrice = tag.getInt("TechnicianPowerRestorationPrice");
+        if (tag.contains("TechnicianCaptureDeviceRadius")) this.TechnicianCaptureDeviceRadius = tag.getInt("TechnicianCaptureDeviceRadius");
+        if (tag.contains("TechnicianCaptureDeviceStunSeconds")) this.TechnicianCaptureDeviceStunSeconds = tag.getInt("TechnicianCaptureDeviceStunSeconds");
+        if (tag.contains("TechnicianCaptureDeviceLifetimeSeconds")) this.TechnicianCaptureDeviceLifetimeSeconds = tag.getInt("TechnicianCaptureDeviceLifetimeSeconds");
+        if (tag.contains("TechnicianPowerRestorationCooldown")) this.TechnicianPowerRestorationCooldown = tag.getInt("TechnicianPowerRestorationCooldown");
         //关于NoellesRoles修改
         if (tag.contains("EnableNoellesRolesModify"))   this.EnableNoellesRolesModify = tag.getBoolean("EnableNoellesRolesModify");
         if (tag.contains("ConductorInstinctModify"))   this.ConductorInstinctModify = tag.getBoolean("ConductorInstinctModify");

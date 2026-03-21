@@ -134,6 +134,23 @@ public class KinsWatheConfig {
     @SerialEntry(comment = "Violator: whether to allow Violator to retain disable/enable state after a server restart.")
     public boolean ViolatorEnabled = false;
 
+    @SerialEntry(comment = "\n\n[Technician] Modify:")
+    public int TechnicianWrenchCooldown = GameConstants.getInTicks(0,90) / 20; // 扳手冷却时间（秒）
+    @SerialEntry(comment = "Wrench Price.")
+    public int TechnicianWrenchPrice = 125; // 扳手价格
+    @SerialEntry(comment = "Capture_Device Price.")
+    public int TechnicianCaptureDevicePrice = 150; // 捕捉装置价格
+    @SerialEntry(comment = "Power Restoration Price.")
+    public int TechnicianPowerRestorationPrice = 225; // 电力恢复系统价格
+    @SerialEntry(comment = "Capture_Device Radius.")
+    public int TechnicianCaptureDeviceRadius = 5; // 捕捉装置检测半径
+    @SerialEntry(comment = "Capture device stun duration (seconds).")
+    public int TechnicianCaptureDeviceStunSeconds = 5;  // 原 100 ticks = 5秒
+    @SerialEntry(comment = "Capture device lifetime (seconds).")
+    public int TechnicianCaptureDeviceLifetimeSeconds = 120;  // 原 120*20 ticks = 120秒
+    @SerialEntry(comment = "Power Restoration Cooldown (seconds).")
+    public int TechnicianPowerRestorationCooldown = GameConstants.getInTicks(2,0) / 20; // 电力恢复系统冷却时间（秒）
+
     /// 关于NoellesRoles修改
     @SerialEntry(comment = "\n\n[Noelle's Roles] Modify (default settings are original settings of Noelle's Roles):")
     public boolean EnableNoellesRolesModify = false;
