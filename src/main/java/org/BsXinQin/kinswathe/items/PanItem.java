@@ -2,7 +2,6 @@ package org.BsXinQin.kinswathe.items;
 
 import dev.doctor4t.wathe.game.GameFunctions;
 import dev.doctor4t.wathe.index.WatheSounds;
-import lombok.SneakyThrows;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
@@ -17,6 +16,7 @@ import net.minecraft.world.World;
 import org.BsXinQin.kinswathe.packet.items.PanC2SPacket;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class PanItem extends Item {
@@ -32,15 +32,17 @@ public class PanItem extends Item {
         return TypedActionResult.consume(stack);
     }
 
-    @Override @SneakyThrows
+    @Override
     public void onStoppedUsing(@NotNull ItemStack stack, @NotNull World world, @NotNull LivingEntity livingEntity, int remainingUseTicks) {
         if (!(livingEntity instanceof @NotNull PlayerEntity player) || player.isSpectator() || remainingUseTicks >= this.getMaxUseTime(stack, player) - 10) return;
         if (world.isClient && remainingUseTicks > 5) {
             HitResult hitResult = ProjectileUtil.getCollision(player, entity -> entity instanceof @NotNull PlayerEntity target && GameFunctions.isPlayerAliveAndSurvival(target), 3.0F);
             if (hitResult instanceof @NotNull EntityHitResult entityHitResult) {
-                Class<?> networkingClass = Class.forName("net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking");
-                Method getMethod = networkingClass.getMethod("send", net.minecraft.network.packet.CustomPayload.class);
-                getMethod.invoke(null, new PanC2SPacket(entityHitResult.getEntity().getId()));
+                try {
+                    Class<?> networkingClass = Class.forName("net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking");
+                    Method getMethod = networkingClass.getMethod("send", net.minecraft.network.packet.CustomPayload.class);
+                    getMethod.invoke(null, new PanC2SPacket(entityHitResult.getEntity().getId()));
+                } catch (ClassNotFoundException | InvocationTargetException | IllegalAccessException | NoSuchMethodException ignored) {}
             }
         }
     }

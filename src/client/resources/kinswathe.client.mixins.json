@@ -36,8 +36,13 @@
     "roles.kidnapper.KidnapperKeyControlledMixin",
     "roles.kidnapper.KidnapperShopMixin",
     "roles.licensed_villain.LicensedVillainShopMixin",
+    "roles.physician.PhysicianHandPosMixin",
+    "roles.physician.PhysicianHandViewMixin",
     "roles.physician.PhysicianShopMixin",
-    "roles.robot.RobotHudMixin"
+    "roles.robot.RobotHudMixin",
+    "roles.technician.TechnicianHandPosMixin",
+    "roles.technician.TechnicianHandViewMixin",
+    "roles.technician.TechnicianShopMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -67,8 +72,6 @@
     "roles.physician.PhysicianDeathReasonMixin",
     "roles.physician.PhysicianInstinctMixin",
     "roles.robot.RobotMoodMixin",
-    "roles.technician.TechnicianHandMixin",
-    "roles.technician.TechnicianInvisPaperMixin",
-    "roles.technician.TechnicianShopMixin"
+    "roles.technician.TechnicianInstinctMixin"
   ]
 }

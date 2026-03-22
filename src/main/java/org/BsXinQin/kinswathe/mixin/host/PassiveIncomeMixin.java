@@ -20,9 +20,6 @@ public abstract class PassiveIncomeMixin {
         if (gameWorld.isRole(player, KinsWatheRoles.COOK) ||
             gameWorld.isRole(player, KinsWatheRoles.DREAMER) ||
             gameWorld.isRole(player, KinsWatheRoles.JUDGE) ||
-            gameWorld.isRole(player, KinsWatheRoles.TECHNICIAN) ||
-
-
            (KinsWatheConfig.HANDLER.instance().HackerHasShop && gameWorld.isRole(player, KinsWatheRoles.HACKER))) return true;
         return original.call(gameWorld,player);
     }

@@ -9,7 +9,6 @@ import dev.doctor4t.wathe.index.WatheEntities;
 import dev.doctor4t.wathe.index.WatheItems;
 import dev.doctor4t.wathe.index.WatheParticles;
 import dev.doctor4t.wathe.index.WatheSounds;
-import lombok.SneakyThrows;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -30,11 +29,11 @@ import org.BsXinQin.kinswathe.packet.roles.BodymakerC2SPacket;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class BodymakerAbility {
 
-    @SneakyThrows
     public static void register(@NotNull BodymakerC2SPacket payload, @NotNull PlayerEntity player) {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
         AbilityPlayerComponent ability = AbilityPlayerComponent.KEY.get(player);
@@ -58,28 +57,30 @@ public class BodymakerAbility {
                     BodyDeathReasonComponent bodyDeathReason = BodyDeathReasonComponent.KEY.get(playerBody);
                     bodyDeathReason.deathReason = Identifier.of(payload.deathReason());
                     if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
-                        Class<?> bodyDeathReasonClass = Class.forName("org.agmas.noellesroles.coroner.BodyDeathReasonComponent");
-                        Field keyField = bodyDeathReasonClass.getField("KEY");
-                        Object componentKey = keyField.get(null);
-                        Method getComponentMethod = componentKey.getClass().getMethod("get", Object.class);
-                        Object deathReasonInstance = getComponentMethod.invoke(componentKey, playerBody);
-                        Field deathReasonField = bodyDeathReasonClass.getField("deathReason");
-                        Field playerRoleField = bodyDeathReasonClass.getField("playerRole");
-                        Method syncMethod = bodyDeathReasonClass.getMethod("sync");
-                        deathReasonField.set(deathReasonInstance, Identifier.of(payload.deathReason()));
-                        if (!KinsWatheConfig.HANDLER.instance().BodymakerAbilityFakeRole) {
-                            if (gameWorld.isRole(target, KinsWatheRoles.BODYMAKER)) {
-                                playerRoleField.set(deathReasonInstance, WatheRoles.KILLER.identifier());
+                        try {
+                            Class<?> bodyDeathReasonClass = Class.forName("org.agmas.noellesroles.coroner.BodyDeathReasonComponent");
+                            Field keyField = bodyDeathReasonClass.getField("KEY");
+                            Object componentKey = keyField.get(null);
+                            Method getComponentMethod = componentKey.getClass().getMethod("get", Object.class);
+                            Object deathReasonInstance = getComponentMethod.invoke(componentKey, playerBody);
+                            Field deathReasonField = bodyDeathReasonClass.getField("deathReason");
+                            Field playerRoleField = bodyDeathReasonClass.getField("playerRole");
+                            Method syncMethod = bodyDeathReasonClass.getMethod("sync");
+                            deathReasonField.set(deathReasonInstance, Identifier.of(payload.deathReason()));
+                            if (!KinsWatheConfig.HANDLER.instance().BodymakerAbilityFakeRole) {
+                                if (gameWorld.isRole(target, KinsWatheRoles.BODYMAKER)) {
+                                    playerRoleField.set(deathReasonInstance, WatheRoles.KILLER.identifier());
+                                } else {
+                                    playerRoleField.set(deathReasonInstance, gameWorld.getRole(target) != null ? gameWorld.getRole(target).identifier() : WatheRoles.CIVILIAN.identifier());
+                                }
                             } else {
-                                playerRoleField.set(deathReasonInstance, gameWorld.getRole(target) != null ? gameWorld.getRole(target).identifier() : WatheRoles.CIVILIAN.identifier());
+                                playerRoleField.set(deathReasonInstance, Identifier.of(payload.role()));
                             }
-                        } else {
-                            playerRoleField.set(deathReasonInstance, Identifier.of(payload.role()));
-                        }
-                        if (Identifier.of(payload.role()).equals(Identifier.of("noellesroles", "noisemaker"))) {
-                            playerBody.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 1200, 0));
-                        }
-                        syncMethod.invoke(deathReasonInstance);
+                            if (Identifier.of(payload.role()).equals(Identifier.of("noellesroles", "noisemaker"))) {
+                                playerBody.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 1200, 0));
+                            }
+                            syncMethod.invoke(deathReasonInstance);
+                        } catch (NoSuchFieldException | ClassNotFoundException | InvocationTargetException | IllegalAccessException | NoSuchMethodException ignored) {}
                     }
                     if (Identifier.of(payload.deathReason()).equals(GameConstants.DeathReasons.GUN)) {
                         player.getWorld().playSound(null, player.getX(), player.getEyeY(), player.getZ(), WatheSounds.ITEM_REVOLVER_SHOOT, SoundCategory.PLAYERS, 5f, 1f + player.getRandom().nextFloat() * .1f - .05f);

@@ -43,7 +43,7 @@
   "announcement.goals.kinswathe.hacker": "试图黑入整个列车系统...",
   "hud.kinswathe.hacker.target": "正在破解角色身份",
   "hud.kinswathe.hacker.target_hacked": "角色身份已被破解",
-  "hud.kinswathe.hacker.target_safe": "安全时间无内法破解角色身份",
+  "hud.kinswathe.hacker.target_safe": "安全时间内无法破解角色身份",
   "item.kinswathe.icon_ability_cooldown_refresh": "刷新技能冷却",
   "item.kinswathe.icon_ability_cooldown_refresh.tooltip": "刷新所有杀手的技能与疯魔模式冷却\n购买后立即生效，冷却 5 分钟",
   "tip.kinswathe.hacker.ability_cooldown_refresh": "黑客为你刷新了技能冷却",
@@ -84,8 +84,11 @@
   "announcement.role.kinswathe.robot": "机器人",
   "announcement.goals.kinswathe.robot": "毫无感情可言的机器。",
 
-  "announcement.role.kinswathe.technician": "技术师",
+  "announcement.role.kinswathe.technician": "技术员",
   "announcement.goals.kinswathe.technician": "用技术解决问题！",
+  "tip.kinswathe.technician.captured": "%s 被捕捉装置困住了",
+  "item.kinswathe.icon_power_restoration": "电力恢复",
+  "item.kinswathe.icon_power_restoration.tooltip": "立即结束停电效果\n购买后立即生效，冷却 3 分钟",
 
   "announcement.modifier.kinswathe.magnate": "富豪",
   "announcement.modifier.kinswathe.taskmaster": "任务大师",
@@ -93,6 +96,9 @@
 
   "item.kinswathe.blowgun": "吹矢",
   "item.kinswathe.blowgun.tooltip": "瞄准、右键点击并射击\n被射中的目标将会中毒\n冷却 1 分钟",
+
+  "item.kinswathe.capture_device": "捕捉装置",
+  "item.kinswathe.capture_device.tooltip": "右键点击放置在地板上\n困住路过的玩家并告知使用者\n捕捉装置将会在一段时间后自动消失\n对其他玩家不可见，无论是放置后还是手中持有时\n冷却 1 分钟",
 
   "item.kinswathe.dream_imprint": "梦之印记",
   "item.kinswathe.dream_imprint.tooltip": "用于玩家，使其额外承受一次伤害\n对方受到伤害后传送到使用者身边，并给予一个服用幻觉试剂次数\n一次性物品",
@@ -122,16 +128,7 @@
   "item.kinswathe.sulfuric_acid_barrel.tooltip": "用于尸体，可将其溶解移除\n冷却 1 分钟",
 
   "item.kinswathe.wrench": "扳手",
-  "item.kinswathe.wrench.tooltip": "将扳手对准被撬棍破坏的门进行右键，可进行一次修复\n当对准被开锁器卡住的门进行右键，可解除被卡住的状态\n当扳手使用完以后,进入冷却",
-  "item.kinswathe.capture_report.tooltip": "你使用捕捉装置捕捉到了 %s 个人，他们的名字是：",
-
-  "item.kinswathe.capture_device": "捕捉装置",
-  "item.kinswathe.capture_device.tooltip": "捕捉装置可放置于地板或者天花板，手持该物品对其他玩家不可见\n当放置于地板的时候，会进行检测，检测除了自己以外的所有人\n当超过1名及其以上的玩家经过该区域，则会使该区域内的所有玩家(除了自己)以外的所有人被强行定在原地一段时间\n同时生成一份报告，记录被捕捉玩家的名字\n当该装置放置一定时间后，会自动销毁",
-
-  "item.kinswathe.power_restoration": "电力恢复系统",
-  "item.kinswathe.power_restoration.tooltip": "当处于停电状态的时候，使用电力恢复系统可立即消除一次停电效果\n面对黑暗中的意外，电力恢复系统会发挥其应有的作用",
-
-
+  "item.kinswathe.wrench.tooltip": "用于任意被堵死或撬开的门将其恢复正常\n冷却 2 分钟",
 
   "shop.purchase_failed": "购买失败",
   "tip.cooldown_temporary": "冷却中...",
@@ -204,9 +201,9 @@
   "guidebook.role.title.kinswathe:robot": "机械造物",
   "guidebook.role.description.kinswathe:robot": "机器人混入了这趟列车，没人知道它的目的是什么。\n\n作为机械构造体，它没有情绪，免疫毒药，不会被迷药迷晕，并且拥有无限的体力。\n\n每隔一段时间，机器人可以启动夜视模式，在黑暗中也能清晰视物。\n\n有人说它只是出了故障，也有人坚信它带着某种使命...",
 
-  "guidebook.role.kinswathe:technician": "技术师",
-  "guidebook.role.title.kinswathe:technician": "机械大师",
-  "guidebook.role.description.kinswathe:technician": "技术师是列车上的维修专家，任何机械故障在他手中都能迎刃而解。\n\n技术师每完成一项任务可获得 50 枚金币。他的扳手可以修复被撬棍破坏或卡住的门，让它们恢复正常使用。\n\n技术师还能在商店购买捕捉装置和电力恢复系统。捕捉装置能定身闯入的敌人并生成报告；电力恢复系统则可在停电时瞬间重启灯光，为所有人带来光明。\n\n别小看技术师，他的工具能改变整场游戏的局势。",
+  "guidebook.role.kinswathe:technician": "技术员",
+  "guidebook.role.title.kinswathe:technician": "专业维护员",
+  "guidebook.role.description.kinswathe:technician": "技术员负责整架列车的维护工作。\n\n技术员每完成一项任务可获得 50 枚金币，能购买扳手来修复被堵住或撬开的门。\n\n同时，也可以购买捕捉装置来检查是否存在有嫌疑的乘客经过。\n\n在电力故障期间，技术员也可以快速恢复电力系统，给杀手们一个措手不及！",
 
   "guidebook.role.kinswathe:magnate": "富豪",
   "guidebook.role.title.kinswathe:magnate": "财富的宠儿",

@@ -4,7 +4,6 @@ import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.client.WatheClient;
 import dev.doctor4t.wathe.client.gui.RoleNameRenderer;
 import dev.doctor4t.wathe.entity.PlayerBodyEntity;
-import lombok.SneakyThrows;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -27,6 +26,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 @Mixin(RoleNameRenderer.class)
@@ -57,16 +57,18 @@ public class PhysicianDeathReasonMixin {
         }
     }
 
-    @Unique @SneakyThrows
+    @Unique
     private static boolean isVultured(@NotNull PlayerBodyEntity playerBody) {
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
-            Class<?> bodyDeathReasonClass = Class.forName("org.agmas.noellesroles.coroner.BodyDeathReasonComponent");
-            Field keyField = bodyDeathReasonClass.getField("KEY");
-            Object componentKey = keyField.get(null);
-            Method getComponentMethod = componentKey.getClass().getMethod("get", Object.class);
-            Object deathReasonInstance = getComponentMethod.invoke(componentKey, playerBody);
-            Field vulturedField = bodyDeathReasonClass.getField("vultured");
-            return (boolean) vulturedField.get(deathReasonInstance);
+            try {
+                Class<?> bodyDeathReasonClass = Class.forName("org.agmas.noellesroles.coroner.BodyDeathReasonComponent");
+                Field keyField = bodyDeathReasonClass.getField("KEY");
+                Object componentKey = keyField.get(null);
+                Method getComponentMethod = componentKey.getClass().getMethod("get", Object.class);
+                Object deathReasonInstance = getComponentMethod.invoke(componentKey, playerBody);
+                Field vulturedField = bodyDeathReasonClass.getField("vultured");
+                return (boolean) vulturedField.get(deathReasonInstance);
+            } catch (NoSuchFieldException | ClassNotFoundException | InvocationTargetException | IllegalAccessException | NoSuchMethodException ignored) {}
         }
         return false;
     }

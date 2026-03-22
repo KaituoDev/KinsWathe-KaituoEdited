@@ -6,14 +6,14 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.entities.CaptureDeviceEntity;
+import org.jetbrains.annotations.NotNull;
 
 public class KinsWatheEntities {
-    public static final EntityType<CaptureDeviceEntity> CAPTURE_DEVICE = Registry.register(
+
+    public static final @NotNull EntityType<@NotNull CaptureDeviceEntity> CAPTURE_DEVICE = Registry.register(
             Registries.ENTITY_TYPE,
             Identifier.of(KinsWathe.MOD_ID, "capture_device"),
-            EntityType.Builder.create(CaptureDeviceEntity::new, SpawnGroup.MISC)
-                    .dimensions(0.75f, 0.75f)
-                    .build("capture_device")
+            EntityType.Builder.create(CaptureDeviceEntity::new, SpawnGroup.MISC).dimensions(0.75F, 0.75F).build("capture_device")
     );
 
     public static void init() {}

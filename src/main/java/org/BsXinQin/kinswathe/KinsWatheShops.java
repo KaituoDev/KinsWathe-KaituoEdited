@@ -16,6 +16,7 @@ import net.minecraft.util.Util;
 import net.minecraft.world.World;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
 import org.BsXinQin.kinswathe.roles.hacker.HackerComponent;
+import org.BsXinQin.kinswathe.roles.technician.TechnicianComponent;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
@@ -43,7 +44,7 @@ public class KinsWatheShops {
                 Field framingShopField = noellesRolesClass.getField("FRAMING_ROLES_SHOP");
                 FRAMING_ROLES_SHOP = (ArrayList<ShopEntry>) framingShopField.get(null);
             } catch (Exception exception) {
-                FRAMING_ROLES_SHOP = new ArrayList<>();
+                FRAMING_ROLES_SHOP = null;
             }
         }
     }
@@ -91,11 +92,11 @@ public class KinsWatheShops {
         return Util.make(new ArrayList<>(), (entries) -> {
             entries.add(new ShopEntry(WatheItems.LOCKPICK.getDefaultStack(), getItemPrice("LOCKPICK", 50), ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.BLACKOUT.getDefaultStack(), getItemPrice("BLACKOUT", 200), ShopEntry.Type.TOOL));
-            entries.add(new ShopEntry(KinsWatheItems.ICON_WEAPON_COOLDOWN_REFRESH.getDefaultStack(), 300, ShopEntry.Type.TOOL));
-            entries.add(new ShopEntry(KinsWatheItems.ICON_ABILITY_COOLDOWN_REFRESH.getDefaultStack(), 400, ShopEntry.Type.TOOL));
-            entries.add(new ShopEntry(KinsWatheItems.ICON_POTION_EFFECT_REFRESH.getDefaultStack(), 200, ShopEntry.Type.TOOL));
-            entries.add(new ShopEntry(WatheItems.FIRECRACKER.getDefaultStack(), getItemPrice("FIRECRACKER", 10) / 2, ShopEntry.Type.TOOL));
-            entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), getItemPrice("NOTE", 10) / 2, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(KinsWatheItems.ICON_WEAPON_COOLDOWN_REFRESH.getDefaultStack(), ConfigWorldComponent.KEY.get(world).HackerRefreshWeaponCooldownPrice, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(KinsWatheItems.ICON_ABILITY_COOLDOWN_REFRESH.getDefaultStack(), ConfigWorldComponent.KEY.get(world).HackerRefreshAbilityCooldownPrice, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(KinsWatheItems.ICON_POTION_EFFECT_REFRESH.getDefaultStack(), ConfigWorldComponent.KEY.get(world).HackerRefreshPotionEffectPrice, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(WatheItems.FIRECRACKER.getDefaultStack(), getItemPrice("FIRECRACKER", 10), ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), getItemPrice("NOTE", 10), ShopEntry.Type.TOOL));
         });
     }
     //追猎者商店
@@ -126,9 +127,17 @@ public class KinsWatheShops {
             entries.add(new ShopEntry(WatheItems.SCORPION.getDefaultStack(), getItemPrice("SCORPION", 50), ShopEntry.Type.POISON));
             entries.add(new ShopEntry(WatheItems.FIRECRACKER.getDefaultStack(), getItemPrice("FIRECRACKER", 10), ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.LOCKPICK.getDefaultStack(), getItemPrice("LOCKPICK", 50), ShopEntry.Type.TOOL));
-            entries.add(new ShopEntry(WatheItems.BODY_BAG.getDefaultStack(), getItemPrice("BODY_BAG", 200)/2, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(WatheItems.BODY_BAG.getDefaultStack(), getItemPrice("BODY_BAG", 200), ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.BLACKOUT.getDefaultStack(), getItemPrice("BLACKOUT", 200), ShopEntry.Type.TOOL));
             entries.add(new ShopEntry(WatheItems.NOTE.getDefaultStack(), getItemPrice("NOTE", 10), ShopEntry.Type.TOOL));
+        });
+    }
+    //技术员商店
+    public static List<ShopEntry> getTechnicianShop(@NotNull World world) {
+        return Util.make(new ArrayList<>(), (entries) -> {
+            entries.add(new ShopEntry(KinsWatheItems.WRENCH.getDefaultStack(), ConfigWorldComponent.KEY.get(world).TechnicianWrenchPrice, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(KinsWatheItems.CAPTURE_DEVICE.getDefaultStack(), ConfigWorldComponent.KEY.get(world).TechnicianCaptureDevicePrice, ShopEntry.Type.TOOL));
+            entries.add(new ShopEntry(KinsWatheItems.ICON_POWER_RESTORATION.getDefaultStack(), ConfigWorldComponent.KEY.get(world).TechnicianPowerRestorationPrice, ShopEntry.Type.TOOL));
         });
     }
     //杀手方中立商店
@@ -145,6 +154,7 @@ public class KinsWatheShops {
             else if (item == KinsWatheItems.ICON_WEAPON_COOLDOWN_REFRESH) HackerComponent.refreshWeaponCooldown(player);
             else if (item == KinsWatheItems.ICON_ABILITY_COOLDOWN_REFRESH) HackerComponent.refreshAbilityCooldown(player);
             else if (item == KinsWatheItems.ICON_POTION_EFFECT_REFRESH) HackerComponent.refreshPotionEffect(player);
+            else if (item == KinsWatheItems.ICON_POWER_RESTORATION) TechnicianComponent.stopBlackout(player);
             else player.giveItemStack(item.getDefaultStack());
             if (player instanceof @NotNull ServerPlayerEntity serverPlayer) {
                 serverPlayer.playSoundToPlayer(WatheSounds.UI_SHOP_BUY, SoundCategory.PLAYERS,1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F);
@@ -156,23 +166,6 @@ public class KinsWatheShops {
                 serverPlayer.playSoundToPlayer(WatheSounds.UI_SHOP_BUY_FAIL, SoundCategory.PLAYERS,1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F);
             }
             return false;
-        }
-    }
-    /**
-     * 播放购买成功音效（仅服务端）
-     */
-    public static void playBuySound(@NotNull PlayerEntity player) {
-        if (player instanceof ServerPlayerEntity sp) {
-            sp.playSoundToPlayer(WatheSounds.UI_SHOP_BUY, SoundCategory.PLAYERS, 1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F);
-        }
-    }
-
-    /**
-     * 播放购买失败音效（仅服务端）
-     */
-    public static void playFailSound(@NotNull PlayerEntity player) {
-        if (player instanceof ServerPlayerEntity sp) {
-            sp.playSoundToPlayer(WatheSounds.UI_SHOP_BUY_FAIL, SoundCategory.PLAYERS, 1.0F, 0.9F + player.getRandom().nextFloat() * 0.2F);
         }
     }
 }

@@ -83,7 +83,7 @@ public class KinsWatheConfig {
     @SerialEntry(comment = "Dreamer: modify initial quantity of Dream Imprint.")
     public int DreamerInitialItemQuantity = 1;
 
-    @SerialEntry(comment = "Drugmaker: modify generation player limit, get coins when someone was poisoned, price of Poison Injector and Blowgun.")
+    @SerialEntry(comment = "Drugmaker: modify generation player limit, get coins when someone was poisoned and price of Poison Injector and Blowgun.")
     public int DrugmakerPlayerLimit = 10;
     @SerialEntry
     public int DrugmakerGetCoins = 50;
@@ -92,7 +92,7 @@ public class KinsWatheConfig {
     @SerialEntry
     public int DrugmakerBlowgunPrice = 175;
 
-    @SerialEntry(comment = "Hacker: modify generation limit, hacking time and whether to enable shop.")
+    @SerialEntry(comment = "Hacker: modify generation limit, hacking time, whether to enable shop and price of props.")
     public int HackerPlayerLimit = 10;
     @SerialEntry
     public boolean HackerGenerateWithMimic = false;
@@ -100,6 +100,12 @@ public class KinsWatheConfig {
     public int HackerHackingTime = GameConstants.getInTicks(0,30) / 20;
     @SerialEntry
     public boolean HackerHasShop = true;
+    @SerialEntry
+    public int HackerRefreshWeaponCooldownPrice = 300;
+    @SerialEntry
+    public int HackerRefreshAbilityCooldownPrice = 400;
+    @SerialEntry
+    public int HackerRefreshPotionEffectPrice = 200;
 
     @SerialEntry(comment = "Hunter: modify price and cooldown of ability.")
     public int HunterAbilityPrice = 125;
@@ -131,25 +137,19 @@ public class KinsWatheConfig {
     @SerialEntry
     public int RobotAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
 
+    @SerialEntry(comment = "Technician: modify price of props and Capture Device parameter.")
+    public int TechnicianWrenchPrice = 100;
+    @SerialEntry
+    public int TechnicianCaptureDevicePrice = 100;
+    @SerialEntry
+    public int TechnicianPowerRestorationPrice = 300;
+    @SerialEntry
+    public int TechnicianCaptureDeviceStunTime = GameConstants.getInTicks(0,5) / 20;
+    @SerialEntry
+    public int TechnicianCaptureDeviceLifetimeSeconds = GameConstants.getInTicks(3,0) / 20;
+
     @SerialEntry(comment = "Violator: whether to allow Violator to retain disable/enable state after a server restart.")
     public boolean ViolatorEnabled = false;
-
-    @SerialEntry(comment = "\n\n[Technician] Modify:")
-    public int TechnicianWrenchCooldown = GameConstants.getInTicks(0,90) / 20; // 扳手冷却时间（秒）
-    @SerialEntry(comment = "Wrench Price.")
-    public int TechnicianWrenchPrice = 125; // 扳手价格
-    @SerialEntry(comment = "Capture_Device Price.")
-    public int TechnicianCaptureDevicePrice = 150; // 捕捉装置价格
-    @SerialEntry(comment = "Power Restoration Price.")
-    public int TechnicianPowerRestorationPrice = 225; // 电力恢复系统价格
-    @SerialEntry(comment = "Capture_Device Radius.")
-    public int TechnicianCaptureDeviceRadius = 5; // 捕捉装置检测半径
-    @SerialEntry(comment = "Capture device stun duration (seconds).")
-    public int TechnicianCaptureDeviceStunSeconds = 5;  // 原 100 ticks = 5秒
-    @SerialEntry(comment = "Capture device lifetime (seconds).")
-    public int TechnicianCaptureDeviceLifetimeSeconds = 120;  // 原 120*20 ticks = 120秒
-    @SerialEntry(comment = "Power Restoration Cooldown (seconds).")
-    public int TechnicianPowerRestorationCooldown = GameConstants.getInTicks(2,0) / 20; // 电力恢复系统冷却时间（秒）
 
     /// 关于NoellesRoles修改
     @SerialEntry(comment = "\n\n[Noelle's Roles] Modify (default settings are original settings of Noelle's Roles):")

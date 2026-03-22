@@ -1,30 +1,28 @@
 {
-	"format_version": "1.21.11",
-	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
 		"layer0": "kinswathe:item/wrench"
 	},
 	"display": {
 		"thirdperson_righthand": {
-			"rotation": [70, -90, 4],
-			"translation": [0.5, 3.25, 2.5],
-			"scale": [0.625, 0.625, 0.625]
+			"rotation": [0, 90, 50],
+			"translation": [0, 4.5, 2.5],
+			"scale": [0.6, 0.6, 0.6]
 		},
 		"thirdperson_lefthand": {
-			"rotation": [70, 90, 4],
-			"translation": [-0.5, 3.25, 2.5],
-			"scale": [0.625, 0.625, 0.625]
+			"rotation": [0, -90, -45],
+			"translation": [0, 4.5, 2.5],
+			"scale": [0.6, 0.6, 0.6]
 		},
 		"firstperson_righthand": {
-			"rotation": [10, -90, 0],
-			"translation": [0, 3, 1],
-			"scale": [0.75, 0.75, 0.75]
+			"rotation": [-45, -90, -22.5],
+			"translation": [0, 3.5, 1],
+			"scale": [0.7, 0.7, 0.7]
 		},
 		"firstperson_lefthand": {
-			"rotation": [0, 90, 0],
-			"translation": [0, 3, 1],
-			"scale": [0.75, 0.75, 0.75]
+			"rotation": [-45, 90, 22.5],
+			"translation": [0, 3.5, 1],
+			"scale": [0.7, 0.7, 0.7]
 		}
 	}
 }

@@ -4,7 +4,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 import dev.doctor4t.wathe.cca.GameRoundEndComponent;
 import dev.doctor4t.wathe.client.gui.RoleAnnouncementTexts;
 import dev.doctor4t.wathe.client.gui.RoundTextRenderer;
-import lombok.SneakyThrows;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -18,6 +17,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.lang.reflect.InvocationTargetException;
 
 @Mixin(value = RoundTextRenderer.class, priority = 500)
 public class EndTextRendererMixin {
@@ -91,17 +92,19 @@ public class EndTextRendererMixin {
         NEUTRAL_TOTAL.remove();
     }
 
-    @Unique @SneakyThrows
+    @Unique
     private static boolean isStupidExpressCustomWin(@NotNull ClientPlayerEntity player) {
         if (ConfigWorldComponent.KEY.get(player.getWorld()).EnableNeutralAnnouncement) {
             if (FabricLoader.getInstance().isModLoaded("stupid_express")) {
-                Class<?> componentClass = Class.forName("pro.fazeclan.river.stupid_express.cca.CustomWinnerComponent");
-                var keyField = componentClass.getField("KEY");
-                var key = keyField.get(null);
-                var getMethod = key.getClass().getMethod("get", Object.class);
-                var component = getMethod.invoke(key, player.getWorld());
-                var hasCustomWinnerMethod = componentClass.getMethod("hasCustomWinner");
-                return (boolean) hasCustomWinnerMethod.invoke(component);
+                try {
+                    Class<?> componentClass = Class.forName("pro.fazeclan.river.stupid_express.cca.CustomWinnerComponent");
+                    var keyField = componentClass.getField("KEY");
+                    var key = keyField.get(null);
+                    var getMethod = key.getClass().getMethod("get", Object.class);
+                    var component = getMethod.invoke(key, player.getWorld());
+                    var hasCustomWinnerMethod = componentClass.getMethod("hasCustomWinner");
+                    return (boolean) hasCustomWinnerMethod.invoke(component);
+                } catch (NoSuchFieldException | ClassNotFoundException | InvocationTargetException | IllegalAccessException | NoSuchMethodException ignored) {}
             }
         }
         return false;

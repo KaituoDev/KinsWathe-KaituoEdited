@@ -41,7 +41,8 @@
       "kinswathe:hacker_phone",
       "kinswathe:hunter",
       "kinswathe:kidnapper",
-      "kinswathe:physician"
+      "kinswathe:physician",
+      "kinswathe:technician"
     ]
   },
   "mixins": [

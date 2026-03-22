@@ -92,10 +92,10 @@
   - Use ability to see the darkness clearly
 
 - Technician
-  - Can purchase Props in shop
-  - Wrench can fix the abnormal state of the door
-  - The capture device can capture a person and keep them in place for a period of time
-  - The power restoration system can solve blackout problems
+  - Can purchase Wrench, Capture Device and Power Restoration in shop
+  - Wrench can restore any jammed or pried door to normal
+  - Capture Device can trap passing player and inform the user
+  - Power Restoration can end blackout effect instantly
 
 
 ## New Killers
@@ -121,11 +121,13 @@
 
 - Hunter
   - If holding knife when sprinting, hunter will speed up
+  - Can not purchase Poison Vial and Scorpion in shop
   - Can purchase Hunting Knife in shop
   - Hunting Knife will immediately cooldown when stoping holding if sprinted
   - Use ability to refresh knifes' cooldown
 
 - Kidnapper
+  - Can not purchase Crowbar in shop
   - Can purchase Knockout Drug in shop
   - Initially equip with a Knockout Drug
   - Knockout Drug can daze target and let it follow you
@@ -204,4 +206,4 @@
 
 - AqumpusAXY for Wathe Plus Function
 
-- Annina for Bodymaker
+- Annina for Bodymaker and Technician

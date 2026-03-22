@@ -85,7 +85,10 @@
   "announcement.goals.kinswathe.robot": "A machine devoid of any emotion.",
 
   "announcement.role.kinswathe.technician": "Technician",
-  "announcement.goals.kinswathe.technician": "Solve problems with technology!",
+  "announcement.goals.kinswathe.technician": "Use technology to solve problems!",
+  "tip.kinswathe.technician.captured": "%s was captured",
+  "item.kinswathe.icon_power_restoration": "Power Restoration",
+  "item.kinswathe.icon_power_restoration.tooltip": "Instantly end blackout effect\nActivated instantly on purchase, 3 minutes cooldown",
 
   "announcement.modifier.kinswathe.magnate": "Magnate",
   "announcement.modifier.kinswathe.taskmaster": "Taskmaster",
@@ -93,6 +96,9 @@
 
   "item.kinswathe.blowgun": "Blowgun",
   "item.kinswathe.blowgun.tooltip": "Point, right-click and shoot\nTarget that be shooted will be poisoned\n1 minute cooldown",
+
+  "item.kinswathe.capture_device": "Capture Device",
+  "item.kinswathe.capture_device.tooltip": "Right-click to place down on floors\nTrap passing player and inform the user\nCapture Device will automatically disappear after a period of time\nInvisible to other players, both placed and in hand\n1 minute cooldown",
 
   "item.kinswathe.dream_imprint": "Dream Imprint",
   "item.kinswathe.dream_imprint.tooltip": "Use on a player to protect one extra hit of life\nTarget will teleport to user if it dies and give a delusion count\nSingle use",
@@ -113,7 +119,7 @@
   "item.kinswathe.phone.tooltip": "Right-click to switch between Free-Voice-Group and Killer-Voice-Group",
 
   "item.kinswathe.pill": "Pill",
-  "item.kinswathe.pill.tooltip": "Right-click to eat\nProtects player one extra hit of life\nSingle use, 3 minute cooldown",
+  "item.kinswathe.pill.tooltip": "Right-click to eat\nProtects player one extra hit of life\nSingle use, 3 minutes cooldown",
 
   "item.kinswathe.poison_injector": "Poison Injector",
   "item.kinswathe.poison_injector.tooltip": "Use on a player to poison it\nIf target have been poisoned, directly cause death\n1 minute cooldown",
@@ -122,14 +128,7 @@
   "item.kinswathe.sulfuric_acid_barrel.tooltip": "Use on a dead body to dissolve it\n1 minute cooldown",
 
   "item.kinswathe.wrench": "Wrench",
-  "item.kinswathe.wrench.tooltip": "Right-click a door that has been damaged by a crowbar with the wrench to repair it once.\nRight-click a door that has been jammed by a lockpick to unjam it.\nEnters cooldown after use.",
-
-  "item.kinswathe.capture_device": "Capture Device",
-  "item.kinswathe.capture_device.tooltip": "Capture devices can be placed on the floor or ceiling. This item is invisible to other players when held.\nWhen placed on the floor, it will detect everyone except yourself.\nIf 1 or more players pass through the area, all players in the area (except yourself) will be immobilized for a few seconds.\nA report will also be generated, recording the names of the captured players.\nAfter the device has been placed for a certain period of time, it will automatically destroy itself.",
-  "item.kinswathe.capture_report.tooltip": "You captured %s people with the Capture Device. Their names are:",
-
-  "item.kinswathe.power_restoration": "Power Restoration System",
-  "item.kinswathe.power_restoration.tooltip": "When in a power outage state, using the Power Restoration System can immediately eliminate one power outage effect.\nFacing unexpected darkness, the Power Restoration System will perform its intended function.",
+  "item.kinswathe.wrench.tooltip": "Use on any jammed or pried door to restore to normal\n2 minutes cooldown",
 
   "shop.purchase_failed": "Purchase Failed",
   "tip.cooldown_temporary": "On cooldown...",
@@ -172,7 +171,7 @@
 
   "guidebook.role.kinswathe:drugmaker": "Drugmaker",
   "guidebook.role.title.kinswathe:drugmaker": "Lethal Formula",
-  "guidebook.role.description.kinswathe:drugmaker": "The Drugmaker is the killer most skilled with poisons, savoring every second of his prey's suffering after being poisoned. He is only deployed to assist killers when there are enough players.\n\nThe Drugmaker can see players who are genuinely poisoned — after all, they are his masterpieces. Whenever a player is poisoned, he receives a reward of gold coins.\n\nPoison Injector and Blowgun can be purchased at the shop — two distinctly different methods of poisoning.\n\nFor the Drugmaker, death is just a matter of prescription.",
+  "guidebook.role.description.kinswathe:drugmaker": "The Drugmaker is the killer most skilled with poisons, savoring every second of his prey's suffering after being poisoned. He is only deployed to assist killers when there are enough players.\n\nThe Drugmaker can see players who are genuinely poisoned — after all, they are his masterpieces. Whenever a player is poisoned, he receives a reward of coins.\n\nPoison Injector and Blowgun can be purchased at the shop — two distinctly different methods of poisoning.\n\nFor the Drugmaker, death is just a matter of prescription.",
 
   "guidebook.role.kinswathe:hacker": "Hacker",
   "guidebook.role.title.kinswathe:hacker": "Shadow Supporter",
@@ -192,7 +191,7 @@
 
   "guidebook.role.kinswathe:licensed_villain": "Licensed Villain",
   "guidebook.role.title.kinswathe:licensed_villain": "Officially Certified",
-  "guidebook.role.description.kinswathe:licensed_villain": "The Licensed Villain is a rare character holding an officially certified villain license. He only appears when there are enough players.\n\nThe Licensed Villain's win condition is unique — he must kill everyone. When all civilians or all killers are eliminated, the game does not end. Only he can end it all with his own hands.\n\nThe Licensed Villain has 15 seconds of sprint time, boards with Lockpick, and receives gold coins for completing tasks.\n\nRevolver can be purchased at the shop, and he suffers no misfire penalty when using it — after all, he's a professional.",
+  "guidebook.role.description.kinswathe:licensed_villain": "The Licensed Villain is a rare character holding an officially certified villain license. He only appears when there are enough players.\n\nThe Licensed Villain's win condition is unique — he must kill everyone. When all civilians or all killers are eliminated, the game does not end. Only he can end it all with his own hands.\n\nThe Licensed Villain has 15 seconds of sprint time, boards with Lockpick, and receives coins for completing tasks.\n\nRevolver can be purchased at the shop, and he suffers no misfire penalty when using it — after all, he's a professional.",
 
   "guidebook.role.kinswathe:physician": "Physician",
   "guidebook.role.title.kinswathe:physician": "Angel in White",
@@ -203,16 +202,16 @@
   "guidebook.role.description.kinswathe:robot": "The Robot has infiltrated this train; no one knows its purpose.\n\nAs a mechanical construct, it has no mood, is immune to poison, cannot be knocked out by Knockout Drug, and has unlimited stamina.\n\nEvery so often, the Robot can activate Night Vision mode, allowing it to see clearly in the dark.\n\nSome say it's just malfunctioning, while others believe it carries some kind of mission...",
 
   "guidebook.role.kinswathe:technician": "Technician",
-  "guidebook.role.title.kinswathe:technician": "Master Mechanic",
-  "guidebook.role.description.kinswathe:technician": "The Technician is a maintenance expert aboard the train, capable of solving any mechanical malfunction with ease.\n\nThe Technician earns 50 coins for each task completed. His wrench can repair doors that have been damaged by a crowbar or jammed, restoring them to normal function.\n\nThe Technician can also purchase a Capture Device and a Power Restoration System from the shop. The Capture Device can immobilize intruding enemies and generate a report; the Power Restoration System can instantly restore lighting during a power outage, bringing light to everyone.\n\nDon't underestimate the Technician—his tools can change the course of the entire game.",
+  "guidebook.role.title.kinswathe:technician": "Professional Maintenance Worker",
+  "guidebook.role.description.kinswathe:technician": "The Technician is responsible for the maintenance of the entire train.\n\nEvery time the Technician completes a task, they receive 50 coins. They can purchase a Wrench to repair jammed or pried doors.\n\nAdditionally, they can purchase a Capture Device to check for suspicious passengers passing by.\n\nDuring the blackout, the Technician can quickly restore the power system, catching the killers off guard!",
 
   "guidebook.role.kinswathe:magnate": "Magnate",
   "guidebook.role.title.kinswathe:magnate": "Fortune's Favorite",
-  "guidebook.role.description.kinswathe:magnate": "The Magnate is the wealthiest person on the train, his pockets always full of endless gold coins.\n\nThe Magnate's passive income is twice that of other characters.",
+  "guidebook.role.description.kinswathe:magnate": "The Magnate is the wealthiest person on the train, his pockets always full of endless coins.\n\nThe Magnate's passive income is twice that of other characters.",
 
   "guidebook.role.kinswathe:taskmaster": "Taskmaster",
   "guidebook.role.title.kinswathe:taskmaster": "More Work, More Pay",
-  "guidebook.role.description.kinswathe:taskmaster": "Hard work pays off — the Taskmaster's income is tied to tasks.\n\nIf the Taskmaster is on the killer team, completing a task rewards 50 gold coins.\n\nIf on the non-killer team, completing a task grants an additional 25 gold coins on top of the regular reward.",
+  "guidebook.role.description.kinswathe:taskmaster": "Hard work pays off — the Taskmaster's income is tied to tasks.\n\nIf the Taskmaster is on the killer team, completing a task rewards 50 coins.\n\nIf on the non-killer team, completing a task grants an additional 25 coins on top of the regular reward.",
 
   "guidebook.role.kinswathe:violator": "Violator",
   "guidebook.role.title.kinswathe:violator": "Rule Breaker",

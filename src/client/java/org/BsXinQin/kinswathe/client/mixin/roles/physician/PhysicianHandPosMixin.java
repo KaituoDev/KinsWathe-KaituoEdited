@@ -1,23 +1,23 @@
-package org.BsXinQin.kinswathe.client.mixin.roles.technician;
+package org.BsXinQin.kinswathe.client.mixin.roles.physician;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import dev.doctor4t.wathe.cca.GameWorldComponent;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import org.BsXinQin.kinswathe.KinsWatheItems;
-import org.BsXinQin.kinswathe.KinsWatheRoles;
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(PlayerEntityRenderer.class)
-public class TechnicianHandMixin {
+public class PhysicianHandPosMixin {
+
     @WrapOperation(method = "getArmPose", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;getStackInHand(Lnet/minecraft/util/Hand;)Lnet/minecraft/item/ItemStack;"))
-    private static ItemStack hideCaptureDeviceForArmPose(AbstractClientPlayerEntity player, Hand hand, Operation<ItemStack> original) {
+    private static ItemStack hidePillHandPos(@NotNull AbstractClientPlayerEntity player, @NotNull Hand hand, @NotNull Operation<@NotNull ItemStack> original) {
         ItemStack stack = original.call(player, hand);
-        if (stack.isOf(KinsWatheItems.CAPTURE_DEVICE) && GameWorldComponent.KEY.get(player.getWorld()).isRole(player, KinsWatheRoles.TECHNICIAN)) {
+        if (stack.isOf(KinsWatheItems.PILL)) {
             return ItemStack.EMPTY;
         }
         return stack;

@@ -18,6 +18,7 @@ import org.BsXinQin.kinswathe.roles.hacker.HackerPhoneComponent;
 import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.BsXinQin.kinswathe.roles.kidnapper.KidnapperComponent;
 import org.BsXinQin.kinswathe.roles.physician.PhysicianComponent;
+import org.BsXinQin.kinswathe.roles.technician.TechnicianComponent;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -48,6 +49,7 @@ public class GameFnctionsMixin {
         HunterComponent.KEY.get(player).reset();
         KidnapperComponent.KEY.get(player).reset();
         PhysicianComponent.KEY.get(player).reset();
+        TechnicianComponent.KEY.get(player).reset();
     }
 
     @Inject(method = "initializeGame", at = @At("RETURN"))

@@ -37,6 +37,7 @@ import org.BsXinQin.kinswathe.roles.hacker.HackerPhoneComponent;
 import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.BsXinQin.kinswathe.roles.kidnapper.KidnapperComponent;
 import org.BsXinQin.kinswathe.roles.physician.PhysicianComponent;
+import org.BsXinQin.kinswathe.roles.technician.TechnicianComponent;
 import org.agmas.harpymodloader.events.ResetPlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -87,6 +88,7 @@ public class KinsWatheGameSettings {
 
     /// 设置指令
     public static void setCommands(@NotNull MinecraftServer server) {
+        server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=kinswathe:capture_device]");
         server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=wathe:player_body]");
         server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "kill @e[type=item]");
         if (GAME_STOP) {
@@ -210,6 +212,7 @@ public class KinsWatheGameSettings {
             HunterComponent.KEY.get(player).reset();
             KidnapperComponent.KEY.get(player).reset();
             PhysicianComponent.KEY.get(player).reset();
+            TechnicianComponent.KEY.get(player).reset();
         });
     }
 

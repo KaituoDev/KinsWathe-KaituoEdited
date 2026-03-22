@@ -6,7 +6,6 @@ import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
 import dev.doctor4t.wathe.client.gui.RoleAnnouncementTexts;
 import dev.doctor4t.wathe.index.WatheItems;
-import lombok.SneakyThrows;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
@@ -163,7 +162,7 @@ public class KinsWatheRoles {
             false,
             false,
             Role.MoodType.FAKE,
-            300,
+            WatheRoles.CIVILIAN.getMaxSprintTime() * 3 / 2,
             false
     ));
     //医师
@@ -173,7 +172,7 @@ public class KinsWatheRoles {
             true,
             false,
             Role.MoodType.REAL,
-            300,
+            WatheRoles.CIVILIAN.getMaxSprintTime() * 3 / 2,
             false
     ));
     //机器人
@@ -186,15 +185,15 @@ public class KinsWatheRoles {
             -1,
             false
     ));
-    //技术师
+    //技术员
     public static Role TECHNICIAN = registerRole(new Role(
             Identifier.of(KinsWathe.MOD_ID, "technician"),
-            0x66B2FF, // 颜色（与工程师保持一致）
-            true,     // 平民方
-            false,    // 不是杀手
+            0x003366,
+            true,
+            false,
             Role.MoodType.REAL,
             WatheRoles.CIVILIAN.getMaxSprintTime(),
-            true
+            false
     ));
 
     /// 新增词条
@@ -249,19 +248,23 @@ public class KinsWatheRoles {
 
     /// 引入其他模组角色
     //引入NoellesRoles角色
-    @SneakyThrows
     public static Role noellesrolesRoles(@NotNull String role) {
-        Class<?> roleClass = Class.forName("org.agmas.noellesroles.Noellesroles");
-        Field roleField = roleClass.getField(role);
-        return (Role) roleField.get(null);
+        try {
+            Class<?> roleClass = Class.forName("org.agmas.noellesroles.Noellesroles");
+            Field roleField = roleClass.getField(role);
+            return (Role) roleField.get(null);
+        } catch (NoSuchFieldException | ClassNotFoundException | IllegalAccessException ignored) {}
+        return null;
     }
-    @SneakyThrows
     public static boolean noellesrolesKillerSidedNeutrals(@NotNull Object role) {
-        Class<?> noellesrolesClass = Class.forName("org.agmas.noellesroles.Noellesroles");
-        Field field = noellesrolesClass.getDeclaredField("KILLER_SIDED_NEUTRALS");
-        field.setAccessible(true);
-        ArrayList<?> neutralList = (ArrayList<?>) field.get(null);
-        return neutralList.contains(role);
+        try {
+            Class<?> noellesrolesClass = Class.forName("org.agmas.noellesroles.Noellesroles");
+            Field field = noellesrolesClass.getDeclaredField("KILLER_SIDED_NEUTRALS");
+            field.setAccessible(true);
+            ArrayList<?> neutralList = (ArrayList<?>) field.get(null);
+            return neutralList.contains(role);
+        } catch (NoSuchFieldException | ClassNotFoundException | IllegalAccessException ignored) {}
+        return false;
     }
     public static boolean isKillerSidedNeutral(@NotNull PlayerEntity player) {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
@@ -310,7 +313,6 @@ public class KinsWatheRoles {
         roles.add(HUNTER);
         roles.add(JUDGE);
         roles.add(KIDNAPPER);
-        roles.add(TECHNICIAN);
         if (KinsWatheConfig.HANDLER.instance().HackerHasShop) roles.add(HACKER);
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
             roles.add(noellesrolesRoles("MIMIC"));
@@ -320,7 +322,6 @@ public class KinsWatheRoles {
             roles.add(noellesrolesRoles("MORPHLING"));
             roles.add(noellesrolesRoles("NOISEMAKER"));
             roles.add(noellesrolesRoles("EXECUTIONER"));
-            roles.add(noellesrolesRoles("CONTROLLER"));
             roles.add(noellesrolesRoles("THE_INSANE_DAMNED_PARANOID_KILLER_OF_DOOM_DEATH_DESTRUCTION_AND_WAFFLES"));
         }
         return List.copyOf(roles);
