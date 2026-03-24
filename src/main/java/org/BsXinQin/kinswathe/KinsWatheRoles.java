@@ -21,6 +21,7 @@ import org.BsXinQin.kinswathe.roles.bellringer.BellringerAbility;
 import org.BsXinQin.kinswathe.roles.bodymaker.BodymakerAbility;
 import org.BsXinQin.kinswathe.roles.cleaner.CleanerAbility;
 import org.BsXinQin.kinswathe.roles.detective.DetectiveAbility;
+import org.BsXinQin.kinswathe.roles.dreamer.DreamerKillerComponent;
 import org.BsXinQin.kinswathe.roles.hacker.HackerPhoneComponent;
 import org.BsXinQin.kinswathe.roles.hunter.HunterAbility;
 import org.BsXinQin.kinswathe.roles.judge.JudgeAbility;
@@ -390,6 +391,7 @@ public class KinsWatheRoles {
             ability.cooldown = KinsWatheConfig.HANDLER.instance().StartingCooldown * 20;
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
             PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
+            DreamerKillerComponent playerDreamer = DreamerKillerComponent.KEY.get(player);
             HackerPhoneComponent phone = HackerPhoneComponent.KEY.get(player);
             //阵营初始收入
             if (KinsWatheConfig.HANDLER.instance().EnableWatheModify) {
@@ -404,6 +406,7 @@ public class KinsWatheRoles {
             //梦者初始物品
             if (role.equals(DREAMER)) {
                 player.giveItemStack(new ItemStack(KinsWatheItems.DREAM_IMPRINT, KinsWatheConfig.HANDLER.instance().DreamerInitialItemQuantity));
+                playerDreamer.setDreamerRequired();
             }
             //黑客初始物品
             if (role.equals(HACKER)) {
