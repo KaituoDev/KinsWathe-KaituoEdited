@@ -6,7 +6,6 @@ import dev.doctor4t.wathe.util.ShopEntry;
 import net.minecraft.entity.player.PlayerEntity;
 import org.BsXinQin.kinswathe.KinsWatheRoles;
 import org.BsXinQin.kinswathe.KinsWatheShops;
-import org.BsXinQin.kinswathe.component.PlayerPurchaseComponent;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,12 +22,12 @@ public abstract class LicensedVillainShopMixin {
     @Shadow @Final @NotNull private PlayerEntity player;
 
     @Inject(method = "tryBuy", at = @At("HEAD"), cancellable = true)
-    void tryBuy(int index, CallbackInfo ci) {
+    void tryBuy(int index, @NotNull CallbackInfo ci) {
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
         if (gameWorld.isRole(this.player, KinsWatheRoles.LICENSED_VILLAIN)) {
             if (index < 0 || index >= KinsWatheShops.getLicensedVillainShop(this.player.getWorld()).size()) return;
             ShopEntry entries = KinsWatheShops.getLicensedVillainShop(this.player.getWorld()).get(index);
-            if (PlayerPurchaseComponent.handlePurchase(this.player, this.balance, entries.stack().getItem(), entries.price())) {
+            if (KinsWatheShops.handlePurchase(this.player, this.balance, entries.stack().getItem(), entries.price())) {
                 this.balance -= entries.price();
                 this.sync();
             }

@@ -15,6 +15,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.math.MathHelper;
 import org.BsXinQin.kinswathe.client.KinsWatheInitializeClient;
 import org.BsXinQin.kinswathe.component.ConfigWorldComponent;
+import org.BsXinQin.kinswathe.roles.technician.TechnicianComponent;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -39,9 +40,10 @@ public abstract class BetterBlackOutMixin {
         if (MinecraftClient.getInstance().player == null) return;
         if (!ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).EnableBetterBlackout) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
+        TechnicianComponent playerBlackout = TechnicianComponent.KEY.get(MinecraftClient.getInstance().player);
         long currentTime = System.currentTimeMillis();
         long blackoutTime = KinsWatheInitializeClient.BLACKOUT_TIME;
-        if (gameWorld.isRunning() && currentTime < blackoutTime) {
+        if (gameWorld.isRunning() && currentTime < blackoutTime && playerBlackout.blackoutTicks > 0) {
             boolean isOutside = Wathe.isSkyVisibleAdjacent(MinecraftClient.getInstance().player);
             boolean isInstinctEnabled = WatheClient.isInstinctEnabled();
             float currentAlpha = CURRENT_ALPHA;
@@ -75,7 +77,9 @@ public abstract class BetterBlackOutMixin {
             if (MinecraftClient.getInstance().player == null) return;
             if (!ConfigWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld()).EnableBetterBlackout) return;
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
+            TechnicianComponent playerBlackout = TechnicianComponent.KEY.get(MinecraftClient.getInstance().player);
             if (gameWorld.isRunning() && sound.getId().equals(WatheSounds.AMBIENT_BLACKOUT.getId())) {
+                playerBlackout.setBlackoutTicks(GameConstants.BLACKOUT_MAX_DURATION);
                 KinsWatheInitializeClient.BLACKOUT_TIME = System.currentTimeMillis() + (GameConstants.BLACKOUT_MAX_DURATION * 50L);
             }
         }

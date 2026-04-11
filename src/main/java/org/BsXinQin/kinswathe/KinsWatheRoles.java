@@ -2,22 +2,17 @@ package org.BsXinQin.kinswathe;
 
 import dev.doctor4t.wathe.api.Role;
 import dev.doctor4t.wathe.api.WatheRoles;
-import dev.doctor4t.wathe.api.event.AllowPlayerDeath;
-import dev.doctor4t.wathe.api.event.AllowPlayerPunching;
 import dev.doctor4t.wathe.cca.GameWorldComponent;
 import dev.doctor4t.wathe.cca.PlayerShopComponent;
 import dev.doctor4t.wathe.client.gui.RoleAnnouncementTexts;
-import dev.doctor4t.wathe.game.GameConstants;
 import dev.doctor4t.wathe.index.WatheItems;
-import lombok.SneakyThrows;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.UseAction;
 import org.BsXinQin.kinswathe.component.AbilityPlayerComponent;
 import org.BsXinQin.kinswathe.packet.host.AbilityC2SPacket;
 import org.BsXinQin.kinswathe.packet.roles.BodymakerC2SPacket;
@@ -25,22 +20,18 @@ import org.BsXinQin.kinswathe.packet.roles.JudgeC2SPacket;
 import org.BsXinQin.kinswathe.roles.bellringer.BellringerAbility;
 import org.BsXinQin.kinswathe.roles.bodymaker.BodymakerAbility;
 import org.BsXinQin.kinswathe.roles.cleaner.CleanerAbility;
-import org.BsXinQin.kinswathe.roles.cook.CookComponent;
 import org.BsXinQin.kinswathe.roles.detective.DetectiveAbility;
-import org.BsXinQin.kinswathe.roles.dreamer.DreamerComponent;
 import org.BsXinQin.kinswathe.roles.dreamer.DreamerKillerComponent;
+import org.BsXinQin.kinswathe.roles.hacker.HackerPhoneComponent;
 import org.BsXinQin.kinswathe.roles.hunter.HunterAbility;
-import org.BsXinQin.kinswathe.roles.hunter.HunterComponent;
 import org.BsXinQin.kinswathe.roles.judge.JudgeAbility;
-import org.BsXinQin.kinswathe.roles.kidnapper.KidnapperComponent;
-import org.BsXinQin.kinswathe.roles.physician.PhysicianComponent;
 import org.BsXinQin.kinswathe.roles.robot.RobotAbility;
 import org.agmas.harpymodloader.Harpymodloader;
 import org.agmas.harpymodloader.config.HarpyModLoaderConfig;
 import org.agmas.harpymodloader.events.ModdedRoleAssigned;
-import org.agmas.harpymodloader.events.ResetPlayerEvent;
 import org.agmas.harpymodloader.modifiers.HMLModifiers;
 import org.agmas.harpymodloader.modifiers.Modifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -125,6 +116,16 @@ public class KinsWatheRoles {
             -1,
             true
     ));
+    //黑客
+    public static Role HACKER = registerRole(new Role(
+            Identifier.of(KinsWathe.MOD_ID, "hacker"),
+            0x808080,
+            false,
+            false,
+            Role.MoodType.FAKE,
+            WatheRoles.CIVILIAN.getMaxSprintTime(),
+            true
+    ));
     //追猎者
     public static Role HUNTER = registerRole(new Role(
             Identifier.of(KinsWathe.MOD_ID, "hunter"),
@@ -162,7 +163,7 @@ public class KinsWatheRoles {
             false,
             false,
             Role.MoodType.FAKE,
-            300,
+            WatheRoles.CIVILIAN.getMaxSprintTime() * 3 / 2,
             false
     ));
     //医师
@@ -172,7 +173,7 @@ public class KinsWatheRoles {
             true,
             false,
             Role.MoodType.REAL,
-            300,
+            WatheRoles.CIVILIAN.getMaxSprintTime() * 3 / 2,
             false
     ));
     //机器人
@@ -183,6 +184,16 @@ public class KinsWatheRoles {
             false,
             Role.MoodType.FAKE,
             -1,
+            false
+    ));
+    //技术员
+    public static Role TECHNICIAN = registerRole(new Role(
+            Identifier.of(KinsWathe.MOD_ID, "technician"),
+            0x003366,
+            true,
+            false,
+            Role.MoodType.REAL,
+            WatheRoles.CIVILIAN.getMaxSprintTime(),
             false
     ));
 
@@ -238,11 +249,27 @@ public class KinsWatheRoles {
 
     /// 引入其他模组角色
     //引入NoellesRoles角色
-    @SneakyThrows
-    public static Role noellesrolesRoles(String role) {
-        Class<?> roleClass = Class.forName("org.agmas.noellesroles.Noellesroles");
-        Field roleField = roleClass.getField(role);
-        return (Role) roleField.get(null);
+    public static Role noellesrolesRoles(@NotNull String role) {
+        try {
+            Class<?> roleClass = Class.forName("org.agmas.noellesroles.Noellesroles");
+            Field roleField = roleClass.getField(role);
+            return (Role) roleField.get(null);
+        } catch (NoSuchFieldException | ClassNotFoundException | IllegalAccessException ignored) {}
+        return null;
+    }
+    public static boolean noellesrolesKillerSidedNeutrals(@NotNull Object role) {
+        try {
+            Class<?> noellesrolesClass = Class.forName("org.agmas.noellesroles.Noellesroles");
+            Field field = noellesrolesClass.getDeclaredField("KILLER_SIDED_NEUTRALS");
+            field.setAccessible(true);
+            ArrayList<?> neutralList = (ArrayList<?>) field.get(null);
+            return neutralList.contains(role);
+        } catch (NoSuchFieldException | ClassNotFoundException | IllegalAccessException ignored) {}
+        return false;
+    }
+    public static boolean isKillerSidedNeutral(@NotNull PlayerEntity player) {
+        GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
+        return FabricLoader.getInstance().isModLoaded("noellesroles") && gameWorld.getRole(player) != null && (KinsWatheRoles.noellesrolesKillerSidedNeutrals(gameWorld.getRole(player)) || gameWorld.isRole(player, noellesrolesRoles("MIMIC")));
     }
 
     /// 添加有任务收入的身份
@@ -255,10 +282,13 @@ public class KinsWatheRoles {
         roles.add(COOK);
         roles.add(DETECTIVE);
         roles.add(DRUGMAKER);
+        roles.add(HUNTER);
         roles.add(JUDGE);
         roles.add(KIDNAPPER);
         roles.add(LICENSED_VILLAIN);
         roles.add(PHYSICIAN);
+        roles.add(TECHNICIAN);
+        if (KinsWatheConfig.HANDLER.instance().HackerHasShop) roles.add(HACKER);
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
             roles.add(noellesrolesRoles("PHANTOM"));
             roles.add(noellesrolesRoles("SWAPPER"));
@@ -281,8 +311,10 @@ public class KinsWatheRoles {
         roles.add(COOK);
         roles.add(DREAMER);
         roles.add(DRUGMAKER);
+        roles.add(HUNTER);
         roles.add(JUDGE);
         roles.add(KIDNAPPER);
+        if (KinsWatheConfig.HANDLER.instance().HackerHasShop) roles.add(HACKER);
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
             roles.add(noellesrolesRoles("MIMIC"));
             roles.add(noellesrolesRoles("JESTER"));
@@ -307,14 +339,14 @@ public class KinsWatheRoles {
     //新增中立身份
     public static void addNeutralRoles() {
         NEUTRAL_ROLES.add(LICENSED_VILLAIN);
-        Harpymodloader.setRoleMaximum(LICENSED_VILLAIN, 1);
     }
     //新增杀手方中立身份
     public static void addKillerNeutralRoles() {
-        KILLER_NEUTRAL_ROLES.add(DREAMER);
+        KILLER_NEUTRAL_ROLES.add(HACKER);
         if (FabricLoader.getInstance().isModLoaded("noellesroles")) {
+            KILLER_NEUTRAL_ROLES.add(DREAMER);
             Harpymodloader.setRoleMaximum(DREAMER, 1);
-        } else Harpymodloader.setRoleMaximum(DREAMER, 0);
+        }
     }
 
     /// 限制身份生成人数
@@ -325,12 +357,24 @@ public class KinsWatheRoles {
                 Harpymodloader.setRoleMaximum(DRUGMAKER,1);} else {
                 Harpymodloader.setRoleMaximum(DRUGMAKER,0);
             }
+            //限制黑客生成人数
+            if (server.getPlayerManager().getCurrentPlayerCount() >= KinsWatheConfig.HANDLER.instance().HackerPlayerLimit) {
+                Harpymodloader.setRoleMaximum(HACKER,1);} else {
+                Harpymodloader.setRoleMaximum(HACKER,0);
+            }
             //限制执照恶棍生成人数
             if (server.getPlayerManager().getCurrentPlayerCount() >= KinsWatheConfig.HANDLER.instance().LicensedVillainPlayerLimit) {
                 Harpymodloader.setRoleMaximum(LICENSED_VILLAIN,1);} else {
                 Harpymodloader.setRoleMaximum(LICENSED_VILLAIN,0);
             }
         }));
+    }
+
+    /// 限制冲突身份同时生成
+    public static boolean conflictRolesGenerate(@NotNull Role role1, @NotNull Role role2) {
+        if (!FabricLoader.getInstance().isModLoaded("noellesroles")) return false;
+        if (KinsWatheConfig.HANDLER.instance().HackerGenerateWithMimic) return false;
+        return (role1 == HACKER && role2 == noellesrolesRoles("MIMIC")) || (role1 == noellesrolesRoles("MIMIC") && role2 == HACKER);
     }
 
     /// 注册中立结算界面
@@ -347,6 +391,8 @@ public class KinsWatheRoles {
             ability.cooldown = KinsWatheConfig.HANDLER.instance().StartingCooldown * 20;
             GameWorldComponent gameWorld = GameWorldComponent.KEY.get(player.getWorld());
             PlayerShopComponent playerShop = PlayerShopComponent.KEY.get(player);
+            DreamerKillerComponent playerDreamer = DreamerKillerComponent.KEY.get(player);
+            HackerPhoneComponent phone = HackerPhoneComponent.KEY.get(player);
             //阵营初始收入
             if (KinsWatheConfig.HANDLER.instance().EnableWatheModify) {
                 if (gameWorld.isInnocent(player)) playerShop.addToBalance(KinsWatheConfig.HANDLER.instance().InitialCivilianIncome);
@@ -360,6 +406,17 @@ public class KinsWatheRoles {
             //梦者初始物品
             if (role.equals(DREAMER)) {
                 player.giveItemStack(new ItemStack(KinsWatheItems.DREAM_IMPRINT, KinsWatheConfig.HANDLER.instance().DreamerInitialItemQuantity));
+                playerDreamer.setDreamerRequired();
+            }
+            //黑客初始物品
+            if (role.equals(HACKER)) {
+                player.giveItemStack(phone.getPhone());
+                for (ServerPlayerEntity serverPlayer : player.getServer().getPlayerManager().getPlayerList()) {
+                    if (serverPlayer == null) continue;
+                    if (gameWorld.canUseKillerFeatures(serverPlayer)) {
+                        serverPlayer.giveItemStack(phone.getPhone());
+                    }
+                }
             }
             //绑匪初始物品
             if (role.equals(KIDNAPPER)) {
@@ -405,53 +462,6 @@ public class KinsWatheRoles {
         }
     }
 
-    /// 注册游戏事件
-    public static void registerEvents() {
-        //死亡事件
-        AllowPlayerDeath.EVENT.register(((player, killer, identifier) -> {
-            DreamerComponent playerDream = DreamerComponent.KEY.get(player);
-            PhysicianComponent playerPhysician = PhysicianComponent.KEY.get(player);
-            //厨师死亡事件
-            if (player.getMainHandStack().isOf(KinsWatheItems.PAN) && player.isUsingItem() && player.getActiveItem().getItem().getUseAction(player.getActiveItem()) == UseAction.SPEAR) {
-                if (identifier == GameConstants.DeathReasons.GUN) {
-                    KinsWatheItems.setItemAfterUsing(player, KinsWatheItems.PAN, Hand.MAIN_HAND);
-                    player.playSound(SoundEvents.ENTITY_ITEM_BREAK, 1.0f, 1.0f);
-                    return false;
-                }
-            }
-            //梦者死亡事件
-            if (playerDream.dreamArmor > 0) {
-                playerDream.teleportToDreamer();
-                playerDream.reset();
-                return false;
-            }
-            //医师死亡事件
-            if (playerPhysician.physicianArmor > 0) {
-                if (identifier == GameConstants.DeathReasons.FELL_OUT_OF_TRAIN) return true;
-                playerPhysician.armorSound();
-                playerPhysician.reset();
-                return false;
-            }
-            return true;
-        }));
-        //攻击事件
-        AllowPlayerPunching.EVENT.register(((attacker, victim) -> {
-            return attacker.getMainHandStack().isOf(KinsWatheItems.HUNTING_KNIFE);
-        }));
-    }
-
-    /// 重置身份事件
-    public static void resetEvents() {
-        ResetPlayerEvent.EVENT.register(player -> {
-            CookComponent.KEY.get(player).reset();
-            DreamerComponent.KEY.get(player).reset();
-            DreamerKillerComponent.KEY.get(player).reset();
-            HunterComponent.KEY.get(player).reset();
-            KidnapperComponent.KEY.get(player).reset();
-            PhysicianComponent.KEY.get(player).reset();
-        });
-    }
-
     /// 初始化方法
     public static void init() {
         //新增阵营
@@ -466,9 +476,5 @@ public class KinsWatheRoles {
         registerRolesAbility();
         //限制词条自动启用配置
         limitModifiersGenerateConfig();
-        //注册游戏事件
-        registerEvents();
-        //重置事件
-        resetEvents();
     }
 }

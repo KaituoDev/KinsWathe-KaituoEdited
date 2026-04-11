@@ -28,7 +28,7 @@ public abstract class DreamerShopMixin extends LimitedHandledScreen<PlayerScreen
     public DreamerShopMixin(@NotNull PlayerScreenHandler handler, @NotNull PlayerInventory inventory, @NotNull Text title) {super(handler, inventory, title);}
 
     @Inject(method = "init", at = @At("HEAD"))
-    void getShop(CallbackInfo ci) {
+    public void getShop(CallbackInfo ci) {
         if (!FabricLoader.getInstance().isModLoaded("noellesroles")) return;
         GameWorldComponent gameWorld = GameWorldComponent.KEY.get(this.player.getWorld());
         if (gameWorld.isRole(this.player, KinsWatheRoles.DREAMER)) {
@@ -38,7 +38,7 @@ public abstract class DreamerShopMixin extends LimitedHandledScreen<PlayerScreen
             int shouldBeY = (this.height - 32) / 2;
             int y = shouldBeY - 46;
             for(int i = 0; i < entries.size(); ++i) {
-                addDrawableChild(new LimitedInventoryScreen.StoreItemWidget((LimitedInventoryScreen) (Object)this, x + apart * i, y, (ShopEntry)entries.get(i), i));
+                addDrawableChild(new LimitedInventoryScreen.StoreItemWidget((LimitedInventoryScreen) (Object) this, x + apart * i, y, entries.get(i), i));
             }
         }
     }

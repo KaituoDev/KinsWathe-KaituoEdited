@@ -43,11 +43,11 @@ public class ItemToolTip {
         if (MinecraftClient.getInstance().player == null) return;
         if (itemStack.isOf(item)) {
             initItemCooldown();
+            GameSafeComponent gameSafe = GameSafeComponent.KEY.get(MinecraftClient.getInstance().player.getWorld());
             ItemCooldownManager itemCooldown = MinecraftClient.getInstance().player.getItemCooldownManager();
-            GameSafeComponent playerSafe = GameSafeComponent.KEY.get(MinecraftClient.getInstance().player);
             HunterComponent playerHunter = HunterComponent.KEY.get(MinecraftClient.getInstance().player);
             if (itemCooldown != null && itemCooldown.isCoolingDown(item)) {
-                if (playerSafe.isGameSafe || (itemStack.isOf(KinsWatheItems.HUNTING_KNIFE) && playerHunter.knifeTicks > 0)) {
+                if (gameSafe.isSafe() || (itemStack.isOf(KinsWatheItems.HUNTING_KNIFE) && playerHunter.knifeTicks > 0)) {
                     list.add(Text.translatable("tip.cooldown_temporary").withColor(WatheItemTooltips.COOLDOWN_COLOR));
                 } else {
                     float progress = itemCooldown.getCooldownProgress(item, 0);

@@ -83,14 +83,29 @@ public class KinsWatheConfig {
     @SerialEntry(comment = "Dreamer: modify initial quantity of Dream Imprint.")
     public int DreamerInitialItemQuantity = 1;
 
-    @SerialEntry(comment = "Drugmaker: modify generation player limit, get coins when someone was poisoned, price of Poison Injector and Blowgun.")
+    @SerialEntry(comment = "Drugmaker: modify generation player limit, get coins when someone was poisoned and price of Poison Injector and Blowgun.")
     public int DrugmakerPlayerLimit = 10;
     @SerialEntry
     public int DrugmakerGetCoins = 50;
     @SerialEntry
-    public int DrugmakerPoisonInjectorPrice = 125;
+    public int DrugmakerPoisonInjectorPrice = 100;
     @SerialEntry
     public int DrugmakerBlowgunPrice = 175;
+
+    @SerialEntry(comment = "Hacker: modify generation limit, hacking time, whether to enable shop and price of props.")
+    public int HackerPlayerLimit = 10;
+    @SerialEntry
+    public boolean HackerGenerateWithMimic = false;
+    @SerialEntry
+    public int HackerHackingTime = GameConstants.getInTicks(0,30) / 20;
+    @SerialEntry
+    public boolean HackerHasShop = true;
+    @SerialEntry
+    public int HackerRefreshWeaponCooldownPrice = 300;
+    @SerialEntry
+    public int HackerRefreshAbilityCooldownPrice = 400;
+    @SerialEntry
+    public int HackerRefreshPotionEffectPrice = 200;
 
     @SerialEntry(comment = "Hunter: modify price and cooldown of ability.")
     public int HunterAbilityPrice = 125;
@@ -124,6 +139,17 @@ public class KinsWatheConfig {
     @SerialEntry
     public int RobotAbilityCooldown = GameConstants.getInTicks(1,30) / 20;
 
+    @SerialEntry(comment = "Technician: modify price of props and Capture Device parameter.")
+    public int TechnicianWrenchPrice = 100;
+    @SerialEntry
+    public int TechnicianCaptureDevicePrice = 100;
+    @SerialEntry
+    public int TechnicianPowerRestorationPrice = 300;
+    @SerialEntry
+    public int TechnicianCaptureDeviceStunTime = GameConstants.getInTicks(0,5) / 20;
+    @SerialEntry
+    public int TechnicianCaptureDeviceLifetimeSeconds = GameConstants.getInTicks(3,0) / 20;
+
     @SerialEntry(comment = "Violator: whether to allow Violator to retain disable/enable state after a server restart.")
     public boolean ViolatorEnabled = false;
 
@@ -136,4 +162,7 @@ public class KinsWatheConfig {
 
     @SerialEntry(comment = "Coroner: whether to enable instinct of seeing player bodies.")
     public boolean CoronerInstinctModify = false;
+
+    @SerialEntry(comment = "Jester: whether to enable prevent attack killer in Psycho Mode.")
+    public boolean JesterAttackKillerModify = false;
 }

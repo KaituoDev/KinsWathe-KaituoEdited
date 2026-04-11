@@ -26,6 +26,8 @@
     "roles.dreamer.DreamerHudMixin",
     "roles.dreamer.DreamerShopMixin",
     "roles.drugmaker.DrugmakerShopMixin",
+    "roles.hacker.HackerShopMixin",
+    "roles.hunter.HunterFovMixin",
     "roles.hunter.HunterHudMixin",
     "roles.hunter.HunterLockSlotMixin",
     "roles.hunter.HunterShopMixin",
@@ -34,8 +36,13 @@
     "roles.kidnapper.KidnapperKeyControlledMixin",
     "roles.kidnapper.KidnapperShopMixin",
     "roles.licensed_villain.LicensedVillainShopMixin",
+    "roles.physician.PhysicianHandPosMixin",
+    "roles.physician.PhysicianHandViewMixin",
     "roles.physician.PhysicianShopMixin",
-    "roles.robot.RobotHudMixin"
+    "roles.robot.RobotHudMixin",
+    "roles.technician.TechnicianHandPosMixin",
+    "roles.technician.TechnicianHandViewMixin",
+    "roles.technician.TechnicianShopMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -47,6 +54,7 @@
     "gui.IncomeIconMixin",
     "gui.ItemCrosshairMixin",
     "host.EndTextRendererMixin",
+    "host.KillerCohortHudMixin",
     "host.KillerSidedTextMixin",
     "host.UnlockDistanceMixin",
     "noellesroles.roles.conductor.ConductorInstinctMixin",
@@ -56,10 +64,14 @@
     "roles.dreamer.DreamerInstinctMixin",
     "roles.dreamer.DreamerMoodMixin",
     "roles.drugmaker.DrugmakerInstinctMixin",
+    "roles.hacker.HackerInstinctMixin",
+    "roles.hacker.HackerMoodMixin",
+    "roles.hacker.HackerTargetHudMixin",
     "roles.licensed_villain.LicensedVillainInstinctMixin",
     "roles.licensed_villain.LicensedVillainMoodMixin",
     "roles.physician.PhysicianDeathReasonMixin",
     "roles.physician.PhysicianInstinctMixin",
-    "roles.robot.RobotMoodMixin"
+    "roles.robot.RobotMoodMixin",
+    "roles.technician.TechnicianInstinctMixin"
   ]
 }

@@ -5,6 +5,7 @@ import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import org.BsXinQin.kinswathe.KinsWathe;
+import org.BsXinQin.kinswathe.roles.hacker.HackerPhoneComponent;
 import org.jetbrains.annotations.NotNull;
 
 public class ItemExtraModel {
@@ -12,11 +13,18 @@ public class ItemExtraModel {
     public static Identifier getCooldownId() {
         return Identifier.of(KinsWathe.MOD_ID, "item_cooldown");
     }
+    public static Identifier getKillerGroupId() {
+        return Identifier.of(KinsWathe.MOD_ID, "killer_group");
+    }
 
-    public static void registerCooldownModel(@NotNull Item item) {
+    public static void registerExtraModel(@NotNull Item item) {
         ModelPredicateProviderRegistry.register(item, getCooldownId(), (itemStack, world, entity, seed) -> {
             if (MinecraftClient.getInstance().player == null) return 0.0F;
             return MinecraftClient.getInstance().player.getItemCooldownManager().isCoolingDown(item) ? 1.0F : 0.0F;
+        });
+        ModelPredicateProviderRegistry.register(item, getKillerGroupId(), (itemStack, world, entity, seed) -> {
+            if (MinecraftClient.getInstance().player == null) return 0.0F;
+            return HackerPhoneComponent.KEY.get(MinecraftClient.getInstance().player).groupKiller ? 1.0F : 0.0F;
         });
     }
 }
